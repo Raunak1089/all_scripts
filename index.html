@@ -1,4 +1,102 @@
+<!DOCTYPE html>
 <html>
-<script src="calcadd.js"></script>
-<script src="disablescroll.js"></script>
+<head>
+<meta name="description" content="[SO] Disable scrolling in all browsers">
+<meta charset=utf-8 />
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2022 by gblazex (http://jsbin.com/teqoqib/6/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<title>Disable scrolling</title>
+
+<style id="jsbin-css">
+
+* { margin:0; padding:0; }
+#page { width:400px; margin:60px 20px; }
+p { margin:20px 0; }
+button { padding:2px 10px; margin-right:10px; }
+.enabled { color:green }
+.disabled { color:red }
+#menu { position:fixed; top:0; left:0; padding:10px 20px; right:0; background:#fff; border-bottom:1px solid #ccc; background:#f5f5f5; opacity:.95; }
+</style>
+</head>
+<body>
+	<div id="menu">
+		<button id="enable">enable scrolling</button>
+		<button id="disable">disable scrolling</button>
+		<strong id="status" class="enabled">enabled</strong>
+	</div>
+	  
+	
+  <div id="page">
+
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    <p>Fusce tempus rutrum enim, a gravida nulla porta vehicula. Maecenas id purus a diam iaculis egestas. In vestibulum, felis a iaculis sollicitudin, purus nisi faucibus metus, interdum adipiscing nisi purus placerat nibh. Phasellus eget augue quis purus gravida ornare in nec tortor. Curabitur pulvinar imperdiet erat eu accumsan. Cras volutpat dolor vel erat placerat dignissim. Nulla facilisi.</p>
+    
+  </div>
+  
+<script>
+document.getElementById("enable").onclick = function() {
+  enableScroll();
+  document.getElementById("status").innerHTML = "enabled";
+    document.getElementById("status").className = "enabled";
+};
+
+document.getElementById("disable").onclick = function() {
+  disableScroll();
+  document.getElementById("status").innerHTML = "disabled";
+  document.getElementById("status").className = "disabled";
+};
+
+</script>
+
+<script src="disablescroll.js">
+</script>
+</body>
 </html>
