@@ -41,7 +41,7 @@ var myans = document.createElement('span');
         }
 
 
-/*
+
 var disablescroll = document.createElement('script');
 disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
 document.body.appendChild(disablescroll);
@@ -53,7 +53,7 @@ document.body.appendChild(disablescroll);
     mydiv.ontouchend = function() {
         enableScroll();
 }
-*/
+
 
 
 
