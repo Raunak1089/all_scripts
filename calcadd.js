@@ -6,6 +6,7 @@ var mydiv = document.createElement('div');
     mydiv.style.padding = '10px';
     mydiv.style.position = 'fixed';
     mydiv.style.opacity = 0.7;
+    mydiv.style.transition = '0.3s';
     mydiv.style.flex = '1';
     mydiv.style.zIndex = '1000';
     mydiv.style.transition = 'opacity 0.3s';
@@ -34,9 +35,8 @@ var myans = document.createElement('span');
 
     mydiv.ontouchmove = function(ev) {
         var e = ev.targetTouches[0];
-        mydiv.style.left = e.pageX - 50 + 'px';
-        mydiv.style.top = e.pageY - 30 + 'px';
-        mydiv.style.transition = 'opacity 0.3s';
+        mydiv.style.left = e.clientX - 50 + 'px';
+        mydiv.style.top = e.clientY - 30 + 'px';
         window.scrollTo(scrollLeft, scrollTop);
         }
 
@@ -47,10 +47,12 @@ disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
 document.body.appendChild(disablescroll);
 
     mydiv.ontouchstart = function() {
+        mydiv.style.opacity = 1;
         disableScroll();
     }
 
     mydiv.ontouchend = function() {
+        mydiv.style.opacity = 0.7;
         enableScroll();
 }
 
@@ -61,11 +63,13 @@ var dragValue;
 
 mydiv.onmousedown = function(){
         dragValue = mydiv;
+        mydiv.style.opacity = 1;
       }
 document.onmouseup = function(){
         dragValue = null;
+        mydiv.style.opacity = 0.7;
       }
 document.onmousemove = function(e) {
-        dragValue.style.left = e.pageX - 50 + "px";
-        dragValue.style.top = e.pageY - 50 + "px";
+        dragValue.style.left = e.clientX - 50 + "px";
+        dragValue.style.top = e.clientY - 50 + "px";
 };
