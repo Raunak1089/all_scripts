@@ -27,7 +27,7 @@ document.body.appendChild(mydiv);
 
 mydiv.ontouchmove = function(ev) {
            var e = ev.targetTouches[0];
-           var speed = Math.floor(100*Math.pow(1.005, (e.pageY-300)))/100;
+           var speed = Math.floor(100*Math.pow(1.005, (e.screenY-300)))/100;
            myans.innerHTML = speed+'x';
            document.getElementsByClassName('html5-main-video')[0].playbackRate = speed;
            }
