@@ -6,7 +6,6 @@ var mydiv = document.createElement('div');
     mydiv.style.padding = '10px';
     mydiv.style.position = 'fixed';
     mydiv.style.opacity = 0.7;
-    mydiv.style.transition = '0.3s';
     mydiv.style.flex = '1';
     mydiv.style.zIndex = '1000';
     mydiv.style.top = '10px';
