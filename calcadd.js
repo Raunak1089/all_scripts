@@ -1,15 +1,5 @@
 var mydiv = document.createElement('div');
-    mydiv.style.height = '50px';
-    mydiv.style.width = 'fit-content';
-    mydiv.style.background = 'grey';
-    mydiv.style.borderRadius = '10px';
-    mydiv.style.padding = '10px';
-    mydiv.style.position = 'fixed';
-    mydiv.style.opacity = 0.7;
-    mydiv.style.transition = '0.3s';
-    mydiv.style.flex = '1';
-    mydiv.style.zIndex = '1000';
-    mydiv.style.top = '0px';
+    mydiv.style.cssText = "color: #fff; background: rgb(0, 197, 49); border: 1px solid black;height: 50px; width: fit-content; background: grey; border-radius: 10px; padding: 10px; position: fixed; opacity: 0.7; transition: 0.3s; flex: 1; z-index: 1000; margin-top: 10px; margin-right: 10px;";
     
 var myin = document.createElement('input');
     myin.style.width = '70px';
