@@ -9,7 +9,6 @@ var mydiv = document.createElement('div');
     mydiv.style.transition = '0.3s';
     mydiv.style.flex = '1';
     mydiv.style.zIndex = '1000';
-    mydiv.style.transition = 'opacity 0.3s';
     mydiv.style.top = '0px';
     
 var myin = document.createElement('input');
