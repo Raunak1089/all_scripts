@@ -61,17 +61,22 @@ close.onclick=function(){document.body.removeChild(mydiv);};
 
 // DRAGGABLE ________________________________
 
+var disablescroll = document.createElement('script');
+disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
+document.body.appendChild(disablescroll);
+
+
 var mydiv = document.getElementById("mydiv");
 
-document.ontouchstart = function() {
+
     mydiv.ontouchstart = function(ev) {
 
 let textAreaL = document.createElement('textarea');
-textAreaL.style.display= "inline";
+textAreaL.style.display= "none";
 textAreaL.id='l';
 
 let textAreaT = document.createElement('textarea');
-textAreaT.style.display= "inline";
+textAreaT.style.display= "none";
 textAreaT.id='t';
 
 document.body.append(textAreaL);
@@ -86,6 +91,7 @@ document.body.append(textAreaT);
 
 document.getElementById("l").value=l;
 document.getElementById("t").value=t;
+        disableScroll();
 }
 
 
@@ -105,23 +111,9 @@ let textAreaT = document.getElementById("t");
 
             document.body.removeChild(textAreaL);
             document.body.removeChild(textAreaT);
-           }
-}
-
-// DISABLE SCROLL _____________________
-
-var disablescroll = document.createElement('script');
-disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
-document.body.appendChild(disablescroll);
-
-    mydiv.ontouchstart = function() {
-        disableScroll();
-    }
-
-    mydiv.ontouchend = function() {
         enableScroll();
-}
-
+           }
+           
 
 
 
