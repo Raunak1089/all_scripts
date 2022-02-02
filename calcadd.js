@@ -1,4 +1,5 @@
 var mydiv = document.createElement('div');
+mydiv.id='mydiv';
     mydiv.style.height = '50px';
     mydiv.style.width = 'fit-content';
     mydiv.style.background = 'grey';
@@ -57,15 +58,57 @@ var myans = document.createElement('span');
 
 close.onclick=function(){document.body.removeChild(mydiv);};
 
-    mydiv.ontouchmove = function(ev) {
-        var e = ev.targetTouches[0];
-        mydiv.style.left = e.clientX - 50 + 'px';
-        mydiv.style.top = e.clientY - 30 + 'px';
-        mydiv.style.transition = 'opacity 0.3s';
-        window.scrollTo(scrollLeft, scrollTop);
-        }
+
+// DRAGGABLE ________________________________
+
+var mydiv = document.getElementById("mydiv");
+
+document.ontouchstart = function() {
+    mydiv.ontouchstart = function(ev) {
+
+let textAreaL = document.createElement('textarea');
+textAreaL.style.display= "inline";
+textAreaL.id='l';
+
+let textAreaT = document.createElement('textarea');
+textAreaT.style.display= "inline";
+textAreaT.id='t';
+
+document.body.append(textAreaL);
+document.body.append(textAreaT);
 
 
+           var e = ev.targetTouches[0];
+
+            let rect = mydiv.getBoundingClientRect();
+            let l = e.clientX - rect.left;
+            let t = e.clientY - rect.top;
+
+document.getElementById("l").value=l;
+document.getElementById("t").value=t;
+}
+
+
+mydiv.ontouchmove = function(ev) {
+
+let l = Number(document.getElementById("l").value);
+let t = Number(document.getElementById("t").value);
+
+           var e = ev.targetTouches[0];
+           mydiv.style.left = e.clientX - l + 'px'; 
+           mydiv.style.top = e.clientY - t + 'px';
+           }
+
+mydiv.ontouchend = function() {
+let textAreaL = document.getElementById("l");
+let textAreaT = document.getElementById("t");
+
+            document.body.removeChild(textAreaL);
+            document.body.removeChild(textAreaT);
+           }
+}
+
+// DISABLE SCROLL _____________________
 
 var disablescroll = document.createElement('script');
 disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
@@ -84,13 +127,44 @@ document.body.appendChild(disablescroll);
 
 var dragValue;
 
-mydiv.onmousedown = function(){
+mydiv.onmousedown = function(e){
         dragValue = mydiv;
+let textAreaL = document.createElement('textarea');
+textAreaL.style.display= "none";
+textAreaL.id='l';
+
+let textAreaT = document.createElement('textarea');
+textAreaT.style.display= "none";
+textAreaT.id='t';
+
+document.body.append(textAreaL);
+document.body.append(textAreaT);
+
+
+            let rect = dragValue.getBoundingClientRect();
+            let l = e.clientX - rect.left;
+            let t = e.clientY - rect.top;
+
+document.getElementById("l").value=l;
+document.getElementById("t").value=t;
+
       }
+
 document.onmouseup = function(){
         dragValue = null;
+        let textAreaL = document.getElementById("l");
+let textAreaT = document.getElementById("t");
+
+            document.body.removeChild(textAreaL);
+            document.body.removeChild(textAreaT);
+           
       }
+
 document.onmousemove = function(e) {
-        dragValue.style.left = e.clientX - 50 + "px";
-        dragValue.style.top = e.clientY - 50 + "px";
+
+let l = Number(document.getElementById("l").value);
+let t = Number(document.getElementById("t").value);
+
+           dragValue.style.left = e.clientX - l + 'px'; 
+           dragValue.style.top = e.clientY - t + 'px';
 };
