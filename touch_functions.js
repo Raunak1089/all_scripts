@@ -12,7 +12,7 @@ function two_touch_distance(e,first_value,last_value) {
 var a = 40; var b = 720; var c = Number(first_value); var d = Number(last_value); 
 var s = (d - c) / (b - a) ;
   
-let final_distance = Math.floor(c + s * (distance - a));
+let final_distance = c + s * (distance - a);
 
 return final_distance
 
