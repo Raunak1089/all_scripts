@@ -1,3 +1,11 @@
+function fac(num){
+    ans = 1;
+    for (let intern=1; intern<=num; intern++){
+        ans *= intern;
+    }
+    return ans;
+}
+
 function sum(array) {
   let x = 0;
   for (let i = 0; i < array.length; i++) {
@@ -50,14 +58,6 @@ function Cov(array1, array2){
 
 
 function det(every){
-    
-    function fac(num){
-        ans = 1;
-        for (let intern=1; intern<=num; intern++){
-            ans *= intern;
-        }
-        return ans;
-    }
 
     function sum_lambda(p){
         sum_l = 0;
