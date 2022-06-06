@@ -122,3 +122,23 @@ const permutator = (inputArr) => {
     return answer
 }
 
+
+
+function inverse_table(tab){
+    let columns = tab.length;
+    let rows = tab[0].length;
+    
+    let inv = [];
+    
+    for (i=0; i<rows; i++){
+        inv.push([])
+    }
+    
+    for (i=0; i<columns; i++){
+        for (j=0; j<rows; j++){
+            inv[j][i] = tab[i][j]
+        }
+    }
+    
+    return inv
+}
