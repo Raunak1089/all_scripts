@@ -55,6 +55,9 @@ function Cov(array1, array2){
     return x / n
 }
 
+function r(array1, array2){
+    return Cov(array1, array2)/(SD(array1)*SD(array2))
+}
 
 
 function det(every){
