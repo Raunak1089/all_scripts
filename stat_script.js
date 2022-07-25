@@ -127,7 +127,17 @@ const permutator = (inputArr) => {
 }
 */
 
-function det(mat){
+function determinant(every){
+    mat = []
+    n = every.length ** 0.5;
+    for (let z=0; z<n; z++){
+        mat.push([])
+        for (let zz=0; zz<n; zz++){
+            mat[mat.length-1].push(every[n * z + zz])
+        }
+    }
+    
+    function det(mat){
     if (mat.length == 1){
         return mat[0][0]
         }
@@ -153,9 +163,13 @@ function det(mat){
             
         }
 
-        return ans
+            return ans
+        }
     }
+    
+    return det(mat)
 }
+
 
 
 function transpose_table(tab) {
