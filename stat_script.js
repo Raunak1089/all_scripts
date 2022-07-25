@@ -137,35 +137,34 @@ function det(every){
         }
     }
     
-    function determinant(mat){
-    if (mat.length == 1){
-        return mat[0][0]
+function determinant(mat) {
+  
+    if (mat.length == 1) {
+      return mat[0][0];
+    } else {
+      ans = 0;
+  
+      for (let i = 0; i < mat.length; i++) {
+        sub_mat = [];
+  
+        for (let rows = 0; rows < mat.length - 1; rows++) {
+          sub_mat.push([]);
         }
-
-    else{
-        ans = 0
-
-        for (i = 0; i < mat.length; i++){
-            sub_mat = []
-            for (rows = 0; rows < mat.length - 1; rows++){
-                sub_mat.push([])
+  
+        for (let rows = 0; rows < mat.length - 1; rows++) {
+          for (let j = 0; j < mat.length; j++) {
+            if (i !== j) {
+              sub_mat[rows].push(mat[rows + 1][j]);
             }
-
-            for (rows = 0; rows < mat.length - 1; rows++){
-                for (j = 0; j < mat.length; j++){
-                    if (i != j){
-                        sub_mat[rows].push(mat[rows + 1][j])
-                    }
-                }
-            }
-            
-            ans += ((-1) ** i) * mat[0][i] * determinant(sub_mat)
-            
+          }
         }
-
-            return ans
-        }
+  
+        ans += ((-1)**i) * mat[0][i] * determinant(sub_mat);
+      }
+  
+      return ans;
     }
+  }
     
     return determinant(matrix)
 }
