@@ -1,3 +1,11 @@
+function fac(num){
+    ans = 1;
+    for (let intern=1; intern<=num; intern++){
+        ans *= intern;
+    }
+    return ans;
+}
+
 function sum(array) {
   let x = 0;
   for (let i = 0; i < array.length; i++) {
@@ -47,17 +55,13 @@ function Cov(array1, array2){
     return x / n
 }
 
+function r(array1, array2){
+    return Cov(array1, array2)/(SD(array1)*SD(array2))
+}
+
 
 /*
 function det(every){
-    
-    function fac(num){
-        ans = 1;
-        for (let intern=1; intern<=num; intern++){
-            ans *= intern;
-        }
-        return ans;
-    }
 
     function sum_lambda(p){
         sum_l = 0;
@@ -70,26 +74,26 @@ function det(every){
         }
         return sum_l
     }
-    
+
 const permutator = (inputArr) => {
-  let result = [];
+      let result = [];
 
-  const permute = (arr, m = []) => {
-    if (arr.length === 0) {
-      result.push(m)
-    } else {
-      for (let i = 0; i < arr.length; i++) {
-        let curr = arr.slice();
-        let next = curr.splice(i, 1);
-        permute(curr.slice(), m.concat(next))
+      const permute = (arr, m = []) => {
+        if (arr.length === 0) {
+          result.push(m)
+        } else {
+          for (let i = 0; i < arr.length; i++) {
+            let curr = arr.slice();
+            let next = curr.splice(i, 1);
+            permute(curr.slice(), m.concat(next))
+         }
+       }
      }
-   }
- }
 
- permute(inputArr)
+     permute(inputArr)
 
- return result;
-}
+     return result;
+    }
 
 
     mat = []
@@ -106,9 +110,9 @@ const permutator = (inputArr) => {
         digits.push(i)
     }
     boom = permutator(digits);
-        
+
         //console.log(boom);
-        
+
 
     answer = 0;
     for (permute in boom){
@@ -122,7 +126,6 @@ const permutator = (inputArr) => {
     return answer
 }
 */
-
 
 function det(mat){
     if (mat.length == 1){
@@ -152,4 +155,24 @@ function det(mat){
 
         return ans
     }
+}
+
+
+function transpose_table(tab) {
+    let columns = tab.length;
+    let rows = tab[0].length;
+
+    let trans = [];
+
+    for (i=0; i<rows; i++) {
+        trans.push([]);
+    }
+
+    for (i=0; i<columns; i++) {
+        for (j=0; j<rows; j++) {
+            trans[j][i] = tab[i][j];
+        }
+    }
+
+    return trans;
 }
