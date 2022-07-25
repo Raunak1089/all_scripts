@@ -127,17 +127,17 @@ const permutator = (inputArr) => {
 }
 */
 
-function determinant(every){
-    mat = []
+function det(every){
+    matrix = []
     n = every.length ** 0.5;
     for (let z=0; z<n; z++){
-        mat.push([])
+        matrix.push([])
         for (let zz=0; zz<n; zz++){
-            mat[mat.length-1].push(every[n * z + zz])
+            matrix[matrix.length-1].push(every[n * z + zz])
         }
     }
     
-    function det(mat){
+    function determinant(mat){
     if (mat.length == 1){
         return mat[0][0]
         }
@@ -159,7 +159,7 @@ function determinant(every){
                 }
             }
             
-            ans += ((-1) ** i) * mat[0][i] * det(sub_mat)
+            ans += ((-1) ** i) * mat[0][i] * determinant(sub_mat)
             
         }
 
@@ -167,7 +167,7 @@ function determinant(every){
         }
     }
     
-    return det(mat)
+    return determinant(matrix)
 }
 
 
