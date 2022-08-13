@@ -1,6 +1,6 @@
 var mydiv = document.createElement('div'); 
 
-let css = ` 
+let css_div = ` 
         height: 40px;
         width: fit-content;
         background: grey;
@@ -13,13 +13,19 @@ let css = `
         margin-top: 300px;
         user-select: none;
 ` 
-mydiv.setAttribute("style", css); 
+mydiv.setAttribute("style", css_div); 
 
 var myans = document.createElement('span');
-myans.style.padding = '2px 10px';
-myans.style.background = 'white';
-myans.style.borderRadius = '50%';
-myans.style.fontSize = '30px';
+let css_ans = ` 
+        padding: 2px 10px;
+        background: white;
+        border-radius: 50%;
+        font-size: 30px;
+` 
+
+myans.setAttribute("style", css_ans); 
+
+
 myans.innerHTML = '1';
 
 
