@@ -9,7 +9,7 @@ let css_div = `
         position: absolute;
         opacity: 0.7;
         flex: 1;
-        z-index: 1000;
+        z-index: 10000;
         margin-top: 300px;
         user-select: none;
 ` 
@@ -21,6 +21,7 @@ let css_ans = `
         background: white;
         border-radius: 50%;
         font-size: 30px;
+        z-index: 10000;
 ` 
 
 myans.setAttribute("style", css_ans); 
