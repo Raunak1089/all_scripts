@@ -9,8 +9,7 @@ let css_div = `
         position: absolute;
         opacity: 0.7;
         flex: 1;
-        z-index: 10000;
-        margin-top: 300px;
+        z-index: 1000;
         user-select: none;
 ` 
 mydiv.setAttribute("style", css_div); 
@@ -31,7 +30,7 @@ myans.innerHTML = '1';
 
 
 mydiv.appendChild(myans);
-document.body.appendChild(mydiv);
+document.getElementsByClassName("ytm-autonav-title")[0].appendChild(mydiv);
 
 
 mydiv.ontouchmove = function(ev) {
