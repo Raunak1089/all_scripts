@@ -1,3 +1,5 @@
+javascript:(function(){
+
 var mydiv = document.createElement('div'); 
 
 let css_div = ` 
@@ -14,8 +16,8 @@ let css_div = `
 ` 
 mydiv.setAttribute("style", css_div); 
 
-var myans = document.createElement('span');
-let css_ans = ` 
+var myspeed = document.createElement('span');
+let css_speed = ` 
         padding: 2px 10px;
         background: white;
         border-radius: 50%;
@@ -23,20 +25,28 @@ let css_ans = `
         z-index: 10000;
 ` 
 
-myans.setAttribute("style", css_ans); 
+myspeed.setAttribute("style", css_speed); 
+
+myspeed.innerHTML = '1x';
 
 
-myans.innerHTML = '1';
+var myans = document.createElement('span'); myans.style.display='none';
+myans.innerHTML = 1;
 
 
 mydiv.appendChild(myans);
+mydiv.appendChild(myspeed);
 document.getElementsByClassName("ytm-autonav-title")[0].appendChild(mydiv);
 
 
+let init, init_speed;
+
 mydiv.ontouchmove = function(ev) {
            var e = ev.targetTouches[0];
-           myans.innerHTML = Math.floor(100*Math.pow(1.005, (e.pageY-300)))/100;
-           document.getElementsByClassName('html5-main-video')[0].playbackRate = eval(myans.innerHTML);
+        
+           myans.innerHTML = init_speed + Math.floor(100*(e.clientY-init))/100;
+           myspeed.innerHTML = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100+'x';
+           document.getElementsByClassName('html5-main-video')[0].playbackRate = eval(myspeed.innerHTML);
            mydiv.style.transition = 'opacity 0.3s';
            }
 
@@ -50,9 +60,10 @@ document.onmouseup = function(){
       }
 
 document.onmousemove = function(e) {
-        dragValue.innerHTML = Math.floor(100*Math.pow(1.005, (e.clientY-300)))/100;
-        document.getElementsByClassName('html5-main-video')[0].playbackRate = eval(dragValue.innerHTML);
-        mydiv.style.transition = 'opacity 0.3s';
+           myans.innerHTML = init_speed + Math.floor(100*(e.clientY-init))/100;
+           myspeed.innerHTML = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100+'x';
+           document.getElementsByClassName('html5-main-video')[0].playbackRate = eval(myspeed.innerHTML);
+           mydiv.style.transition = 'opacity 0.3s';
       };
 
 }
@@ -61,10 +72,17 @@ var disablescroll = document.createElement('script');
 disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
 document.body.appendChild(disablescroll);
 
-    mydiv.ontouchstart = function() {
+    mydiv.ontouchstart = function(ev) {
         disableScroll();
+            init = ev.targetTouches[0].pageY;
+            init_speed = Number(myans.innerHTML);
     }
 
-    mydiv.ontouchend = function() {
-        enableScroll();
-}
+    mydiv.ontouchend = function(ev) {
+            enableScroll();
+    }
+
+
+
+
+})();	
