@@ -45,7 +45,7 @@ mydiv.ontouchmove = function(ev) {
            myans.innerHTML = init_speed + Math.floor(100*(e.pageY-init))/100;
            speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
            myspeed.innerHTML = speed+'x';
-           document.getElementsByClassName('media')[0].playbackRate = speed;
+           document.getElementsByName('media')[0].playbackRate = speed;
            mydiv.style.transition = 'opacity 0.3s';
            }
 
@@ -62,7 +62,7 @@ document.onmousemove = function(e) {
            myans.innerHTML = init_speed + Math.floor(100*(e.pageY-init))/100;
            speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
            myspeed.innerHTML = speed+'x';
-           document.getElementsByClassName('media')[0].playbackRate = speed;
+           document.getElementsByName('media')[0].playbackRate = speed;
            mydiv.style.transition = 'opacity 0.3s';
       };
 
