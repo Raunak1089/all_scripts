@@ -6,7 +6,7 @@ let css_div = `
         background: grey;
         border-radius: 10px;
         padding: 10px;
-        position: relative;
+        position: absolute;
         opacity: 0.7;
         flex: 1;
         z-index: 1000;
