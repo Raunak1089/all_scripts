@@ -42,7 +42,7 @@ let init, init_speed, speed;
 mydiv.ontouchmove = function(ev) {
            var e = ev.targetTouches[0];
         
-           myans.innerHTML = init_speed + Math.floor(100*(e.clientY-init))/100;
+           myans.innerHTML = init_speed + Math.floor(100*(e.screenY-init))/100;
            speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
            myspeed.innerHTML = speed+'x';
            document.getElementsByClassName('html5-main-video')[0].playbackRate = speed;
@@ -59,7 +59,7 @@ document.onmouseup = function(){
       }
 
 document.onmousemove = function(e) {
-           myans.innerHTML = init_speed + Math.floor(100*(e.clientY-init))/100;
+           myans.innerHTML = init_speed + Math.floor(100*(e.screenY-init))/100;
            speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
            myspeed.innerHTML = speed+'x';
            document.getElementsByClassName('html5-main-video')[0].playbackRate = speed;
