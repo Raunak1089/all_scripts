@@ -43,8 +43,9 @@ mydiv.ontouchmove = function(ev) {
            var e = ev.targetTouches[0];
         
            myans.innerHTML = init_speed + Math.floor(100*(e.clientY-init))/100;
-           myspeed.innerHTML = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100+'x';
-           document.getElementsByName('media')[0].playbackRate = eval(myspeed.innerHTML);
+           speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
+           myspeed.innerHTML = speed+'x';
+           document.getElementsByClassName('html5-main-video')[0].playbackRate = speed;
            mydiv.style.transition = 'opacity 0.3s';
            }
 
@@ -59,8 +60,9 @@ document.onmouseup = function(){
 
 document.onmousemove = function(e) {
            myans.innerHTML = init_speed + Math.floor(100*(e.clientY-init))/100;
-           myspeed.innerHTML = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100+'x';
-           document.getElementsByClassName('html5-main-video')[0].playbackRate = eval(myspeed.innerHTML);
+           speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
+           myspeed.innerHTML = speed+'x';
+           document.getElementsByClassName('html5-main-video')[0].playbackRate = speed;
            mydiv.style.transition = 'opacity 0.3s';
       };
 
