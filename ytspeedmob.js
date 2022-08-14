@@ -1,5 +1,3 @@
-javascript:(function(){
-
 var mydiv = document.createElement('div'); 
 
 let css_div = ` 
@@ -81,8 +79,3 @@ document.body.appendChild(disablescroll);
     mydiv.ontouchend = function(ev) {
             enableScroll();
     }
-
-
-
-
-})();	
