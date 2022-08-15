@@ -33,11 +33,11 @@ let css_speed = `
 
 myspeed.setAttribute("style", css_speed); 
 
-myspeed.innerHTML = '1x';
+myspeed.innerHTML = document.getElementsByClassName('html5-main-video')[0].playbackRate+'x';
 
 
 var myans = document.createElement('span'); myans.style.display='none';
-myans.innerHTML = 1;
+myans.innerHTML = document.getElementsByClassName('html5-main-video')[0].playbackRate;
 
 
 mydiv.appendChild(myans);
