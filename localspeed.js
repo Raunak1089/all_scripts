@@ -25,11 +25,11 @@ let css_speed = `
 
 myspeed.setAttribute("style", css_speed); 
 
-myspeed.innerHTML = '1x';
+myspeed.innerHTML = document.getElementsByName('media')[0].playbackRate+'x';
 
 
 var myans = document.createElement('span'); myans.style.display='none';
-myans.innerHTML = 1;
+myans.innerHTML = document.getElementsByName('media')[0].playbackRate;
 
 
 mydiv.appendChild(myans);
