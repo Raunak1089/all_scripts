@@ -5,7 +5,7 @@ for (i in document.getElementsByTagName('div')){
         console.log(i)
     }
 }
-var x = document.createElement('div'); x.style.height='100px'; x.style.width='100px'; x.style.background='blue';
+
 
 
 var mydiv = document.createElement('div'); 
@@ -43,8 +43,8 @@ myans.innerHTML = 1;
 mydiv.appendChild(myans);
 mydiv.appendChild(myspeed);
 
-but.parentElement.appendChild(mydiv);
-but.parentElement.removeChild(but);
+but.parentElement.parentElement.parentElement.appendChild(mydiv);
+but.parentElement.parentElement.parentElement.removeChild(but.parentElement.parentElement);
 
 
 
