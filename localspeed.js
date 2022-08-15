@@ -51,8 +51,11 @@ mydiv.ontouchmove = function(ev) {
 
 var dragValue;
 
-mydiv.onmousedown = function(){
+mydiv.onmousedown = function(e){
         dragValue = myans;
+        init = e.pageY;
+        init_speed = Number(myans.innerHTML);
+
 
 document.onmouseup = function(){
         dragValue = null;
