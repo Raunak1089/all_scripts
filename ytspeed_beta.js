@@ -64,6 +64,9 @@ var dragValue;
 
 mydiv.onmousedown = function(){
         dragValue = myans;
+        init = e.pageY;
+        init_speed = Number(myans.innerHTML);
+
 
 document.onmouseup = function(){
         dragValue = null;
