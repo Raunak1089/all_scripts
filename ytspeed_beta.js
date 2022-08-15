@@ -1,8 +1,9 @@
+var b = document.getElementsByTagName('*');
 let but;
-for (i in document.getElementsByTagName('div')){
-    if(document.getElementsByTagName('div')[i].innerHTML=='Subscribe' || document.getElementsByTagName('div')[i].innerHTML=='Subscribed'){
-        but = document.getElementsByTagName('div')[i];
-        console.log(i)
+for (i in b){
+    if(b[i].innerHTML=='Subscribe' || b[i].innerHTML=='Subscribed'){
+        but = b[i];
+        console.log(i);
     }
 }
 
@@ -62,8 +63,8 @@ mydiv.ontouchmove = function(ev) {
 
 var dragValue;
 
-mydiv.onmousedown = function(){
-        dragValue = myans;
+mydiv.onmousedown = function(e){
+        dragValue = myspeed;
         init = e.pageY;
         init_speed = Number(myans.innerHTML);
 
@@ -73,14 +74,16 @@ document.onmouseup = function(){
       }
 
 document.onmousemove = function(e) {
+    if(dragValue==myspeed){
            myans.innerHTML = init_speed + Math.floor(100*(e.pageY-init))/100;
            speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
            myspeed.innerHTML = speed+'x';
            document.getElementsByClassName('html5-main-video')[0].playbackRate = speed;
            mydiv.style.transition = 'opacity 0.3s';
+    }
       };
-
 }
+
 
 var disablescroll = document.createElement('script');
 disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
