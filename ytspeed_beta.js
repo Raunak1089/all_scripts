@@ -1,6 +1,6 @@
 let but;
 for (i in document.getElementsByTagName('div')){
-    if(document.getElementsByTagName('div')[i].innerHTML=='Subscribe' || document.getElementsByTagName('div')[i].innerHTML=='SUBSCRIBED'){
+    if(document.getElementsByTagName('div')[i].innerHTML=='Subscribe' || document.getElementsByTagName('div')[i].innerHTML=='Subscribed'){
         but = document.getElementsByTagName('div')[i];
         console.log(i)
     }
