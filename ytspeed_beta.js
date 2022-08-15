@@ -64,17 +64,17 @@ mydiv.ontouchmove = function(ev) {
 var dragValue;
 
 mydiv.onmousedown = function(e){
-        dragValue = myspeed;
+        dragValue = true;
         init = e.pageY;
         init_speed = Number(myans.innerHTML);
 
 
 document.onmouseup = function(){
-        dragValue = null;
+        dragValue = false;
       }
 
 document.onmousemove = function(e) {
-    if(dragValue==myspeed){
+    if(dragValue){
            myans.innerHTML = init_speed + Math.floor(100*(e.pageY-init))/100;
            speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
            myspeed.innerHTML = speed+'x';
