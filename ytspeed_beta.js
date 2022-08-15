@@ -13,7 +13,7 @@ var mydiv = document.createElement('div');
 let css_div = ` 
         height: 40px;
         width: fit-content;
-        background: grey;
+        background: white;
         border-radius: 10px;
         padding: 10px;
         opacity: 0.7;
