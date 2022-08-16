@@ -16,7 +16,7 @@ var mydiv = document.createElement('div');
 let css_div = ` 
         height: 40px;
         width: fit-content;
-        background: white;
+        background: transparent;
         border-radius: 10px;
         padding: 10px;
         opacity: 0.7;
@@ -32,6 +32,10 @@ let css_speed = `
         background: white;
         border-radius: 50%;
         font-size: 30px;
+      -webkit-text-fill-color: white;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+
 ` 
 
 myspeed.setAttribute("style", css_speed); 
