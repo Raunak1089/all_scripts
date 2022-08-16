@@ -1,7 +1,9 @@
+setInterval(() => {
+    try{
 var b = document.getElementsByTagName('*');
 let but;
 for (i in b){
-    if(b[i].innerHTML=='Subscribe' || b[i].innerHTML=='Subscribed'){
+    if(b[i].innerHTML=='Subscribe' || b[i].innerHTML=='Subscribed' ){
         but = b[i];
         console.log(i);
     }
@@ -44,12 +46,15 @@ myans.innerHTML = document.getElementsByClassName('html5-main-video')[0].playbac
 mydiv.appendChild(myans);
 mydiv.appendChild(myspeed);
 
-but.parentElement.parentElement.parentElement.appendChild(mydiv);
-but.parentElement.parentElement.parentElement.removeChild(but.parentElement.parentElement);
-
-
 
 let init, init_speed, speed;
+
+
+but.parentElement.appendChild(mydiv);
+but.parentElement.removeChild(but);
+
+
+
 
 mydiv.ontouchmove = function(ev) {
            var e = ev.targetTouches[0];
@@ -98,3 +103,9 @@ document.body.appendChild(disablescroll);
     mydiv.ontouchend = function(ev) {
             enableScroll();
     }
+
+    }
+
+catch(err) {}
+    
+}, 100)
