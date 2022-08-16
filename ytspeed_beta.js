@@ -31,7 +31,6 @@ mydiv.setAttribute("style", css_div);
 var myspeed = document.createElement('span');
 let css_speed = ` 
         padding: 2px 10px;
-        background: none;
         border-radius: 50%;
         font-size: 30px;
 ` 
