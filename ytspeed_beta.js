@@ -1,10 +1,12 @@
 setInterval(() => {
+
     try{
 var b = document.getElementsByTagName('*');
-let but;
+let but,num;
 for (i in b){
     if(b[i].innerHTML=='Subscribe' || b[i].innerHTML=='Subscribed' ){
         but = b[i];
+        num = i;
         console.log(i);
     }
 }
@@ -16,7 +18,7 @@ var mydiv = document.createElement('div');
 let css_div = ` 
         height: 40px;
         width: fit-content;
-        background: transparent;
+        background: none;
         border-radius: 10px;
         padding: 10px;
         opacity: 0.7;
@@ -32,10 +34,6 @@ let css_speed = `
         background: white;
         border-radius: 50%;
         font-size: 30px;
-      -webkit-text-fill-color: white;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: black;
-
 ` 
 
 myspeed.setAttribute("style", css_speed); 
@@ -108,8 +106,18 @@ document.body.appendChild(disablescroll);
             enableScroll();
     }
 
+
+let css_new = ` 
+      -webkit-text-fill-color: white;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+        text-transform: lowercase;
+` 
+b[num].setAttribute("style", css_new); 
+
+        
     }
 
 catch(err) {}
-    
+        
 }, 100)
