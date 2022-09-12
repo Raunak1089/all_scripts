@@ -1,3 +1,17 @@
+Notification.requestPermission().then(perm => {
+    if(perm ==='granted'){
+        const notification = new Notification("Thanks!!", {
+            body: "Thanks for using my bookmarklet",
+            data: {hello: "world"},
+            icon: "https://logos-world.net/wp-content/uploads/2020/04/Apple-Logo-1977-1998.png",
+            tag: "Welcome message",
+    })
+        notification.addEventListener("click", ()=>{alert("Thanks for attending my notification!")})
+    }
+})
+
+
+
 setInterval(() => {
 
     try{
