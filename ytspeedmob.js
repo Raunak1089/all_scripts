@@ -1,20 +1,4 @@
 
-Notification.requestPermission().then(perm => {
-    if(perm ==='granted'){
-        const notification = new Notification("My first notification!!", {
-            body: "This is the body",
-            data: {hello: "world"},
-            icon: "https://logos-world.net/wp-content/uploads/2020/04/Apple-Logo-1977-1998.png",
-            tag: "Welcome message",
-    })
-        notification.addEventListener("click", ()=>{alert("Thanks for attending my notification!")})
-    }
-})
-
-
-
-
-
 var mydiv = document.createElement('div'); 
 
 let css_div = ` 
