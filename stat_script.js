@@ -36,13 +36,14 @@ function moment(array, order, respect=mean(array)){
     return x/n
 }
 
-function g1(arr) {
-  return (moment(arr, 3))/(moment(arr, 2))**(3/2);
-}
-
-function g2(arr) {
-  return (moment(arr, 4)/(moment(arr, 2))**2) - 3;
-}
+const disp = {
+  g1 : function(arr) {
+    return (moment(arr, 3))/(moment(arr, 2))**(3/2);
+  }
+  g2 : function(arr) {
+    return (moment(arr, 4)/(moment(arr, 2))**2) - 3;
+  }
+};
 
 
 function Var(array){
