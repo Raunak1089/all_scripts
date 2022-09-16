@@ -40,7 +40,7 @@ const Disp = {
     return moment(array, mean(array), 2)
   },
   SD : function(array){
-    return Disp.Var(array) ** 0.5
+    return Var(array) ** 0.5
   },
   g1 : function(arr) {
     return (moment(arr, 3))/(moment(arr, 2))**(3/2);
