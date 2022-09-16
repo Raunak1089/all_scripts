@@ -52,10 +52,6 @@ const Disp = {
 
 
 
-function SD(array){
-    return Disp.Var(array) ** 0.5
-}
-
 function Cov(array1, array2){
     if (array1.length == array2.length){
         n = array1.length
