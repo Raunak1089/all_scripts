@@ -39,7 +39,7 @@ function moment(array, order, respect=mean(array)){
 const disp = {
   g1 : function(arr) {
     return (moment(arr, 3))/(moment(arr, 2))**(3/2);
-  }
+  },
   g2 : function(arr) {
     return (moment(arr, 4)/(moment(arr, 2))**2) - 3;
   }
