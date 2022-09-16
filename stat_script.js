@@ -27,7 +27,7 @@ function MD(array){
     return x/n
 }
 
-function moment(array, respect, order){
+function moment(array, order, respect=mean(array)){
     n = array.length
     x = 0
     for (let i = 0; i < n; i++){
