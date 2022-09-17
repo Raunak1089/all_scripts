@@ -18,7 +18,16 @@ function mean(array){
     return sum(array) / array.length
 }
 
-function moment(array, order, respect=mean(array)){
+function MD(array){
+    n = array.length
+    x = 0
+    for (let i = 0; i < n; i++){
+        x += ((array[i] - mean(array))**2)**0.5
+    }
+    return x/n
+}
+
+function moment(array, respect, order){
     n = array.length
     x = 0
     for (let i = 0; i < n; i++){
@@ -27,31 +36,13 @@ function moment(array, order, respect=mean(array)){
     return x/n
 }
 
-const Disp = {
-  g1 : function(arr) {
-    return (moment(arr, 3))/(moment(arr, 2))**(3/2);
-  },
-  g2 : function(arr) {
-    return (moment(arr, 4)/(moment(arr, 2))**2) - 3;
-  }
-};
-
-  function MD(array) {
-    n = array.length
-    x = 0
-    for (let i = 0; i < n; i++){
-        x += ((array[i] - mean(array))**2)**0.5
-    }
-    return x/n
-  }
-
-  function Var(array){
+function Var(array){
     return moment(array, mean(array), 2)
-  }
+}
 
-  function SD(array){
+function SD(array){
     return Var(array) ** 0.5
-  }
+}
 
 function Cov(array1, array2){
     if (array1.length == array2.length){
