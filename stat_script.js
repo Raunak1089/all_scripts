@@ -28,20 +28,6 @@ function moment(array, order, respect=mean(array)){
 }
 
 const Disp = {
-  MD : function(array) {
-    n = array.length
-    x = 0
-    for (let i = 0; i < n; i++){
-        x += ((array[i] - mean(array))**2)**0.5
-    }
-    return x/n
-  },
-  Var : function(array){
-    return moment(array, mean(array), 2)
-  },
-  SD : function(array){
-    return Var(array) ** 0.5
-  },
   g1 : function(arr) {
     return (moment(arr, 3))/(moment(arr, 2))**(3/2);
   },
@@ -50,7 +36,22 @@ const Disp = {
   }
 };
 
+  function MD(array) {
+    n = array.length
+    x = 0
+    for (let i = 0; i < n; i++){
+        x += ((array[i] - mean(array))**2)**0.5
+    }
+    return x/n
+  }
 
+  function Var(array){
+    return moment(array, mean(array), 2)
+  }
+
+  function SD(array){
+    return Var(array) ** 0.5
+  }
 
 function Cov(array1, array2){
     if (array1.length == array2.length){
