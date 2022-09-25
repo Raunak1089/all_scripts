@@ -1,3 +1,4 @@
+let running=true;
 var mydiv = document.createElement('div');
 mydiv.id='mydiv';
 mydiv.style.cssText= `
@@ -25,7 +26,7 @@ var close = document.createElement('div');
     close.style.cssText= `
     text-align: center;
     background: #ddd;
-    color: #333;
+    color: #f00;
     font-size: 20px;
     font-weight: bold;
     padding: 8px;
@@ -50,7 +51,7 @@ tab.rows[0].cells[0].style.borderRight='1px solid black';
     mydiv.appendChild(tab);
     document.body.appendChild(mydiv);
 
-close.onclick=function(){document.body.removeChild(mydiv);};
+close.onclick=function(){document.body.removeChild(mydiv);running=false;};
 
 function getTime(){
     hr = Math.floor((document.timeline.currentTime/1000)/3600).toString();
@@ -62,7 +63,7 @@ function getTime(){
     return `${hr}:${min}:${sec}`;
 }
 
-setInterval(()=>{document.querySelector('#timer').innerHTML = getTime()}, 100)
+setInterval(()=>{if(running){document.querySelector('#timer').innerHTML = getTime()}}, 100)
 
 
 // DRAGGABLE PHONE ________________________________
