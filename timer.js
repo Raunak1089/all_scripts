@@ -1,4 +1,4 @@
-let running=true;
+running=true;
 var mydiv = document.createElement('div');
 mydiv.id='mydiv';
 mydiv.style.cssText= `
@@ -72,7 +72,7 @@ var disablescroll = document.createElement('script');
 disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
 document.body.appendChild(disablescroll);
 
-let xv_phn, yv_phn;
+var xv_phn, yv_phn;
 
 document.ontouchstart = function() {
     mydiv.ontouchstart = function(ev) {
