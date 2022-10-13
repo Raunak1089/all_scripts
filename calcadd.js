@@ -67,6 +67,29 @@ close.onclick=function(){document.body.removeChild(mydiv);};
 
 // DRAGGABLE ________________________________
 
+
+dragValue = null; l=0; t=0;
+
+mydiv.onmousedown = function(e){
+        dragValue = mydiv;
+            let rect = dragValue.getBoundingClientRect();
+            l = e.clientX - rect.left;
+            t = e.clientY - rect.top;
+    document.body.style.userSelect='none';
+      }
+
+document.onmouseup = function(){
+        dragValue = null;
+        document.body.style.userSelect='';
+      }
+
+document.onmousemove = function(e) {
+  if(dragValue==mydiv){
+        dragValue.style.left = e.clientX - l + "px";
+        dragValue.style.top = e.clientY - t + "px";
+  }
+};
+
 var disablescroll = document.createElement('script');
 disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
 document.body.appendChild(disablescroll);
@@ -97,24 +120,3 @@ mydiv.ontouchend = function() {
            }
            
 
-
-
-dragValue = ''; l=0; t=0;
-
-mydiv.onmousedown = function(e){
-        dragValue = mydiv;
-            let rect = dragValue.getBoundingClientRect();
-            l = e.clientX - rect.left;
-            t = e.clientY - rect.top;
-      }
-
-document.onmouseup = function(){
-        dragValue = null;          
-      }
-
-document.onmousemove = function(e) {
-  if(dragValue==mydiv){
-        dragValue.style.left = e.clientX - l + "px";
-        dragValue.style.top = e.clientY - t + "px";
-  }
-};
