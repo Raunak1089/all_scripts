@@ -99,13 +99,13 @@ mydiv.ontouchend = function() {
 
 
 
-var dragValue, l, t;
+dragValue = ''; l=0; t=0;
 
 mydiv.onmousedown = function(e){
         dragValue = mydiv;
             let rect = dragValue.getBoundingClientRect();
-            let l = e.clientX - rect.left;
-            let t = e.clientY - rect.top;
+            l = e.clientX - rect.left;
+            t = e.clientY - rect.top;
       }
 
 document.onmouseup = function(){
