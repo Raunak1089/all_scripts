@@ -74,95 +74,47 @@ document.body.appendChild(disablescroll);
 
 var mydiv = document.getElementById("mydiv");
 
-
-    mydiv.ontouchstart = function(ev) {
-
-let textAreaL = document.createElement('textarea');
-textAreaL.style.display= "none";
-textAreaL.id='l';
-
-let textAreaT = document.createElement('textarea');
-textAreaT.style.display= "none";
-textAreaT.id='t';
-
-document.body.append(textAreaL);
-document.body.append(textAreaT);
-
-
+let l_mob, t_mob;
+mydiv.ontouchstart = function(ev) {
            var e = ev.targetTouches[0];
 
             let rect = mydiv.getBoundingClientRect();
-            let l = e.clientX - rect.left;
-            let t = e.clientY - rect.top;
+            l_mob = e.clientX - rect.left;
+            t_mob = e.clientY - rect.top;
 
-document.getElementById("l").value=l;
-document.getElementById("t").value=t;
         disableScroll();
-}
+            }
 
 
 mydiv.ontouchmove = function(ev) {
-
-let l = Number(document.getElementById("l").value);
-let t = Number(document.getElementById("t").value);
-
            var e = ev.targetTouches[0];
-           mydiv.style.left = e.clientX - l + 'px'; 
-           mydiv.style.top = e.clientY - t + 'px';
+           mydiv.style.left = e.clientX - l_mob + 'px'; 
+           mydiv.style.top = e.clientY - t_mob + 'px';
            }
 
 mydiv.ontouchend = function() {
-let textAreaL = document.getElementById("l");
-let textAreaT = document.getElementById("t");
-
-            document.body.removeChild(textAreaL);
-            document.body.removeChild(textAreaT);
-        enableScroll();
+       enableScroll();
            }
            
 
 
 
-var dragValue;
+var dragValue, l, t;
 
 mydiv.onmousedown = function(e){
         dragValue = mydiv;
-let textAreaL = document.createElement('textarea');
-textAreaL.style.display= "none";
-textAreaL.id='l';
-
-let textAreaT = document.createElement('textarea');
-textAreaT.style.display= "none";
-textAreaT.id='t';
-
-document.body.append(textAreaL);
-document.body.append(textAreaT);
-
-
             let rect = dragValue.getBoundingClientRect();
             let l = e.clientX - rect.left;
             let t = e.clientY - rect.top;
-
-document.getElementById("l").value=l;
-document.getElementById("t").value=t;
-
       }
 
 document.onmouseup = function(){
-        dragValue = null;
-        let textAreaL = document.getElementById("l");
-let textAreaT = document.getElementById("t");
-
-            document.body.removeChild(textAreaL);
-            document.body.removeChild(textAreaT);
-           
+        dragValue = null;          
       }
 
 document.onmousemove = function(e) {
-
-let l = Number(document.getElementById("l").value);
-let t = Number(document.getElementById("t").value);
-
-           dragValue.style.left = e.clientX - l + 'px'; 
-           dragValue.style.top = e.clientY - t + 'px';
+  if(dragValue==mydiv){
+        dragValue.style.left = e.clientX - l + "px";
+        dragValue.style.top = e.clientY - t + "px";
+  }
 };
