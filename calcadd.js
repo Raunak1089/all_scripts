@@ -74,7 +74,7 @@ document.body.appendChild(disablescroll);
 
 var mydiv = document.getElementById("mydiv");
 
-let l_mob, t_mob;
+var l_mob, t_mob;
 mydiv.ontouchstart = function(ev) {
            var e = ev.targetTouches[0];
 
