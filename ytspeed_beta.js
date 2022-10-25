@@ -133,4 +133,11 @@ b[num].setAttribute("style", css_new);
 
 catch(err) {}
         
+
+
+// STORE LAST PLAYING TIME 
+
+localStorage.setItem(window.location.search,document.getElementsByClassName('html5-main-video')[0].currentTime)
+
+
 }, 100)
