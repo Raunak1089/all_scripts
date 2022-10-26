@@ -13,10 +13,13 @@ Notification.requestPermission().then(perm => {
 
 // CONTINUE FROM WHERE YOU LEFT ___
 
+function cont(){
 try{
 document.getElementsByClassName('html5-main-video')[0].currentTime=localStorage[window.location.search];
 document.getElementsByClassName('html5-main-video')[0].playbackRate=localStorage[window.location.search+'speed'];
 }catch(err){}
+}
+
 
 setInterval(() => {
 
@@ -30,6 +33,7 @@ for (i in b){
         but = b[i];
         num = i;
         console.log(i);
+        cont();
     }
 }
 
