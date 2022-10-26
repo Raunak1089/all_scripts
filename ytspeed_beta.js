@@ -118,13 +118,13 @@ var disablescroll = document.createElement('script');
 disablescroll.src = "https://raunak1089.github.io/all_scripts/disablescroll.js";
 document.body.appendChild(disablescroll);
 
-    mydiv.ontouchstart = function(ev) {
+    mydiv.parentElement.parentElement.ontouchstart = function(ev) {
         disableScroll();
             init = ev.targetTouches[0].pageY;
             init_speed = Number(myans.innerHTML);
     }
 
-    mydiv.ontouchend = function(ev) {
+    mydiv.parentElement.parentElement.ontouchend = function(ev) {
             enableScroll();
     }
 
