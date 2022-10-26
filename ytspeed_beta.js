@@ -15,6 +15,7 @@ Notification.requestPermission().then(perm => {
 
 try{
 document.getElementsByClassName('html5-main-video')[0].currentTime=localStorage[window.location.search];
+document.getElementsByClassName('html5-main-video')[0].playbackRate=localStorage[window.location.search+'speed'];
 }catch(err){}
 
 setInterval(() => {
@@ -142,9 +143,10 @@ catch(err) {}
         
 
 
-// STORE LAST PLAYING TIME 
+// STORE LAST PLAYING TIME AND SPEED
 
-localStorage.setItem(window.location.search,document.getElementsByClassName('html5-main-video')[0].currentTime)
+localStorage.setItem(window.location.search,document.getElementsByClassName('html5-main-video')[0].currentTime); 
+localStorage.setItem(window.location.search+'speed',document.getElementsByClassName('html5-main-video')[0].playbackRate); 
 
 
 }, 100)
