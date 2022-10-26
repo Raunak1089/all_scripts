@@ -18,18 +18,16 @@ try{
 document.getElementsByClassName('html5-main-video')[0].currentTime=localStorage[window.location.search];
 document.getElementsByClassName('html5-main-video')[0].playbackRate=localStorage[window.location.search+'speed'];
 }catch(err){}
-
-
-// STORE LAST PLAYING TIME AND SPEED
-
-localStorage.setItem(window.location.search,document.getElementsByClassName('html5-main-video')[0].currentTime); 
-localStorage.setItem(window.location.search+'speed',document.getElementsByClassName('html5-main-video')[0].playbackRate); 
-
 }
 
+var oldUrl = document.location.href;
 
 setInterval(() => {
 
+if (document.location.href!=oldUrl){
+    cont();
+    oldUrl=document.location.href;
+}
 
     try{
 
@@ -40,7 +38,6 @@ for (i in b){
         but = b[i];
         num = i;
         console.log(i);
-        cont();
     }
 }
 
@@ -153,5 +150,10 @@ b[num].setAttribute("style", css_new);
 catch(err) {}
         
 
+
+// STORE LAST PLAYING TIME AND SPEED
+
+localStorage.setItem(window.location.search,document.getElementsByClassName('html5-main-video')[0].currentTime); 
+localStorage.setItem(window.location.search+'speed',document.getElementsByClassName('html5-main-video')[0].playbackRate); 
 
 }, 100)
