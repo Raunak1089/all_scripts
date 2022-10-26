@@ -11,18 +11,16 @@ Notification.requestPermission().then(perm => {
 })
 
 
+// CONTINUE FROM WHERE YOU LEFT ___
+
+try{
+document.getElementsByClassName('html5-main-video')[0].currentTime=localStorage[window.location.search];
+}catch(err){}
 
 setInterval(() => {
 
 
     try{
-
-// CONTINUE FROM WHERE YOU LEFT ___
-
-
-
-document.getElementsByClassName('html5-main-video')[0].currentTime=localStorage[window.location.search];
-
 
 var b = document.getElementsByTagName('*');
 let but,num;
