@@ -80,7 +80,7 @@ but.parentElement.removeChild(but);
 
 
 
-mydiv.ontouchmove = function(ev) {
+mydiv.parentElement.parentElement.ontouchmove = function(ev) {
            var e = ev.targetTouches[0];
         
            myans.innerHTML = init_speed + Math.floor(100*(e.pageY-init))/100;
@@ -92,7 +92,7 @@ mydiv.ontouchmove = function(ev) {
 
 var dragValue;
 
-mydiv.onmousedown = function(e){
+mydiv.parentElement.parentElement.onmousedown = function(e){
         dragValue = true;
         init = e.pageY;
         init_speed = Number(myans.innerHTML);
@@ -102,7 +102,7 @@ document.onmouseup = function(){
         dragValue = false;
       }
 
-document.onmousemove = function(e) {
+document.parentElement.parentElement.onmousemove = function(e) {
     if(dragValue){
            myans.innerHTML = init_speed + Math.floor(100*(e.pageY-init))/100;
            speed = Math.floor(100*(1.005**(eval(myans.innerHTML))))/100;
