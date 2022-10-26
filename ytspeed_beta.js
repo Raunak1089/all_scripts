@@ -14,6 +14,11 @@ Notification.requestPermission().then(perm => {
 
 setInterval(() => {
 
+// CONTINUE FROM WHERE YOU LEFT ___
+
+document.getElementsByClassName('html5-main-video')[0].currentTime=localStorage[window.location.search];
+
+
     try{
 var b = document.getElementsByTagName('*');
 let but,num;
