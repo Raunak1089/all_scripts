@@ -13,23 +13,14 @@ Notification.requestPermission().then(perm => {
 
 // CONTINUE FROM WHERE YOU LEFT ___
 
-function cont(){
+
 try{
 document.getElementsByClassName('html5-main-video')[0].currentTime=localStorage[window.location.search];
 document.getElementsByClassName('html5-main-video')[0].playbackRate=localStorage[window.location.search+'speed'];
-    oldUrl=document.location.href;
 }catch(err){}
-}
 
-var oldUrl = document.location.href;
 
 setInterval(() => {
-
-if (document.location.href!=oldUrl){
-    document.getElementsByClassName('html5-main-video')[0].onload=()=>{
-    cont();
-    }
-}
 
     try{
 
