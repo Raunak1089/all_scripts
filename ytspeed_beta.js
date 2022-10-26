@@ -25,8 +25,10 @@ var oldUrl = document.location.href;
 setInterval(() => {
 
 if (document.location.href!=oldUrl){
+    document.body.onload=()=>{
     cont();
     oldUrl=document.location.href;
+    }
 }
 
     try{
