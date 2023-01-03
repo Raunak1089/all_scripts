@@ -97,7 +97,7 @@ let out;
 if (proout.includes("e+")||proout.includes("e-")){
     sbs = proout.substring(0, proout.length).replace(/[+]/g, '').split('e'); 
     out = sbs[0]+'&times;10<sup>'+sbs[1]+'</sup>';
-    document.querySelector('sup').style.fontSize='10px';
+    //document.querySelector('sup').style.fontSize='10px';
 }	 
 
 else if (proout == 'Infinity'){
