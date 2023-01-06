@@ -1,4 +1,9 @@
 
+var fnt = document.createElement('style'); 
+fnt.innerHTML="@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,600,700&display=swap');@import url('https://fonts.googleapis.com/css?family=Lora:400,500,600,700&display=swap');@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');";
+document.body.appendChild(fnt);
+
+
 var solvebytupu = document.createElement('script');
 solvebytupu.src = "https://raunak1089.github.io/all_scripts/solvebytupu.js";
 document.body.appendChild(solvebytupu);
@@ -6,18 +11,24 @@ document.body.appendChild(solvebytupu);
 
 var mydiv = document.createElement('div');
 mydiv.id='mydiv';
-    mydiv.style.height = '50px';
-    mydiv.style.width = 'fit-content';
-    mydiv.style.background = 'grey';
-    mydiv.style.borderRadius = '10px';
-    mydiv.style.padding = '10px';
-    mydiv.style.position = 'fixed';
-    mydiv.style.opacity = 0.7;
-    mydiv.style.flex = '1';
-    mydiv.style.zIndex = '1000';
-    mydiv.style.transition = 'opacity 0.3s';
-    mydiv.style.top = '10px';
-    mydiv.style.right = '10px';
+mydiv_css=`
+    height: fit-content;
+    width: fit-content;
+    background: black;
+    border-radius: 10px;
+    padding: 10px;
+    position: fixed;
+    opacity: 0.7;
+    flex: 1 1 0%;
+    z-index: 1000;
+    cursor: all-scroll;
+    transition: opacity 0.3s ease 0s;
+    top: 10px;
+    right: 10px;
+`;
+mydiv.setAttribute('style',mydiv_css);
+
+
 
 var tab = document.createElement('table');
     for (let i=0; i<2; i++) {
@@ -28,33 +39,51 @@ var tab = document.createElement('table');
     }
 
 var close = document.createElement('div');
-    close.innerHTML='&#215;';
-    close.style.textAlign='center';
-    close.style.color='#fff';
-    close.style.fontSize='20px';
-    close.style.fontWeight='bold';
-    close.style.width='20px';
-    close.style.height='20px';
-    close.style.borderRadius='50%';
-    close.style.backgroundColor='red';
-    close.style.userSelect='none';
+close.innerHTML='&#215;';
+close_css=`
+    text-align: center;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: red;
+    user-select: none;
+`;
+close.setAttribute('style',close_css);
 
 var myin = document.createElement('input');
     myin.style.width = '70px';
-    myin.style.background = '#34ebd5';
+    myin.style.background = '#cbcbcb';
+    myin.style.fontFamily='Lora';
+    myin.style.fontWeight='bold';
     
 var mybtn = document.createElement('input');
     mybtn.type = 'submit';
     mybtn.value = '=';
+    mybtn.style = `
+    background: none;
+    border: 0;
+    color: white;
+    font-size: 1.5em;`;
     
 var myans = document.createElement('span');
-    myans.style.background = 'white';
     myans.style.padding = '2px 10px';
-    mybtn.onclick = function (){myans.innerHTML=solvebyTupu(myin.value)};
-    myin.oninput=function (){myans.innerHTML=solvebyTupu(myin.value)};
-    myin.onkeydown=function (){if (event.keyCode == 13){myans.innerHTML=solvebyTupu(myin.value)}};
+    myans.style.color = 'white';
+    myans.style.cursor = 'auto';
+    myans.style.fontFamily='Rubik';
+    mybtn.onclick = function (){myans.innerHTML=eval(myin.value)};
+    myin.oninput=function (){myans.innerHTML=eval(myin.value)};
+    myin.onkeydown=function (){if (event.keyCode == 13){myans.innerHTML=eval(myin.value)}};
 
 
+    tab.rows[0].cells[0].innerText='CASIO';
+    tab.rows[0].cells[0].style.color='white';
+    tab.rows[0].cells[0].style.fontFamily='Montserrat';
+    tab.rows[0].cells[0].style.fontWeight='bold';
+    tab.rows[0].cells[0].style.fonSize='1.5em';
     tab.rows[0].cells[3].appendChild(close);
     tab.rows[1].cells[0].appendChild(myin);
     tab.rows[1].cells[1].appendChild(mybtn);
@@ -63,6 +92,7 @@ var myans = document.createElement('span');
     document.body.appendChild(mydiv);
 
 close.onclick=function(){document.body.removeChild(mydiv);};
+
 
 
 // DRAGGABLE ________________________________
