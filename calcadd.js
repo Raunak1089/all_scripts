@@ -74,9 +74,9 @@ var myans = document.createElement('span');
     myans.style.color = 'white';
     myans.style.cursor = 'auto';
     myans.style.fontFamily='Rubik';
-    mybtn.onclick = function (){myans.innerHTML=eval(myin.value)};
-    myin.oninput=function (){myans.innerHTML=eval(myin.value)};
-    myin.onkeydown=function (){if (event.keyCode == 13){myans.innerHTML=eval(myin.value)}};
+    mybtn.onclick = function (){myans.innerHTML=solvebyTupu(myin.value)};
+    myin.oninput=function (){myans.innerHTML=solvebyTupu(myin.value)};
+    myin.onkeydown=function (){if (event.keyCode == 13){myans.innerHTML=solvebyTupu(myin.value)}};
 
 
     tab.rows[0].cells[0].innerText='CASIO';
