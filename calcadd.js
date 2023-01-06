@@ -1,12 +1,11 @@
 
-var fnt = document.createElement('style'); 
-fnt.innerHTML="@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,600,700&display=swap');@import url('https://fonts.googleapis.com/css?family=Lora:400,500,600,700&display=swap');@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');";
-document.body.appendChild(fnt);
-
-
-var solvebytupu = document.createElement('script');
-solvebytupu.src = "https://raunak1089.github.io/all_scripts/solvebytupu.js";
-document.body.appendChild(solvebytupu);
+    var fnt = document.createElement('style'); 
+    fnt.innerHTML="@import url('https://fonts.googleapis.com/css?family=Rubik:400,500,600,700&display=swap');@import url('https://fonts.googleapis.com/css?family=Lora:400,500,600,700&display=swap');@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700&display=swap');";
+    document.body.appendChild(fnt);
+    
+    var solvebytupu = document.createElement('script');
+    solvebytupu.src = "https://raunak1089.github.io/all_scripts/solvebytupu.js";
+    document.body.appendChild(solvebytupu);
 
 
 var mydiv = document.createElement('div');
@@ -28,7 +27,7 @@ mydiv_css=`
 `;
 mydiv.setAttribute('style',mydiv_css);
 
-
+    
 
 var tab = document.createElement('table');
     for (let i=0; i<2; i++) {
@@ -74,9 +73,30 @@ var myans = document.createElement('span');
     myans.style.color = 'white';
     myans.style.cursor = 'auto';
     myans.style.fontFamily='Rubik';
-    mybtn.onclick = function (){myans.innerHTML=solvebyTupu(myin.value)};
-    myin.oninput=function (){myans.innerHTML=solvebyTupu(myin.value)};
-    myin.onkeydown=function (){if (event.keyCode == 13){myans.innerHTML=solvebyTupu(myin.value)}};
+
+    function solveit(){
+        try{
+            if(myin.value!=''){
+                myans.innerHTML=solvebyTupu(myin.value);
+            }else{
+                myans.innerHTML='';
+            }
+        }catch(err){
+            if(err.message=='Unexpected end of input'||err.message=="Cannot read properties of undefined (reading 'toString')"){
+                myans.innerHTML='...'
+            }
+            else if(err.message.includes('expected token')||err.message.includes('Invalid')){
+                myans.innerHTML='Syntax Error!'
+            }
+            else if(err.message=='missing ) after argument list'){
+                myin.value+=')'
+            }
+            else{console.log(err.message)}
+        }
+    }
+    mybtn.onclick=()=>{solveit()};
+    myin.oninput=()=>{solveit()};
+    myin.onkeydown=()=>{solveit()};
 
 
     tab.rows[0].cells[0].innerText='CASIO';
@@ -148,5 +168,4 @@ mydiv.ontouchmove = function(ev) {
 mydiv.ontouchend = function() {
        enableScroll();
            }
-           
-
+ 
