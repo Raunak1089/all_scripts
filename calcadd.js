@@ -41,6 +41,7 @@ var close = document.createElement('div');
 close.innerHTML='&#215;';
 close_css=`
     text-align: center;
+    line-height: 1;
     color: rgb(255, 255, 255);
     font-size: 20px;
     font-weight: bold;
