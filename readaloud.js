@@ -6,12 +6,12 @@ document.body.appendChild(fontawesome);
 var mydiv = document.createElement('div');
 mydiv.id='mydiv'; mydiv.innerHTML='<i class="fa fa-bullhorn"></i>';
 mydiv_css=`
-    height: fit-content;
-    width: fit-content;
+    height: 1em;
+    width: 1em;
     background: black;
     color: white;
     border-radius: 50%;
-    padding: 10px;
+    padding: 13px;
     position: fixed;
     opacity: 0.7;
     flex: 1 1 0%;
