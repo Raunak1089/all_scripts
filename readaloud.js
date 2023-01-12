@@ -24,7 +24,13 @@ mydiv_css=`
 mydiv.setAttribute('style',mydiv_css);
     document.body.appendChild(mydiv);
 
-mydiv.onclick=()=>{utterance=new SpeechSynthesisUtterance(window.getSelection());speechSynthesis.speak(utterance)};
+l='en-US';
+mydiv.ondblclick=()=>{l=prompt("Enter language code:")}
+mydiv.onclick=()=>{
+utterance=new SpeechSynthesisUtterance(window.getSelection());
+utterance.lang=l;
+speechSynthesis.speak(utterance)
+};
 
 
 // DRAGGABLE ________________________________
