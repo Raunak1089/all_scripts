@@ -43,6 +43,16 @@ document.onkeydown=(e)=>{
     if(e.key=='ArrowLeft'){document.getElementsByName('media')[0].currentTime-=1}
 }
 
+
+
+// REMEMBER LAST TIME AND SPEED ___________________________ 
+
+try{
+     document.getElementsByName('media')[0].currentTime=localStorage[window.location+'time'];
+     document.getElementsByName('media')[0].playbackRate=localStorage[window.location+'speed'];
+}catch(err){}
+
+
 let init, init_speed, speed;
 
 mydiv.ontouchmove = function(ev) {
@@ -90,3 +100,11 @@ document.body.appendChild(disablescroll);
     mydiv.ontouchend = function(ev) {
             enableScroll();
     }
+
+
+// STORE LAST PLAYING TIME AND SPEED
+
+setInterval(() => {
+      localStorage.setItem(window.location+'time',document.getElementsByName('media')[0].currentTime); 
+      localStorage.setItem(window.location+'speed',document.getElementsByName('media')[0].playbackRate); 
+}, 100)
