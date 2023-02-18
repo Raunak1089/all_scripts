@@ -111,31 +111,34 @@ function show_speed(){
 
 function addKeyDownListener() {
   document.addEventListener('keydown', function(event) {
+    if (event.key=='[' || event.key==']') {
       const helloWorld = document.createElement('div');
       helloWorld.innerText = document.getElementsByName('media')[0]+'x';
       helloWorld.style.position = 'absolute';
       const videoRect = video.getBoundingClientRect();
       helloWorld.style.top = videoRect.top + 10 + 'px';
       helloWorld.style.right = window.innerWidth - videoRect.right + 10 + 'px';
-      helloWorld.style.color = 'white';
-      helloWorld.style.fontSize = '2em';
-      helloWorld.style.margin = '10px';
+     css_style=`font-size: 2em;
+      margin: 10px;
+      -webkit-text-fill-color: white;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+    `;
+     helloWorld.setAttribute('style',css_style);
       video.parentNode.appendChild(helloWorld);
       setTimeout(function() {
         helloWorld.remove();
       }, 2000);
+    }
   });
 }
 
-function removeKeyDownListener() {
-  document.removeEventListener('keydown');
-}
 
 addKeyDownListener();
 
 document.addEventListener('fullscreenchange', function() {
   if (document.fullscreenElement) {
-    removeKeyDownListener();
+    document.removeEventListener('keydown');
   } else {
     addKeyDownListener();
   }
