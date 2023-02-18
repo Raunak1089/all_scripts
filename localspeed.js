@@ -119,11 +119,12 @@ document.onkeydown=(e)=>{
  const videoRect = video.getBoundingClientRect();
 
  css_style=`
-  font-size: 2em;
+  font-size: 3em;
   display: none;
   margin: 10px;
   position: absolute;
   font-family: 'Comic Neue';
+  font-weight: bold;
   -webkit-text-fill-color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
