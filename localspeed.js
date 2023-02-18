@@ -110,13 +110,13 @@ document.onkeydown=(e)=>{
  const video = document.getElementsByName('media')[0];
  const helloWorld = document.createElement('div');
  helloWorld.innerText = document.getElementsByName('media')[0].playbackRate.toFixed(2)+'x';
- helloWorld.style.position = 'absolute';
  const videoRect = video.getBoundingClientRect();
 
  css_style=`
   font-size: 2em;
   display: none;
   margin: 10px;
+  position: absolute;
   -webkit-text-fill-color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
