@@ -132,7 +132,7 @@ function addKeyDownListener() {
       setTimeout(function() {
         helloWorld.remove();
       }, 2000);
-  });
+  }); 
 }
 
 function removeKeyDownListener() {
