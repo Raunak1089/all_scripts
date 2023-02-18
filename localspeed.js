@@ -1,4 +1,9 @@
- if(!navigator.userAgent.includes('Windows')){
+    var fnt = document.createElement('style'); 
+    fnt.innerHTML="@import url('@import url('https://fonts.googleapis.com/css?family=Comic Neue:400,500,600,700&display=swap');";
+    document.body.appendChild(fnt); 
+
+
+if(!navigator.userAgent.includes('Windows')){
         var mydiv = document.createElement('div'); 
 
         let css_div = ` 
@@ -8,6 +13,7 @@
                 border-radius: 10px;
                 padding: 10px;
                 position: absolute;
+                font-family: 'Comic Neue';
                 opacity: 0.7;
                 flex: 1;
                 z-index: 1000;
@@ -117,6 +123,7 @@ document.onkeydown=(e)=>{
   display: none;
   margin: 10px;
   position: absolute;
+  font-family: 'Comic Neue';
   -webkit-text-fill-color: white;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
