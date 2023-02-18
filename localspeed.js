@@ -106,43 +106,44 @@ document.onkeydown=(e)=>{
 
 // VLC SPEED CONVENTION ___________________________________
 
-function show_speed(){
+
  const video = document.getElementsByName('media')[0];
+ const helloWorld = document.createElement('div');
+ helloWorld.innerText = document.getElementsByName('media')[0]+'x';
+ helloWorld.style.position = 'absolute';
+ const videoRect = video.getBoundingClientRect();
+ helloWorld.style.top = videoRect.top + 10 + 'px';
+ helloWorld.style.right = window.innerWidth - videoRect.right + 10 + 'px';
+ css_style=`
+  font-size: 2em;
+  display: none;
+  margin: 10px;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+ `;
+helloWorld.setAttribute('style',css_style);
+ video.parentNode.appendChild(helloWorld);
 
-function addKeyDownListener() {
-  document.addEventListener('keydown', function(event) {
-      const helloWorld = document.createElement('div');
-      helloWorld.innerText = document.getElementsByName('media')[0]+'x';
-      helloWorld.style.position = 'absolute';
-      const videoRect = video.getBoundingClientRect();
-      helloWorld.style.top = videoRect.top + 10 + 'px';
-      helloWorld.style.right = window.innerWidth - videoRect.right + 10 + 'px';
-     css_style=`font-size: 2em;
-      margin: 10px;
-      -webkit-text-fill-color: white;
-      -webkit-text-stroke-width: 1px;
-      -webkit-text-stroke-color: black;
-    `;
-     helloWorld.setAttribute('style',css_style);
-      video.parentNode.appendChild(helloWorld);
-      setTimeout(function() {
-        helloWorld.remove();
-      }, 2000);
-  });
+
+function show_speed(){
+  helloWorld.style.display='inline';
+  setTimeout(function() {
+     helloWorld.style.display='none';
+  }, 2000);
 }
 
+//addKeyDownListener();
 
-addKeyDownListener();
+//document.addEventListener('fullscreenchange', function() {
+//  if (document.fullscreenElement) {
+//    document.removeEventListener('keydown');
+//  } else {
+//    addKeyDownListener();
+//  }
+//});
 
-document.addEventListener('fullscreenchange', function() {
-  if (document.fullscreenElement) {
-    document.removeEventListener('keydown');
-  } else {
-    addKeyDownListener();
-  }
-});
 
-}
 
 document.onkeydown=(e)=>{
     if(e.key=='['){document.getElementsByName('media')[0].playbackRate-=0.1; show_speed();}
