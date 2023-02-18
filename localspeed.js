@@ -1,5 +1,5 @@
     var fnt = document.createElement('style'); 
-    fnt.innerHTML="@import url('@import url('https://fonts.googleapis.com/css?family=Comic Neue:400,500,600,700&display=swap');";
+    fnt.innerHTML="@import url('https://fonts.googleapis.com/css?family=Comic Neue:400,500,600,700&display=swap');";
     document.body.appendChild(fnt); 
 
 
