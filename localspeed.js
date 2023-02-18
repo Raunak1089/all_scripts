@@ -109,7 +109,7 @@ document.onkeydown=(e)=>{
 
  const video = document.getElementsByName('media')[0];
  const helloWorld = document.createElement('div');
- helloWorld.innerText = document.getElementsByName('media')[0]+'x';
+ helloWorld.innerText = document.getElementsByName('media')[0].playbackRate+'x';
  helloWorld.style.position = 'absolute';
  const videoRect = video.getBoundingClientRect();
  helloWorld.style.top = videoRect.top + 10 + 'px';
