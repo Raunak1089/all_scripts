@@ -112,8 +112,7 @@ document.onkeydown=(e)=>{
  helloWorld.innerText = document.getElementsByName('media')[0].playbackRate.toFixed(2)+'x';
  helloWorld.style.position = 'absolute';
  const videoRect = video.getBoundingClientRect();
- helloWorld.style.top = videoRect.top + 10 + 'px';
- helloWorld.style.right = window.innerWidth - videoRect.right + 10 + 'px';
+
  css_style=`
   font-size: 2em;
   display: none;
@@ -123,7 +122,9 @@ document.onkeydown=(e)=>{
   -webkit-text-stroke-color: black;
  `;
 helloWorld.setAttribute('style',css_style);
- video.parentNode.appendChild(helloWorld);
+ helloWorld.style.top = videoRect.top + 10 + 'px';
+ helloWorld.style.right = window.innerWidth - videoRect.right + 10 + 'px';
+video.parentNode.appendChild(helloWorld);
 
 
 function show_speed(){
