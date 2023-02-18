@@ -111,7 +111,6 @@ function show_speed(){
 
 function addKeyDownListener() {
   document.addEventListener('keydown', function(event) {
-    if (event.key=='[' || event.key==']') {
       const helloWorld = document.createElement('div');
       helloWorld.innerText = document.getElementsByName('media')[0]+'x';
       helloWorld.style.position = 'absolute';
@@ -129,7 +128,6 @@ function addKeyDownListener() {
       setTimeout(function() {
         helloWorld.remove();
       }, 2000);
-    }
   });
 }
 
@@ -147,8 +145,8 @@ document.addEventListener('fullscreenchange', function() {
 }
 
 document.onkeydown=(e)=>{
-    if(e.key=='['){document.getElementsByName('media')[0].playbackRate-=0.1}
-    if(e.key==']'){document.getElementsByName('media')[0].playbackRate+=0.1}
+    if(e.key=='['){document.getElementsByName('media')[0].playbackRate-=0.1; show_speed();}
+    if(e.key==']'){document.getElementsByName('media')[0].playbackRate+=0.1; show_speed();}
 }
 
 
