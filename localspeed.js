@@ -37,15 +37,6 @@
         mydiv.appendChild(myspeed);
         document.body.appendChild(mydiv);
 
-        // ARROW KEY FORWARD BACKWARD _____________________________
-
-        document.onkeydown=(e)=>{
-            if(e.key=='ArrowRight'){document.getElementsByName('media')[0].currentTime+=1}
-            if(e.key=='ArrowLeft'){document.getElementsByName('media')[0].currentTime-=1}
-        }
-
-
-
         let init, init_speed, speed;
 
         mydiv.ontouchmove = function(ev) {
@@ -109,7 +100,7 @@ try{
 
 document.onkeydown=(e)=>{
     if(e.key=='ArrowRight'){document.getElementsByName('media')[0].currentTime+=1}
-    if(e.key=='ArrowLeft'){document.getElementsByName('media')[0].currentTime-=1}
+    if(e.key=='ArrowLeft'){document.getElementsByName('media')[0].currentTime-=1.2}
 }
 
 
