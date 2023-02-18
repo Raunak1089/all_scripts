@@ -46,14 +46,6 @@
 
 
 
-        // REMEMBER LAST TIME AND SPEED ___________________________ 
-
-        try{
-             document.getElementsByName('media')[0].currentTime=localStorage[window.location+'time'];
-             document.getElementsByName('media')[0].playbackRate=localStorage[window.location+'speed'];
-        }catch(err){}
-
-
         let init, init_speed, speed;
 
         mydiv.ontouchmove = function(ev) {
@@ -102,6 +94,15 @@
                     enableScroll();
             }
 }
+
+
+// REMEMBER LAST TIME AND SPEED ___________________________ 
+
+try{
+     document.getElementsByName('media')[0].currentTime=localStorage[window.location+'time'];
+     document.getElementsByName('media')[0].playbackRate=localStorage[window.location+'speed'];
+}catch(err){}
+
 
 
 // ARROW KEY FORWARD BACKWARD _____________________________
