@@ -105,8 +105,8 @@ try{
 // ARROW KEY FORWARD BACKWARD _____________________________
 
 document.onkeydown=(e)=>{
-    if(e.key=='ArrowRight'){document.getElementsByName('media')[0].currentTime+=1}
-    if(e.key=='ArrowLeft'){document.getElementsByName('media')[0].currentTime-=1.2}
+    if(e.key=='ArrowRight'){document.getElementsByName('media')[0].currentTime+=5}
+    if(e.key=='ArrowLeft'){document.getElementsByName('media')[0].currentTime-=5}
 }
 
 
