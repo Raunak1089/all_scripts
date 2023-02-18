@@ -112,6 +112,52 @@ document.onkeydown=(e)=>{
 }
 
 
+// VLC SPEED CONVENTION ___________________________________
+
+function show_speed(){
+ const video = document.getElementsByName('media')[0];
+
+function addKeyDownListener() {
+  document.addEventListener('keydown', function(event) {
+    if (event.code === 'KeyG') {
+      const helloWorld = document.createElement('div');
+      helloWorld.innerText = document.getElementsByName('media')[0]+'x';
+      helloWorld.style.position = 'absolute';
+      const videoRect = video.getBoundingClientRect();
+      helloWorld.style.top = videoRect.top + 10 + 'px';
+      helloWorld.style.right = window.innerWidth - videoRect.right + 10 + 'px';
+      helloWorld.style.color = 'white';
+      helloWorld.style.fontSize = '2em';
+      helloWorld.style.margin = '10px';
+      video.parentNode.appendChild(helloWorld);
+      setTimeout(function() {
+        helloWorld.remove();
+      }, 2000);
+    }
+  });
+}
+
+function removeKeyDownListener() {
+  document.removeEventListener('keydown');
+}
+
+addKeyDownListener();
+
+document.addEventListener('fullscreenchange', function() {
+  if (document.fullscreenElement) {
+    removeKeyDownListener();
+  } else {
+    addKeyDownListener();
+  }
+});
+
+}
+
+document.onkeydown=(e)=>{
+    if(e.key=='['){document.getElementsByName('media')[0].playbackRate-=0.1}
+    if(e.key==']'){document.getElementsByName('media')[0].playbackRate+=0.1}
+}
+
 
 // REMEMBER LAST TIME AND SPEED ___________________________ 
 
