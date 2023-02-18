@@ -119,7 +119,6 @@ function show_speed(){
 
 function addKeyDownListener() {
   document.addEventListener('keydown', function(event) {
-    if (event.code === 'KeyG') {
       const helloWorld = document.createElement('div');
       helloWorld.innerText = document.getElementsByName('media')[0]+'x';
       helloWorld.style.position = 'absolute';
@@ -133,7 +132,6 @@ function addKeyDownListener() {
       setTimeout(function() {
         helloWorld.remove();
       }, 2000);
-    }
   });
 }
 
