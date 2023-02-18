@@ -109,7 +109,7 @@ document.onkeydown=(e)=>{
 
  const video = document.getElementsByName('media')[0];
  const helloWorld = document.createElement('div');
- helloWorld.innerText = document.getElementsByName('media')[0].playbackRate+'x';
+ helloWorld.innerText = document.getElementsByName('media')[0].playbackRate.toFixed(2)+'x';
  helloWorld.style.position = 'absolute';
  const videoRect = video.getBoundingClientRect();
  helloWorld.style.top = videoRect.top + 10 + 'px';
@@ -127,6 +127,7 @@ helloWorld.setAttribute('style',css_style);
 
 
 function show_speed(){
+  helloWorld.innerText = document.getElementsByName('media')[0].playbackRate.toFixed(2)+'x';
   helloWorld.style.display='inline';
   setTimeout(function() {
      helloWorld.style.display='none';
