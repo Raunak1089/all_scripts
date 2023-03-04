@@ -189,3 +189,116 @@ function transpose_table(tab) {
 
     return trans;
 }
+
+
+
+class Matrix {
+    static transpose(matrix) {
+        const transpose = [];
+        for (let i = 0; i < matrix[0].length; i++) {
+            transpose.push(new Array(matrix.length).fill(0));
+        }
+        for (let i = 0; i < matrix.length; i++) {
+            for (let j = 0; j < matrix[0].length; j++) {
+                transpose[j][i] = matrix[i][j];
+            }
+        }
+        return transpose;
+    }
+
+    static multiply_matrices(matrix_1, matrix_2) {
+        if (matrix_1[0].length !== matrix_2.length) {
+            throw new Error("Invalid dimensions for matrix multiplication.");
+        }
+        const product_matrix = [];
+        for (let i = 0; i < matrix_1.length; i++) {
+            product_matrix.push(new Array(matrix_2[0].length).fill(0));
+        }
+        for (let i = 0; i < matrix_1.length; i++) {
+            for (let j = 0; j < matrix_2[0].length; j++) {
+                for (let k = 0; k < matrix_1[0].length; k++) {
+                    product_matrix[i][j] += matrix_1[i][k] * matrix_2[k][j];
+                }
+            }
+        }
+        return product_matrix;
+    }
+
+    static augment(matrix1, matrix2) {
+        const augmentedMatrix = [];
+        for (let i = 0; i < matrix1.length; i++) {
+        const row = matrix1[i].concat(matrix2[i]);
+        augmentedMatrix.push(row);
+        }
+        return augmentedMatrix;
+    }
+
+    static transpose(matrix) {
+        const transpose = [];
+        for (let i = 0; i < matrix[0].length; i++) {
+        transpose.push(Array(matrix.length).fill(0));
+        }
+        for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            transpose[j][i] = matrix[i][j];
+        }
+        }
+        return transpose;
+    }
+
+    static copyMatrix(matrix) {
+        const copiedMatrix = [];
+        for (let i = 0; i < matrix.length; i++) {
+        copiedMatrix.push(Array(matrix[0].length).fill(0));
+        }
+        for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            copiedMatrix[i][j] = matrix[i][j];
+        }
+        }
+        return copiedMatrix;
+    }
+
+    static det(matrix) {
+        if (matrix.length === 1) {
+        return matrix[0][0];
+        } else {
+        let sum = 0;
+        for (let c = 0; c < matrix.length; c++) {
+            const subMatrix = matrix.slice(1).map(row => row.filter((_, i) => i !== c));
+            const sign = (-1) ** (c % 2);
+            const product = matrix[0][c] * sign * Matrix.det(subMatrix);
+            sum += product;
+        }
+        return sum;
+        }
+    }
+
+    static cofactor(rowId, colId, matrix) {
+        const subMatrix = Matrix.copyMatrix(matrix).filter((_, i) => i !== rowId)
+                                                    .map(row => row.filter((_, j) => j !== colId));
+        return (-1) ** (rowId + colId) * Matrix.det(subMatrix);
+    }
+
+    static adjoint(matrix) {
+        const cofactorMatrix = Matrix.copyMatrix(matrix);
+        for (let i = 0; i < matrix.length; i++) {
+        for (let j = 0; j < matrix[0].length; j++) {
+            cofactorMatrix[i][j] = Matrix.cofactor(i, j, matrix);
+        }
+        }
+        return Matrix.transpose(cofactorMatrix);
+    }
+
+    static inverse(matrix) {
+        const inverseMatrix = Matrix.adjoint(matrix);
+        const det = Matrix.det(matrix);
+        for (let c = 0; c < matrix[0].length; c++) {
+        for (let r = 0; r < matrix.length; r++) {
+            inverseMatrix[r][c] = (1 / det) * inverseMatrix[r][c];
+        }
+        }
+        return inverseMatrix;
+    }
+}
+
