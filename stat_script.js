@@ -302,3 +302,175 @@ class Matrix {
     }
 }
 
+
+// ____ DECIMAL TO FRACTION _________________________________________
+
+function check_rep(arr) {
+    let br;
+    if (arr[arr.length - 1] !== 1) {
+        return false;
+    }
+    else {
+        for (let i = 1; i <= arr.length + 1; i++) {
+            if (arr[arr.length - i] !== 1) {
+                br = arr.length - i;
+                break;
+            }
+        }
+        return br + 1;
+    }
+}
+
+
+function check_for_n(string, n) {
+    list = [];
+    let ans = false;
+    //    console.log('new_check for n = ' + n);
+    for (let t = 0; t < 15 - 2 * n; t++) {
+        if (string.slice(t, t + n) === string.slice(t + n, t + n + n)) {
+            list.push(1);
+        } else {
+            list.push(0);
+        }
+    }
+    if (sum(list) == list.length) ans = [0, string.slice(0, n)];
+    else if (check_rep(list)) ans = [check_rep(list), string.slice(check_rep(list), check_rep(list) + n)];
+    //    console.log(list);
+    //    console.log(check_rep(list));
+    return ans;
+}
+
+function fraction(decimal) {
+    function find_repeating_substring(string) {
+        // for (let t = 0; t < string.length - 2 * 5; t++) {
+        //     if (string.slice(t, t + 5) === string.slice(t + 5, t + 2 * 5)) {
+        //         if (string.slice(t, t + 1) === string.slice(t + 1, t + 2 * 1)) {
+        //             return string.slice(t, t + 1);
+        //         } else {
+        //             return string.slice(t, t + 5);
+        //         }
+        //     }
+        // }
+        // for (let t = 0; t < string.length - 2 * 4; t++) {
+        //     if (string.slice(t, t + 4) === string.slice(t + 4, t + 2 * 4)) {
+        //         if (string.slice(t, t + 1) === string.slice(t + 1, t + 2 * 1)) {
+        //             return string.slice(t, t + 1);
+        //         } else if (string.slice(t, t + 2) === string.slice(t + 2, t + 2 * 2)) {
+        //             return string.slice(t, t + 2);
+        //         } else {
+        //             return string.slice(t, t + 4);
+        //         }
+        //     }
+        // }
+        // for (let t = 0; t < string.length - 2 * 3; t++) {
+        //     if (string.slice(t, t + 3) === string.slice(t + 3, t + 2 * 3)) {
+        //         if (string.slice(t, t + 1) === string.slice(t + 1, t + 2 * 1)) {
+        //             return string.slice(t, t + 1);
+        //         } else {
+        //             return string.slice(t, t + 3);
+        //         }
+        //     }
+        // }
+        // for (let t = 0; t < string.length - 2 * 2; t++) {
+        //     if (string.slice(t, t + 2) === string.slice(t + 2, t + 2 * 2)) {
+        //         if (string.slice(t, t + 1) === string.slice(t + 1, t + 2 * 1)) {
+        //             return string.slice(t, t + 1);
+        //         } else {
+        //             return string.slice(t, t + 2);
+        //         }
+        //     }
+        // }
+        // for (let t = 0; t < string.length - 2 * 1; t++) {
+        //     if (string.slice(t, t + 1) === string.slice(t + 1, t + 2 * 1)) {
+        //         return string.slice(t, t + 1);
+        //     }
+        // }
+
+        found = false;
+        let sub_str;
+        let i = 1;
+        while (!found & i < 9) {
+            if (check_for_n(string, i)) {
+                sub_str = check_for_n(string, i);
+                found = true;
+            }
+            i++;
+        }
+        return sub_str;
+    }
+
+    function gcd(n1, n2) {
+        if (n1 % n2 === 0) {
+            return n2;
+        } else {
+            return gcd(n2, n1 % n2);
+        }
+    }
+
+    if (typeof decimal === "number" && Number.isInteger(decimal)) {
+        return decimal;
+    }
+    const s = String(Math.abs(decimal));
+    let flag;
+    if (decimal > 0) {
+        flag = 0;
+    } else if (decimal < 0) {
+        flag = 1;
+    } else {
+        return "0";
+    }
+
+    let pre, post;
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === ".") {
+            pre = s.slice(0, i);
+            post = s.slice(i + 1);
+        }
+    }
+
+    const rep = find_repeating_substring(post);
+    // console.log(rep);
+
+    if (pre.length + post.length < 16) {
+        const d = gcd(parseInt(post), Math.pow(10, post.length));
+        let Nr = parseInt(post) / d;
+        let Dr = Math.pow(10, post.length) / d;
+        if (Dr === 1) {
+            return `${Math.pow(-1, flag) * (parseInt(pre) * Dr + Nr)}`;
+        } else {
+            return `${Math.pow(-1, flag) * (parseInt(pre) * Dr + Nr)}/${Dr}`;
+        }
+    } else if (rep) {
+        if (rep[0] === 0) {
+            //    console.log(rep[0]);
+            const Nr = parseInt(rep[1]);
+            const Dr = parseInt("9".repeat(rep[1].length));
+            const d = gcd(Nr, Dr);
+            const reducedNr = Nr / d;
+            const reducedDr = Dr / d;
+            if (reducedDr === 1) {
+                return `${Math.pow(-1, flag) * (parseInt(pre) * reducedDr + reducedNr)}`;
+            } else {
+                return `${Math.pow(-1, flag) * (parseInt(pre) * reducedDr + reducedNr)}/${reducedDr}`;
+            }
+        } else {
+            const Nr = parseInt(post.slice(0, rep[0]) + rep[1]) - parseInt(post.slice(0, rep[0]));
+            const Dr = parseInt("9".repeat(rep[1].length) + "0".repeat(rep[0]));
+            const d = gcd(Nr, Dr);
+            const reducedNr = Nr / d;
+            const reducedDr = Dr / d;
+            if (reducedDr === 1) {
+                return `${Math.pow(-1, flag) * (parseInt(pre) * reducedDr + reducedNr)}`;
+            } else {
+                return `${Math.pow(-1, flag) * (parseInt(pre) * reducedDr + reducedNr)}/${reducedDr}`;
+            }
+        }
+    } else {
+        return `${decimal} is non-terminating and non-recurring decimal number, so it cannot be expressed as a fraction.`;
+    }
+}
+
+// console.log(fraction(1.44651818181818181818181818));
+
+// ______________________________________________________________________________
+
