@@ -326,7 +326,7 @@ function check_for_n(string, n) {
     list = [];
     let ans = false;
     //    console.log('new_check for n = ' + n);
-    for (let t = 0; t < 15 - 2 * n; t++) {
+    for (let t = 0; t < 16 - 2 * n; t++) {
         if (string.slice(t, t + n) === string.slice(t + n, t + n + n)) {
             list.push(1);
         } else {
