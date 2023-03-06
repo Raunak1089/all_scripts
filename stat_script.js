@@ -6,6 +6,11 @@ function fac(num){
     return ans;
 }
 
+function gcd(n1,n2){
+    if (n1 % n2 == 0) return n2;
+    else return gcd(n2, n1 % n2);
+}
+
 function sum(array) {
   let x = 0;
   for (let i = 0; i < array.length; i++) {
@@ -192,6 +197,119 @@ function transpose_table(tab) {
 
 
 
+
+
+
+// CLASS FRACTION ________________________________________________
+
+
+
+class Fraction {
+  constructor(fractionString) {
+    const [numerator, denominator] = fractionString.split('/').map(Number);
+    if (!Number.isInteger(numerator) || !Number.isInteger(denominator)) {
+      throw new Error('Invalid fraction string');
+    }
+    this.numerator = numerator/gcd(numerator,denominator);
+    this.denominator = denominator/gcd(numerator,denominator);
+    this.value = numerator / denominator;
+    if(denominator/gcd(numerator,denominator)==1) this.form = Number(numerator/gcd(numerator,denominator));
+    else if(numerator*denominator<0) this.form = `-${Math.abs(numerator/gcd(numerator,denominator))}/${Math.abs(denominator/gcd(numerator,denominator))}`;
+    else this.form = `${numerator/gcd(numerator,denominator)}/${denominator/gcd(numerator,denominator)}`;
+  }
+
+  static add() {
+    for(let i=0;i<arguments.length;i++) {
+        if(arguments[i].constructor.name!='Fraction') {
+            arguments[i]=arguments[i].toFraction();
+        }
+    }
+    if(arguments.length==2) {
+      const [num1, den1] = [arguments[0].numerator,arguments[0].denominator];
+      const [num2, den2] = [arguments[1].numerator,arguments[1].denominator];
+      const numerator = num1 * den2 + num2 * den1;
+      const denominator = den1 * den2;
+      return new Fraction(`${numerator}/${denominator}`);
+    } else {
+          let args = [];
+          for(let i=1;i<arguments.length;i++) args.push(arguments[i])
+          let result = Fraction.add(...args);
+          return Fraction.add(arguments[0],result);
+    }
+  }
+
+  static mult() {
+    for(let i=0;i<arguments.length;i++) {
+        if(arguments[i].constructor.name!='Fraction') {
+            arguments[i]=arguments[i].toFraction();
+        }
+    }
+
+    if(arguments.length==2) {
+      const [num1, den1] = [arguments[0].numerator,arguments[0].denominator];
+      const [num2, den2] = [arguments[1].numerator,arguments[1].denominator];
+      const numerator = num1 * num2;
+      const denominator = den1 * den2;
+      return new Fraction(`${numerator}/${denominator}`);
+    } else {
+          let args = [];
+          for(let i=1;i<arguments.length;i++) args.push(arguments[i])
+          let result = Fraction.mult(...args);
+          return Fraction.mult(arguments[0],result);
+    }
+  }
+
+  static divide(fraction1, fraction2) {
+    if(fraction1.constructor.name!='Fraction') fraction1=fraction1.toFraction();
+    if(fraction2.constructor.name!='Fraction') fraction2=fraction2.toFraction();
+
+
+    const [num1, den1] = [fraction1.numerator,fraction1.denominator];
+    const [num2, den2] = [fraction2.numerator,fraction2.denominator];
+    const numerator = num1 * den2;
+    const denominator = den1 * num2;
+    if(denominator) return new Fraction(`${numerator}/${denominator}`);
+    else throw new Error('ZeroDivisionError');
+  }
+}
+
+String.prototype.toFraction = function() {
+    if(this.includes('/')) return new Fraction(this)
+    else if(this.includes('.')) return new Fraction(fraction(this))
+    else return new Fraction(this+'/1')
+};
+
+Number.prototype.toFraction = function() {
+    if(!this.toString().includes('.')) return this.toString().toFraction()
+    else return fraction(this).toString().toFraction()
+};
+
+Boolean.prototype.toFraction = function() {
+  return Number(this).toFraction()
+};
+
+Fraction.prototype.toFraction = function() {
+  return this
+};
+
+Fraction.prototype.toString = function() {
+  return this.form
+};
+
+Fraction.prototype.valueOf = function() {
+  return this.value
+};
+
+
+
+
+
+
+
+
+// CLASS MATRIX ________________________________________________________
+
+
 class Matrix {
     static transpose(matrix) {
         const transpose = [];
@@ -217,7 +335,7 @@ class Matrix {
         for (let i = 0; i < matrix_1.length; i++) {
             for (let j = 0; j < matrix_2[0].length; j++) {
                 for (let k = 0; k < matrix_1[0].length; k++) {
-                    product_matrix[i][j] += matrix_1[i][k] * matrix_2[k][j];
+                    product_matrix[i][j] = Fraction.add(product_matrix[i][j], Fraction.mult(matrix_1[i][k], matrix_2[k][j]));
                 }
             }
         }
@@ -267,8 +385,8 @@ class Matrix {
         for (let c = 0; c < matrix.length; c++) {
             const subMatrix = matrix.slice(1).map(row => row.filter((_, i) => i !== c));
             const sign = (-1) ** (c % 2);
-            const product = matrix[0][c] * sign * Matrix.det(subMatrix);
-            sum += product;
+            const product = Fraction.mult(matrix[0][c], sign, Matrix.det(subMatrix));
+            sum = Fraction.add(sum, product);
         }
         return sum;
         }
@@ -277,7 +395,7 @@ class Matrix {
     static cofactor(rowId, colId, matrix) {
         const subMatrix = Matrix.copyMatrix(matrix).filter((_, i) => i !== rowId)
                                                     .map(row => row.filter((_, j) => j !== colId));
-        return (-1) ** (rowId + colId) * Matrix.det(subMatrix);
+        return Fraction.mult(((-1) ** (rowId + colId)), Matrix.det(subMatrix));
     }
 
     static adjoint(matrix) {
@@ -295,12 +413,14 @@ class Matrix {
         const det = Matrix.det(matrix);
         for (let c = 0; c < matrix[0].length; c++) {
         for (let r = 0; r < matrix.length; r++) {
-            inverseMatrix[r][c] = (1 / det) * inverseMatrix[r][c];
+            inverseMatrix[r][c] = Fraction.mult(Fraction.divide(1, det), inverseMatrix[r][c]);
         }
         }
         return inverseMatrix;
     }
 }
+
+
 
 
 // ____ DECIMAL TO FRACTION _________________________________________
@@ -386,6 +506,7 @@ function fraction(decimal) {
         //     }
         // }
 
+
         found = false;
         let sub_str;
         let i = 1;
@@ -399,13 +520,6 @@ function fraction(decimal) {
         return sub_str;
     }
 
-    function gcd(n1, n2) {
-        if (n1 % n2 === 0) {
-            return n2;
-        } else {
-            return gcd(n2, n1 % n2);
-        }
-    }
 
     if (typeof decimal === "number" && Number.isInteger(decimal)) {
         return decimal;
@@ -466,7 +580,7 @@ function fraction(decimal) {
             }
         }
     } else {
-        return `${decimal} is non-terminating and non-recurring decimal number, so it cannot be expressed as a fraction.`;
+        return decimal;
     }
 }
 
