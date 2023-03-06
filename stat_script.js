@@ -213,7 +213,7 @@ class Fraction {
     this.numerator = numerator/gcd(numerator,denominator);
     this.denominator = denominator/gcd(numerator,denominator);
     this.value = numerator / denominator;
-    if(denominator/gcd(numerator,denominator)==1) this.form = Number(numerator/gcd(numerator,denominator));
+    if(denominator/gcd(numerator,denominator)==1) this.form = String(numerator/gcd(numerator,denominator));
     else if(numerator*denominator<0) this.form = `-${Math.abs(numerator/gcd(numerator,denominator))}/${Math.abs(denominator/gcd(numerator,denominator))}`;
     else this.form = `${numerator/gcd(numerator,denominator)}/${denominator/gcd(numerator,denominator)}`;
   }
