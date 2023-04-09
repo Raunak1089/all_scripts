@@ -1,5 +1,5 @@
 var fontawesome = document.createElement('script');
-fontawesome.src = "https://kit.fontawesome.com/ea77d645dc.js";
+fontawesome.src = "https://raunak1089.github.io/all_scripts/fontawesome.js";
 fontawesome.crossOrigin="anonymous";
 document.body.appendChild(fontawesome);
 
