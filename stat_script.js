@@ -411,12 +411,14 @@ class Matrix {
     static inverse(matrix) {
         const inverseMatrix = Matrix.adjoint(matrix);
         const det = Matrix.det(matrix);
-        for (let c = 0; c < matrix[0].length; c++) {
-        for (let r = 0; r < matrix.length; r++) {
-            inverseMatrix[r][c] = Fraction.mult(Fraction.divide(1, det), inverseMatrix[r][c]);
+        if(det==0) {throw new Error("Matrix inverse does not exist!")} else {
+          for (let c = 0; c < matrix[0].length; c++) {
+            for (let r = 0; r < matrix.length; r++) {
+                inverseMatrix[r][c] = Fraction.mult(Fraction.divide(1, det), inverseMatrix[r][c]);
+            }
+          }
+          return inverseMatrix;
         }
-        }
-        return inverseMatrix;
     }
 }
 
