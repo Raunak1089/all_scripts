@@ -123,7 +123,7 @@
     for(e of document.querySelectorAll('div')){
         e.innerHTML += `
         <i class="fa-sharp fa-solid fa-play" onclick="const code = document.createElement('script'); code.src = this.parentElement.querySelector('a').href; document.body.appendChild(code);"></i>
-        <i class="fa-light fa-pen-to-square" onclick="window.open('https://github.com/Raunak1089/all_scripts/blob/main/' + this.parentElement.querySelector('a').href.split('/')[2])"></i>
+        <i class="fa-light fa-pen-to-square" onclick="window.open('https://github.com/Raunak1089/all_scripts/edit/main/' + this.parentElement.querySelector('a').href.split('/')[2])"></i>
         `;
     }
     
