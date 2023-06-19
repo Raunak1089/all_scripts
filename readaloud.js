@@ -1,6 +1,5 @@
 var fontawesome = document.createElement('script');
 fontawesome.src = "https://raunak1089.github.io/all_scripts/fontawesome.js";
-fontawesome.crossOrigin="anonymous";
 document.body.appendChild(fontawesome);
 
 var mydiv = document.createElement('div');
@@ -11,15 +10,17 @@ mydiv_css=`
     background: black;
     color: white;
     border-radius: 50%;
+    display: grid;
     padding: 13px;
     position: fixed;
     opacity: 0.7;
-    flex: 1 1 0%;
     z-index: 1000;
     cursor: pointer;
     transition: opacity 0.3s ease 0s;
     top: 10px;
     right: 10px;
+    justify-content: center;
+    align-items: center;
 `;
 mydiv.setAttribute('style',mydiv_css);
     document.body.appendChild(mydiv);
