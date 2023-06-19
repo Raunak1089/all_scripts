@@ -11,3 +11,7 @@ const link3 = document.createElement('link');
 link3.setAttribute('rel', 'stylesheet');
 link3.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css');
 head.appendChild(link3);
+const link4 = document.createElement('link');
+link4.setAttribute('rel', 'stylesheet');
+link4.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css');
+head.appendChild(link4);
