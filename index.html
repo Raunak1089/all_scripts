@@ -121,7 +121,11 @@
   </body>
   <script>
     for(e of document.querySelectorAll('div')){
-        e.innerHTML+=`<i class="fa-sharp fa-solid fa-play" onclick="const code=document.createElement('script');code.src=this.parentElement.children[0].href;document.body.appendChild(code);"></i>`;
+        e.innerHTML+=`
+        <i class="fa-sharp fa-solid fa-play" onclick="const code=document.createElement('script');code.src=this.parentElement.children[0].href;document.body.appendChild(code);"></i>
+        <i class="fa-light fa-pen-to-square" onclick="window.open('https://github.com/Raunak1089/all_scripts/blob/main/${this.parentElement.children[0].href.split('/')[2]}')"></i>
+        `;
     }
+    
   </script>
 </html>
