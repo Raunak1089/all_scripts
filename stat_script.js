@@ -590,3 +590,75 @@ function fraction(decimal) {
 
 // ______________________________________________________________________________
 
+// ____ T DISTRIBUTION FROM University of Iowa __________________________________
+
+    let common = document.createElement('script');
+    common.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/common.js";
+    document.body.appendChild(common);
+
+    let jstat = document.createElement('script');
+    jstat.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/jstat.min.js";
+    document.body.appendChild(jstat);
+
+    let tdist = document.createElement('script');
+    tdist.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/tdist.object.js";
+    document.body.appendChild(tdist);
+
+
+function t_dist(x_val,df,type='less'){
+
+    t = new tDistribution(eval(df));
+    if(type == 'less') 
+        return roundNumber(
+            t.cdf(eval(x_val)),5);
+    if(type == 'greater') 
+        return roundNumber(
+            1-t.cdf(eval(x_val)),5);
+    if(type == 'twotail') {
+        if(x_val >= 0)
+            return 2*roundNumber(
+                t.cdf(-eval(x_val)),5);
+        else
+            return 2*roundNumber(
+                t.cdf(eval(x_val)),5);
+    }			
+    if(type == 'twotailinside') {
+        return 1 - 2*roundNumber(
+            t.cdf(-Math.abs(eval(x_val))),5);
+    }			
+    // t.printPdf(eval(x_val), type);
+    if(x_val == '') {
+        return '';
+    }
+}
+
+
+function inv_t(p_val,df,type='less'){
+    if((eval(p_val) <= 0) || 
+    (eval(p_val) >= 1) || 
+    isNaN(eval(p_val))) {
+    alert('Error: Probability must be between 0 and 1');
+    p_val='';
+    }
+    else {
+    t = new tDistribution(eval(df));
+    if(type == 'less') 
+        return roundNumber(
+            t.percentile(eval(p_val)),5);
+    if(type == 'greater') 
+        return roundNumber(
+            t.percentile(1-eval(p_val)),5);
+    if(type == 'twotail')
+        return -roundNumber(
+            t.percentile(0.5*eval(p_val)),5);
+    if(type == 'twotailinside')
+        return -roundNumber(
+            t.percentile(0.5*(1-eval(p_val))),5);
+    // t.printPdf(eval(this.form.x.value), type);
+    }
+}
+
+// console.log(t_dist(1.561,30,"greater"))
+// console.log(inv_t(0.5,30))
+
+// ______________________________________________________________________________
