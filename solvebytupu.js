@@ -104,6 +104,10 @@ else if (proout == 'Infinity'){
     out = '&infin;';
 }	 
 
+else if (proout == '-Infinity'){
+    out = '-&infin;';
+}	 
+
 else if (proout == 'NaN'){
     out = 'Syntax Error!';
 }	 
