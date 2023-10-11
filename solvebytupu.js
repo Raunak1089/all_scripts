@@ -1,7 +1,7 @@
 function solvebyTupu(input_expression){
 
     let exp = input_expression;
- let proexp = exp;
+    let proexp = exp;
 
 
  all = {
@@ -125,5 +125,11 @@ else {out = proout;}
 
 
 return out
+
+  return {
+    html: out,
+    val: ans
+  };
+    
 }
 
