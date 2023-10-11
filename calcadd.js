@@ -78,7 +78,7 @@ var myans = document.createElement('span');
     function solveit(){
         try{
             if(myin.value!=''){
-                myans.innerHTML=solvebyTupu(myin.value);
+                myans.innerHTML=solvebyTupu(myin.value).html;
             }else{
                 myans.innerHTML='';
             }
