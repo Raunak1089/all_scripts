@@ -123,9 +123,6 @@ else if (Number(proout).toString()=='NaN'){
 
 else {out = proout;}
 
-
-return out
-
   return {
     html: out,
     val: ans
