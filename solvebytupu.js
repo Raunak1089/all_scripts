@@ -10,6 +10,8 @@ function solvebyTupu(input_expression){
      "sin" : "Math.sin",
      "cos" : "Math.cos",
      "tan" : "Math.tan",
+     "max" : "Math.max",
+     "min" : "Math.min",
      "ln" : "Math['log']",
      "log(" : "Math['log10'](",
      "√" : "Math.sqrt",
