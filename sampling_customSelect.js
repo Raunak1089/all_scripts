@@ -91,7 +91,7 @@ style_select.innerHTML = `
 .select-selected:after {
   position: absolute;
   content: "";
-  top: 30px;
+  top: 15px;
   right: 10px;
   width: 0;
   height: 0;
@@ -102,7 +102,7 @@ style_select.innerHTML = `
 /*point the arrow upwards when the select box is open (active):*/
 .select-selected.select-arrow-active:after {
   border-color: transparent transparent #000 transparent;
-  top: 25px;
+  top: 10px;
 }
 
 /*style the items (options), including the selected item:*/
