@@ -19,6 +19,8 @@ for (i = 0; i < l; i++) {
     c = document.createElement("DIV");
     c.setAttribute("serial", j);
     c.innerHTML = selElmnt.options[j].innerHTML;
+    c.setAttribute('dist_name', selElmnt.options[j].value);
+    c.setAttribute('dist', selElmnt.options[j].innerHTML);
     c.addEventListener("click", function(e) {
         /*when an item is clicked, update the original select box,
         and the selected item:*/
@@ -27,7 +29,11 @@ for (i = 0; i < l; i++) {
         sl = s.length;
         h = this.parentNode.previousSibling;
         s.selectedIndex=this.getAttribute("serial");
-        h.innerHTML = this.innerHTML;
+        s.setAttribute("dist_name", this.getAttribute('dist_name'));
+        h.innerHTML = this.getAttribute('dist');
+        // h.setAttribute('dist_name', this.getAttribute('dist_name'));
+        MathJax.typeset();
+
         h.click();
     });
     b.appendChild(c);
