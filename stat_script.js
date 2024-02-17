@@ -19,6 +19,19 @@ function sum(array) {
   return x
 }
 
+function ceil(i, n) {
+  let quotient = Math.ceil(n / i);
+  return quotient * i;
+}
+function floor(i, n) {
+  let quotient = Math.floor(n / i);
+  return quotient * i;
+}
+function round(n, i) {
+  return Math.round((10**i) * n) / (10**i);
+}
+
+
 function mean(array){
     return sum(array) / array.length
 }
