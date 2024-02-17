@@ -27,7 +27,7 @@ function floor(i, n) {
   let quotient = Math.floor(n / i);
   return quotient * i;
 }
-function round(n, i) {
+function round(n, i=0) {
   return Math.round((10**i) * n) / (10**i);
 }
 
