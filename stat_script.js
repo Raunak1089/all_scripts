@@ -354,6 +354,20 @@ class Matrix {
         }
         return product_matrix;
     }
+    
+    static add_matrices(matrix_1, matrix_2) {
+        if (matrix_1[0].length !== matrix_2[0].length || matrix_1.length !== matrix_2.length) {
+            throw new Error("Invalid dimensions for matrix addition.");
+        }
+        const add_matrix = [];
+        for(let i in matrix_1){
+            add_matrix.push([]);
+            for(let j in matrix_1[i]){
+                add_matrix[i][j] = Fraction.add(mat1[i][j], mat2[i][j]);
+            }
+        }
+        return add_matrix;
+    }
 
     static augment(matrix1, matrix2) {
         const augmentedMatrix = [];
