@@ -381,9 +381,7 @@ class Matrix {
         const row = matrix1[i].concat(matrix2[i]);
         augmentedMatrix.push(row);
         }
-        this.fracObj = augmentedMatrix;
-        this.value = augmentedMatrix.map(row=>row.map(el=>el.value));
-        return this;
+        return augmentedMatrix;
     }
 
     static copyMatrix(matrix) {
