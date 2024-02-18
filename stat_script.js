@@ -334,7 +334,9 @@ class Matrix {
                 transpose[j][i] = matrix[i][j];
             }
         }
-        return transpose;
+        this.fracObj = transpose;
+        this.value = transpose.map(row=>row.map(el=>el.value));
+        return this;
     }
 
     static multiply_matrices(matrix_1, matrix_2) {
@@ -352,7 +354,9 @@ class Matrix {
                 }
             }
         }
-        return product_matrix;
+        this.fracObj = product_matrix;
+        this.value = product_matrix.map(row=>row.map(el=>el.value));
+        return this;
     }
     
     static add_matrices(matrix_1, matrix_2) {
@@ -366,7 +370,9 @@ class Matrix {
                 add_matrix[i][j] = Fraction.add(mat1[i][j], mat2[i][j]);
             }
         }
-        return add_matrix;
+        this.fracObj = add_matrix;
+        this.value = add_matrix.map(row=>row.map(el=>el.value));
+        return this;
     }
 
     static augment(matrix1, matrix2) {
@@ -375,20 +381,9 @@ class Matrix {
         const row = matrix1[i].concat(matrix2[i]);
         augmentedMatrix.push(row);
         }
-        return augmentedMatrix;
-    }
-
-    static transpose(matrix) {
-        const transpose = [];
-        for (let i = 0; i < matrix[0].length; i++) {
-        transpose.push(Array(matrix.length).fill(0));
-        }
-        for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[0].length; j++) {
-            transpose[j][i] = matrix[i][j];
-        }
-        }
-        return transpose;
+        this.fracObj = augmentedMatrix;
+        this.value = augmentedMatrix.map(row=>row.map(el=>el.value));
+        return this;
     }
 
     static copyMatrix(matrix) {
@@ -401,7 +396,9 @@ class Matrix {
             copiedMatrix[i][j] = matrix[i][j];
         }
         }
-        return copiedMatrix;
+        this.fracObj = copiedMatrix;
+        this.value = copiedMatrix.map(row=>row.map(el=>el.value));
+        return this;
     }
 
     static det(matrix) {
@@ -432,7 +429,10 @@ class Matrix {
             cofactorMatrix[i][j] = Matrix.cofactor(i, j, matrix);
         }
         }
-        return Matrix.transpose(cofactorMatrix);
+        let adjoint = Matrix.transpose(cofactorMatrix);
+        this.fracObj = adjoint;
+        this.value = adjoint.map(row=>row.map(el=>el.value));
+        return this;
     }
 
     static inverse(matrix) {
@@ -444,7 +444,9 @@ class Matrix {
                 inverseMatrix[r][c] = Fraction.mult(Fraction.divide(1, det), inverseMatrix[r][c]);
             }
           }
-          return inverseMatrix;
+          this.fracObj = inverseMatrix;
+          this.value = inverseMatrix.map(row=>row.map(el=>el.value));
+          return this;
         }
     }
 }
