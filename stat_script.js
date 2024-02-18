@@ -415,26 +415,26 @@ class Matrix {
     }
 
     static cofactor(rowId, colId, matrix) {
-        const subMatrix = Matrix.copyMatrix(matrix).filter((_, i) => i !== rowId)
+        const subMatrix = Matrix.copyMatrix(matrix).fracObj.filter((_, i) => i !== rowId)
                                                     .map(row => row.filter((_, j) => j !== colId));
         return Fraction.mult(((-1) ** (rowId + colId)), Matrix.det(subMatrix));
     }
 
     static adjoint(matrix) {
-        const cofactorMatrix = Matrix.copyMatrix(matrix);
+        const cofactorMatrix = Matrix.copyMatrix(matrix).fracObj;
         for (let i = 0; i < matrix.length; i++) {
         for (let j = 0; j < matrix[0].length; j++) {
             cofactorMatrix[i][j] = Matrix.cofactor(i, j, matrix);
         }
         }
-        let adjoint = Matrix.transpose(cofactorMatrix);
+        let adjoint = Matrix.transpose(cofactorMatrix).fracObj;
         this.fracObj = adjoint;
         this.value = adjoint.map(row=>row.map(el=>el.value));
         return this;
     }
 
     static inverse(matrix) {
-        const inverseMatrix = Matrix.adjoint(matrix);
+        const inverseMatrix = Matrix.adjoint(matrix).fracObj;
         const det = Matrix.det(matrix);
         if(det==0) {throw new Error("Matrix inverse does not exist!")} else {
           for (let c = 0; c < matrix[0].length; c++) {
