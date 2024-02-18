@@ -367,7 +367,7 @@ class Matrix {
         for(let i in matrix_1){
             add_matrix.push([]);
             for(let j in matrix_1[i]){
-                add_matrix[i][j] = Fraction.add(mat1[i][j], mat2[i][j]);
+                add_matrix[i][j] = Fraction.add(matrix_1[i][j], matrix_2[i][j]);
             }
         }
         this.fracObj = add_matrix;
