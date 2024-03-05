@@ -1,17 +1,22 @@
 const head = document.querySelector('head');
 const link1 = document.createElement('link');
 link1.setAttribute('rel', 'stylesheet');
-link1.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.4.0/css/all.css');
+link1.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.5.1/css/all.css');
 head.appendChild(link1);
 const link2 = document.createElement('link');
 link2.setAttribute('rel', 'stylesheet');
-link2.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-solid.css');
+link2.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-thin.css');
 head.appendChild(link2);
 const link3 = document.createElement('link');
 link3.setAttribute('rel', 'stylesheet');
-link3.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-regular.css');
+link3.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-solid.css');
 head.appendChild(link3);
 const link4 = document.createElement('link');
 link4.setAttribute('rel', 'stylesheet');
-link4.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css');
+link4.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-regular.css');
 head.appendChild(link4);
+const link4 = document.createElement('link');
+link4.setAttribute('rel', 'stylesheet');
+link4.setAttribute('href', 'https://site-assets.fontawesome.com/releases/v6.5.1/css/sharp-light.css');
+head.appendChild(link4);
+
