@@ -50,7 +50,7 @@ document.body.appendChild(alertBoxDiv);
 function alertMessage(message, bgColor="#3498db", color="white") {
     document.querySelector('#alertBox').style.display = 'block';
     document.querySelector('#alertBox').style.backgroundColor = bgColor;
-    document.querySelector('#alertBox').style.backgroundColor = color;
+    document.querySelector('#alertBox').style.color = color;
     document.querySelector('#alertBox msg').innerHTML = message;
 }
 
