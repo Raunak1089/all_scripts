@@ -48,10 +48,11 @@ alertBoxDiv.innerHTML = `
 document.body.appendChild(alertBoxDiv);
 
 
-function alertMessage(message, color="#3498db") {
+function alertMessage(message, bgColor="#3498db", color="white") {
     document.querySelector('#alertBox').style.display = 'block';
+    document.querySelector('#alertBox').style.backgroundColor = bgColor;
     document.querySelector('#alertBox').style.backgroundColor = color;
-    document.querySelector('#alertBox msg').innerText = message;
+    document.querySelector('#alertBox msg').innerHTML = message;
 }
 
 function closeAlert() {
