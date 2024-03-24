@@ -28,7 +28,6 @@ let alertBoxCSS = `
         top: 5px;
         right: 5px;
         cursor: pointer;
-        color: white;
         font-weight: bold;
     }
 `;
