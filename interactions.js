@@ -60,7 +60,7 @@ function alertMessage(message, bgColor="#3498db", color="white") {
     document.querySelector('#alertBox').style.backgroundColor = bgColor;
     document.querySelector('#alertBox').style.color = color;
     document.querySelector('#alertBox msg').innerHTML = message;
-    try {Mathjax.typeset()} catch {};
+    try {MathJax.typeset()} catch {};
 }
 
 function closeAlert() {
