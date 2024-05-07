@@ -83,13 +83,13 @@ function sort(arr) {
         return arr;
     }
 
-    const pivot = arr[Math.floor(arr.length / 2)]; // Choosing middle element as pivot
+    const pivot = arr[Math.floor(arr.length / 2)];
     const left = [];
     const right = [];
 
     for (let i = 0; i < arr.length; i++) {
         if (i === Math.floor(arr.length / 2)) {
-            continue; // Skip the pivot element
+            continue; 
         }
         if (arr[i] < pivot) {
             left.push(arr[i]);
@@ -98,7 +98,7 @@ function sort(arr) {
         }
     }
 
-    return [...quickSort(left), pivot, ...quickSort(right)];
+    return [...sort(left), pivot, ...sort(right)];
 }
 
 
