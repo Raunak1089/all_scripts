@@ -1,80 +1,80 @@
-function fac(num){
+function fac(num) {
     ans = 1;
-    for (let intern=1; intern<=num; intern++){
+    for (let intern = 1; intern <= num; intern++) {
         ans *= intern;
     }
     return ans;
 }
 
-function gcd(n1,n2){
+function gcd(n1, n2) {
     if (n1 % n2 == 0) return n2;
     else return gcd(n2, n1 % n2);
 }
 
 function sum(array) {
-  let x = 0;
-  for (let i = 0; i < array.length; i++) {
-    x += array[i];
-  }
-  return x
+    let x = 0;
+    for (let i = 0; i < array.length; i++) {
+        x += array[i];
+    }
+    return x
 }
 
 function ceil(i, n) {
-  let quotient = Math.ceil(n / i);
-  return quotient * i;
+    let quotient = Math.ceil(n / i);
+    return quotient * i;
 }
 function floor(i, n) {
-  let quotient = Math.floor(n / i);
-  return quotient * i;
+    let quotient = Math.floor(n / i);
+    return quotient * i;
 }
-function round(n, i=0) {
-  return Math.round((10**i) * n) / (10**i);
+function round(n, i = 0) {
+    return Math.round((10 ** i) * n) / (10 ** i);
 }
 
 
-function mean(array){
+function mean(array) {
     return sum(array) / array.length
 }
 
-function MD(array){
+function MD(array) {
     n = array.length
     x = 0
-    for (let i = 0; i < n; i++){
-        x += ((array[i] - mean(array))**2)**0.5
+    for (let i = 0; i < n; i++) {
+        x += ((array[i] - mean(array)) ** 2) ** 0.5
     }
-    return x/n
+    return x / n
 }
 
-function moment(array, respect, order){
+function moment(array, respect, order) {
     n = array.length
     x = 0
-    for (let i = 0; i < n; i++){
+    for (let i = 0; i < n; i++) {
         x += (array[i] - respect) ** order
     }
-    return x/n
+    return x / n
 }
 
-function Var(array){
+function Var(array) {
     return moment(array, mean(array), 2)
 }
 
-function SD(array){
+function SD(array) {
     return Var(array) ** 0.5
 }
 
-function Cov(array1, array2){
-    if (array1.length == array2.length){
+function Cov(array1, array2) {
+    if (array1.length == array2.length) {
         n = array1.length
         x = 0
-        for (let i = 0; i < n; i++){
+        for (let i = 0; i < n; i++) {
             x += (array1[i] - mean(array1)) * (array2[i] - mean(array2))
         }
     }
     return x / n
 }
 
-function r(array1, array2){
-    return Cov(array1, array2)/(SD(array1)*SD(array2))
+function r(array1, array2) {
+    return Cov(array1, array2) / (SD(array1) * SD(array2))
 }
 
 
@@ -89,7 +89,7 @@ function sort(arr) {
 
     for (let i = 0; i < arr.length; i++) {
         if (i === Math.floor(arr.length / 2)) {
-            continue; 
+            continue;
         }
         if (arr[i] < pivot) {
             left.push(arr[i]);
@@ -169,45 +169,45 @@ const permutator = (inputArr) => {
 }
 */
 
-function det(every){
+function det(every) {
     matrix = []
     n = every.length ** 0.5;
-    for (let z=0; z<n; z++){
+    for (let z = 0; z < n; z++) {
         matrix.push([])
-        for (let zz=0; zz<n; zz++){
-            matrix[matrix.length-1].push(every[n * z + zz])
+        for (let zz = 0; zz < n; zz++) {
+            matrix[matrix.length - 1].push(every[n * z + zz])
         }
     }
-    
-function determinant(mat) {
-  
-    if (mat.length == 1) {
-      return mat[0][0];
-    } else {
-      ans = 0;
-  
-      for (let i = 0; i < mat.length; i++) {
-        sub_mat = [];
-  
-        for (let rows = 0; rows < mat.length - 1; rows++) {
-          sub_mat.push([]);
-        }
-  
-        for (let rows = 0; rows < mat.length - 1; rows++) {
-          for (let j = 0; j < mat.length; j++) {
-            if (i !== j) {
-              sub_mat[rows].push(mat[rows + 1][j]);
+
+    function determinant(mat) {
+
+        if (mat.length == 1) {
+            return mat[0][0];
+        } else {
+            ans = 0;
+
+            for (let i = 0; i < mat.length; i++) {
+                sub_mat = [];
+
+                for (let rows = 0; rows < mat.length - 1; rows++) {
+                    sub_mat.push([]);
+                }
+
+                for (let rows = 0; rows < mat.length - 1; rows++) {
+                    for (let j = 0; j < mat.length; j++) {
+                        if (i !== j) {
+                            sub_mat[rows].push(mat[rows + 1][j]);
+                        }
+                    }
+                }
+
+                ans += ((-1) ** i) * mat[0][i] * determinant(sub_mat);
             }
-          }
+
+            return ans;
         }
-  
-        ans += ((-1)**i) * mat[0][i] * determinant(sub_mat);
-      }
-  
-      return ans;
     }
-  }
-    
+
     return determinant(matrix)
 }
 
@@ -219,12 +219,12 @@ function transpose_table(tab) {
 
     let trans = [];
 
-    for (i=0; i<rows; i++) {
+    for (i = 0; i < rows; i++) {
         trans.push([]);
     }
 
-    for (i=0; i<columns; i++) {
-        for (j=0; j<rows; j++) {
+    for (i = 0; i < columns; i++) {
+        for (j = 0; j < rows; j++) {
             trans[j][i] = tab[i][j];
         }
     }
@@ -242,99 +242,99 @@ function transpose_table(tab) {
 
 
 class Fraction {
-  constructor(fractionString) {
-    const [numerator, denominator] = fractionString.split('/').map(Number);
-    if (!Number.isInteger(numerator) || !Number.isInteger(denominator)) {
-      throw new Error('Invalid fraction string');
-    }
-    this.numerator = numerator/gcd(numerator,denominator);
-    this.denominator = denominator/gcd(numerator,denominator);
-    this.value = numerator / denominator;
-    if(denominator/gcd(numerator,denominator)==1) this.form = String(numerator/gcd(numerator,denominator));
-    else if(numerator*denominator<0) this.form = `-${Math.abs(numerator/gcd(numerator,denominator))}/${Math.abs(denominator/gcd(numerator,denominator))}`;
-    else this.form = `${numerator/gcd(numerator,denominator)}/${denominator/gcd(numerator,denominator)}`;
-  }
-
-  static add() {
-    for(let i=0;i<arguments.length;i++) {
-        if(arguments[i].constructor.name!='Fraction') {
-            arguments[i]=arguments[i].toFraction();
+    constructor(fractionString) {
+        const [numerator, denominator] = fractionString.split('/').map(Number);
+        if (!Number.isInteger(numerator) || !Number.isInteger(denominator)) {
+            throw new Error('Invalid fraction string');
         }
+        this.numerator = numerator / gcd(numerator, denominator);
+        this.denominator = denominator / gcd(numerator, denominator);
+        this.value = numerator / denominator;
+        if (denominator / gcd(numerator, denominator) == 1) this.form = String(numerator / gcd(numerator, denominator));
+        else if (numerator * denominator < 0) this.form = `-${Math.abs(numerator / gcd(numerator, denominator))}/${Math.abs(denominator / gcd(numerator, denominator))}`;
+        else this.form = `${numerator / gcd(numerator, denominator)}/${denominator / gcd(numerator, denominator)}`;
     }
-    if(arguments.length==2) {
-      const [num1, den1] = [arguments[0].numerator,arguments[0].denominator];
-      const [num2, den2] = [arguments[1].numerator,arguments[1].denominator];
-      const numerator = num1 * den2 + num2 * den1;
-      const denominator = den1 * den2;
-      return new Fraction(`${numerator}/${denominator}`);
-    } else {
-          let args = [];
-          for(let i=1;i<arguments.length;i++) args.push(arguments[i])
-          let result = Fraction.add(...args);
-          return Fraction.add(arguments[0],result);
-    }
-  }
 
-  static mult() {
-    for(let i=0;i<arguments.length;i++) {
-        if(arguments[i].constructor.name!='Fraction') {
-            arguments[i]=arguments[i].toFraction();
+    static add() {
+        for (let i = 0; i < arguments.length; i++) {
+            if (arguments[i].constructor.name != 'Fraction') {
+                arguments[i] = arguments[i].toFraction();
+            }
+        }
+        if (arguments.length == 2) {
+            const [num1, den1] = [arguments[0].numerator, arguments[0].denominator];
+            const [num2, den2] = [arguments[1].numerator, arguments[1].denominator];
+            const numerator = num1 * den2 + num2 * den1;
+            const denominator = den1 * den2;
+            return new Fraction(`${numerator}/${denominator}`);
+        } else {
+            let args = [];
+            for (let i = 1; i < arguments.length; i++) args.push(arguments[i])
+            let result = Fraction.add(...args);
+            return Fraction.add(arguments[0], result);
         }
     }
 
-    if(arguments.length==2) {
-      const [num1, den1] = [arguments[0].numerator,arguments[0].denominator];
-      const [num2, den2] = [arguments[1].numerator,arguments[1].denominator];
-      const numerator = num1 * num2;
-      const denominator = den1 * den2;
-      return new Fraction(`${numerator}/${denominator}`);
-    } else {
-          let args = [];
-          for(let i=1;i<arguments.length;i++) args.push(arguments[i])
-          let result = Fraction.mult(...args);
-          return Fraction.mult(arguments[0],result);
+    static mult() {
+        for (let i = 0; i < arguments.length; i++) {
+            if (arguments[i].constructor.name != 'Fraction') {
+                arguments[i] = arguments[i].toFraction();
+            }
+        }
+
+        if (arguments.length == 2) {
+            const [num1, den1] = [arguments[0].numerator, arguments[0].denominator];
+            const [num2, den2] = [arguments[1].numerator, arguments[1].denominator];
+            const numerator = num1 * num2;
+            const denominator = den1 * den2;
+            return new Fraction(`${numerator}/${denominator}`);
+        } else {
+            let args = [];
+            for (let i = 1; i < arguments.length; i++) args.push(arguments[i])
+            let result = Fraction.mult(...args);
+            return Fraction.mult(arguments[0], result);
+        }
     }
-  }
 
-  static divide(fraction1, fraction2) {
-    if(fraction1.constructor.name!='Fraction') fraction1=fraction1.toFraction();
-    if(fraction2.constructor.name!='Fraction') fraction2=fraction2.toFraction();
+    static divide(fraction1, fraction2) {
+        if (fraction1.constructor.name != 'Fraction') fraction1 = fraction1.toFraction();
+        if (fraction2.constructor.name != 'Fraction') fraction2 = fraction2.toFraction();
 
 
-    const [num1, den1] = [fraction1.numerator,fraction1.denominator];
-    const [num2, den2] = [fraction2.numerator,fraction2.denominator];
-    const numerator = num1 * den2;
-    const denominator = den1 * num2;
-    if(denominator) return new Fraction(`${numerator}/${denominator}`);
-    else throw new Error('ZeroDivisionError');
-  }
+        const [num1, den1] = [fraction1.numerator, fraction1.denominator];
+        const [num2, den2] = [fraction2.numerator, fraction2.denominator];
+        const numerator = num1 * den2;
+        const denominator = den1 * num2;
+        if (denominator) return new Fraction(`${numerator}/${denominator}`);
+        else throw new Error('ZeroDivisionError');
+    }
 }
 
-String.prototype.toFraction = function() {
-    if(this.includes('/')) return new Fraction(this)
-    else if(this.includes('.')) return new Fraction(fraction(this))
-    else return new Fraction(this+'/1')
+String.prototype.toFraction = function () {
+    if (this.includes('/')) return new Fraction(this)
+    else if (this.includes('.')) return new Fraction(fraction(this))
+    else return new Fraction(this + '/1')
 };
 
-Number.prototype.toFraction = function() {
-    if(!this.toString().includes('.')) return this.toString().toFraction()
+Number.prototype.toFraction = function () {
+    if (!this.toString().includes('.')) return this.toString().toFraction()
     else return fraction(this).toString().toFraction()
 };
 
-Boolean.prototype.toFraction = function() {
-  return Number(this).toFraction()
+Boolean.prototype.toFraction = function () {
+    return Number(this).toFraction()
 };
 
-Fraction.prototype.toFraction = function() {
-  return this
+Fraction.prototype.toFraction = function () {
+    return this
 };
 
-Fraction.prototype.toString = function() {
-  return this.form
+Fraction.prototype.toString = function () {
+    return this.form
 };
 
-Fraction.prototype.valueOf = function() {
-  return this.value
+Fraction.prototype.valueOf = function () {
+    return this.value
 };
 
 
@@ -359,7 +359,7 @@ class Fraction_Matrix {
             }
         }
         this.fracObj = transpose;
-        this.value = transpose.map(row=>row.map(el=>el.value));
+        this.value = transpose.map(row => row.map(el => el.value));
         return this;
     }
 
@@ -379,31 +379,31 @@ class Fraction_Matrix {
             }
         }
         this.fracObj = product_matrix;
-        this.value = product_matrix.map(row=>row.map(el=>el.value));
+        this.value = product_matrix.map(row => row.map(el => el.value));
         return this;
     }
-    
+
     static add_matrices(matrix_1, matrix_2) {
         if (matrix_1[0].length !== matrix_2[0].length || matrix_1.length !== matrix_2.length) {
             throw new Error("Invalid dimensions for matrix addition.");
         }
         const add_matrix = [];
-        for(let i in matrix_1){
+        for (let i in matrix_1) {
             add_matrix.push([]);
-            for(let j in matrix_1[i]){
+            for (let j in matrix_1[i]) {
                 add_matrix[i][j] = Fraction.add(matrix_1[i][j], matrix_2[i][j]);
             }
         }
         this.fracObj = add_matrix;
-        this.value = add_matrix.map(row=>row.map(el=>el.value));
+        this.value = add_matrix.map(row => row.map(el => el.value));
         return this;
     }
 
     static augment(matrix1, matrix2) {
         const augmentedMatrix = [];
         for (let i = 0; i < matrix1.length; i++) {
-        const row = matrix1[i].concat(matrix2[i]);
-        augmentedMatrix.push(row);
+            const row = matrix1[i].concat(matrix2[i]);
+            augmentedMatrix.push(row);
         }
         return augmentedMatrix;
     }
@@ -411,64 +411,64 @@ class Fraction_Matrix {
     static copyMatrix(matrix) {
         const copiedMatrix = [];
         for (let i = 0; i < matrix.length; i++) {
-        copiedMatrix.push(Array(matrix[0].length).fill(0));
+            copiedMatrix.push(Array(matrix[0].length).fill(0));
         }
         for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[0].length; j++) {
-            copiedMatrix[i][j] = matrix[i][j];
-        }
+            for (let j = 0; j < matrix[0].length; j++) {
+                copiedMatrix[i][j] = matrix[i][j];
+            }
         }
         this.fracObj = copiedMatrix;
-        this.value = copiedMatrix.map(row=>row.map(el=>el.value));
+        this.value = copiedMatrix.map(row => row.map(el => el.value));
         return this;
     }
 
     static det(matrix) {
         if (matrix.length === 1) {
-        return matrix[0][0];
+            return matrix[0][0];
         } else {
-        let sum = 0;
-        for (let c = 0; c < matrix.length; c++) {
-            const subMatrix = matrix.slice(1).map(row => row.filter((_, i) => i !== c));
-            const sign = (-1) ** (c % 2);
-            const product = Fraction.mult(matrix[0][c], sign, Fraction_Matrix.det(subMatrix));
-            sum = Fraction.add(sum, product);
-        }
-        return sum;
+            let sum = 0;
+            for (let c = 0; c < matrix.length; c++) {
+                const subMatrix = matrix.slice(1).map(row => row.filter((_, i) => i !== c));
+                const sign = (-1) ** (c % 2);
+                const product = Fraction.mult(matrix[0][c], sign, Fraction_Matrix.det(subMatrix));
+                sum = Fraction.add(sum, product);
+            }
+            return sum;
         }
     }
 
     static cofactor(rowId, colId, matrix) {
         const subMatrix = Fraction_Matrix.copyMatrix(matrix).fracObj.filter((_, i) => i !== rowId)
-                                                    .map(row => row.filter((_, j) => j !== colId));
+            .map(row => row.filter((_, j) => j !== colId));
         return Fraction.mult(((-1) ** (rowId + colId)), Fraction_Matrix.det(subMatrix));
     }
 
     static adjoint(matrix) {
         const cofactorMatrix = Fraction_Matrix.copyMatrix(matrix).fracObj;
         for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[0].length; j++) {
-            cofactorMatrix[i][j] = Fraction_Matrix.cofactor(i, j, matrix);
-        }
+            for (let j = 0; j < matrix[0].length; j++) {
+                cofactorMatrix[i][j] = Fraction_Matrix.cofactor(i, j, matrix);
+            }
         }
         let adjoint = Fraction_Matrix.transpose(cofactorMatrix).fracObj;
         this.fracObj = adjoint;
-        this.value = adjoint.map(row=>row.map(el=>el.value));
+        this.value = adjoint.map(row => row.map(el => el.value));
         return this;
     }
 
     static inverse(matrix) {
         const inverseMatrix = Fraction_Matrix.adjoint(matrix).fracObj;
         const det = Fraction_Matrix.det(matrix);
-        if(det==0) {throw new Error("Matrix inverse does not exist!")} else {
-          for (let c = 0; c < matrix[0].length; c++) {
-            for (let r = 0; r < matrix.length; r++) {
-                inverseMatrix[r][c] = Fraction.mult(Fraction.divide(1, det), inverseMatrix[r][c]);
+        if (det == 0) { throw new Error("Matrix inverse does not exist!") } else {
+            for (let c = 0; c < matrix[0].length; c++) {
+                for (let r = 0; r < matrix.length; r++) {
+                    inverseMatrix[r][c] = Fraction.mult(Fraction.divide(1, det), inverseMatrix[r][c]);
+                }
             }
-          }
-          this.fracObj = inverseMatrix;
-          this.value = inverseMatrix.map(row=>row.map(el=>el.value));
-          return this;
+            this.fracObj = inverseMatrix;
+            this.value = inverseMatrix.map(row => row.map(el => el.value));
+            return this;
         }
     }
 }
@@ -505,15 +505,15 @@ class Matrix {
         }
         return product_matrix;
     }
-    
+
     static add_matrices(matrix_1, matrix_2) {
         if (matrix_1[0].length !== matrix_2[0].length || matrix_1.length !== matrix_2.length) {
             throw new Error("Invalid dimensions for matrix addition.");
         }
         const add_matrix = [];
-        for(let i in matrix_1){
+        for (let i in matrix_1) {
             add_matrix.push([]);
-            for(let j in matrix_1[i]){
+            for (let j in matrix_1[i]) {
                 add_matrix[i][j] = matrix_1[i][j] + matrix_2[i][j];
             }
         }
@@ -523,8 +523,8 @@ class Matrix {
     static augment(matrix1, matrix2) {
         const augmentedMatrix = [];
         for (let i = 0; i < matrix1.length; i++) {
-        const row = matrix1[i].concat(matrix2[i]);
-        augmentedMatrix.push(row);
+            const row = matrix1[i].concat(matrix2[i]);
+            augmentedMatrix.push(row);
         }
         return augmentedMatrix;
     }
@@ -532,43 +532,43 @@ class Matrix {
     static copyMatrix(matrix) {
         const copiedMatrix = [];
         for (let i = 0; i < matrix.length; i++) {
-        copiedMatrix.push(Array(matrix[0].length).fill(0));
+            copiedMatrix.push(Array(matrix[0].length).fill(0));
         }
         for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[0].length; j++) {
-            copiedMatrix[i][j] = matrix[i][j];
-        }
+            for (let j = 0; j < matrix[0].length; j++) {
+                copiedMatrix[i][j] = matrix[i][j];
+            }
         }
         return copiedMatrix;
     }
 
     static det(matrix) {
         if (matrix.length === 1) {
-        return matrix[0][0];
+            return matrix[0][0];
         } else {
-        let sum = 0;
-        for (let c = 0; c < matrix.length; c++) {
-            const subMatrix = matrix.slice(1).map(row => row.filter((_, i) => i !== c));
-            const sign = (-1) ** (c % 2);
-            const product = matrix[0][c] * sign * Matrix.det(subMatrix);
-            sum += product;
-        }
-        return sum;
+            let sum = 0;
+            for (let c = 0; c < matrix.length; c++) {
+                const subMatrix = matrix.slice(1).map(row => row.filter((_, i) => i !== c));
+                const sign = (-1) ** (c % 2);
+                const product = matrix[0][c] * sign * Matrix.det(subMatrix);
+                sum += product;
+            }
+            return sum;
         }
     }
 
     static cofactor(rowId, colId, matrix) {
         const subMatrix = Matrix.copyMatrix(matrix).filter((_, i) => i !== rowId)
-                                                    .map(row => row.filter((_, j) => j !== colId));
+            .map(row => row.filter((_, j) => j !== colId));
         return ((-1) ** (rowId + colId)) * Matrix.det(subMatrix);
     }
 
     static adjoint(matrix) {
         const cofactorMatrix = Matrix.copyMatrix(matrix);
         for (let i = 0; i < matrix.length; i++) {
-        for (let j = 0; j < matrix[0].length; j++) {
-            cofactorMatrix[i][j] = Matrix.cofactor(i, j, matrix);
-        }
+            for (let j = 0; j < matrix[0].length; j++) {
+                cofactorMatrix[i][j] = Matrix.cofactor(i, j, matrix);
+            }
         }
         return Matrix.transpose(cofactorMatrix);
     }
@@ -576,13 +576,13 @@ class Matrix {
     static inverse(matrix) {
         const inverseMatrix = Matrix.adjoint(matrix);
         const det = Matrix.det(matrix);
-        if(det==0) {throw new Error("Matrix inverse does not exist!")} else {
-          for (let c = 0; c < matrix[0].length; c++) {
-            for (let r = 0; r < matrix.length; r++) {
-                inverseMatrix[r][c] = 1/det * inverseMatrix[r][c];
+        if (det == 0) { throw new Error("Matrix inverse does not exist!") } else {
+            for (let c = 0; c < matrix[0].length; c++) {
+                for (let r = 0; r < matrix.length; r++) {
+                    inverseMatrix[r][c] = 1 / det * inverseMatrix[r][c];
+                }
             }
-          }
-          return inverseMatrix;
+            return inverseMatrix;
         }
     }
 
@@ -615,13 +615,16 @@ class Matrix {
         }
 
         let convolutedMatrix = [];
-        
-        for (let i = 0; i <= matrix_1.length-matrix_2.length; i+=x_step) {
-            convolutedMatrix.push(new Array(matrix_1[0].length-matrix_2[0].length+1).fill(0));
-            for (let j = 0; j <= matrix_1[0].length-matrix_2[0].length; j+=y_step) {
+
+        let i = 0, j = 0;
+        while (i <= matrix_1.length - matrix_2.length) {
+            convolutedMatrix.push(new Array(matrix_1[0].length - matrix_2[0].length + 1).fill(0));
+            while (j <= matrix_1[0].length - matrix_2[0].length) {
                 let sm = getSubMatrix(matrix_1, i, j, matrix_2[0].length, matrix_2.length);
                 convolutedMatrix[i][j] = Matrix.dotProd_matrices(sm, matrix_2);
+                j += y_step;
             }
+            i += x_step
         }
         return convolutedMatrix;
 
@@ -798,69 +801,69 @@ function fraction(decimal) {
 
 // ____ T DISTRIBUTION FROM University of Iowa __________________________________
 
-    let common = document.createElement('script');
-    common.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/common.js";
-    document.body.appendChild(common);
+let common = document.createElement('script');
+common.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/common.js";
+document.body.appendChild(common);
 
-    let jstat = document.createElement('script');
-    jstat.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/jstat.min.js";
-    document.body.appendChild(jstat);
+let jstat = document.createElement('script');
+jstat.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/jstat.min.js";
+document.body.appendChild(jstat);
 
-    let tdist = document.createElement('script');
-    tdist.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/tdist.object.js";
-    document.body.appendChild(tdist);
+let tdist = document.createElement('script');
+tdist.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/tdist.object.js";
+document.body.appendChild(tdist);
 
 
-function t_dist(x_val,df,type='less'){
+function t_dist(x_val, df, type = 'less') {
 
     t = new tDistribution(eval(df));
-    if(type == 'less') 
+    if (type == 'less')
         return roundNumber(
-            t.cdf(eval(x_val)),5);
-    if(type == 'greater') 
+            t.cdf(eval(x_val)), 5);
+    if (type == 'greater')
         return roundNumber(
-            1-t.cdf(eval(x_val)),5);
-    if(type == 'twotail') {
-        if(x_val >= 0)
-            return 2*roundNumber(
-                t.cdf(-eval(x_val)),5);
+            1 - t.cdf(eval(x_val)), 5);
+    if (type == 'twotail') {
+        if (x_val >= 0)
+            return 2 * roundNumber(
+                t.cdf(-eval(x_val)), 5);
         else
-            return 2*roundNumber(
-                t.cdf(eval(x_val)),5);
-    }			
-    if(type == 'twotailinside') {
-        return 1 - 2*roundNumber(
-            t.cdf(-Math.abs(eval(x_val))),5);
-    }			
+            return 2 * roundNumber(
+                t.cdf(eval(x_val)), 5);
+    }
+    if (type == 'twotailinside') {
+        return 1 - 2 * roundNumber(
+            t.cdf(-Math.abs(eval(x_val))), 5);
+    }
     // t.printPdf(eval(x_val), type);
-    if(x_val == '') {
+    if (x_val == '') {
         return '';
     }
 }
 
 
-function inv_t(p_val,df,type='less'){
-    if((eval(p_val) <= 0) || 
-    (eval(p_val) >= 1) || 
-    isNaN(eval(p_val))) {
-    alert('Error: Probability must be between 0 and 1');
-    p_val='';
+function inv_t(p_val, df, type = 'less') {
+    if ((eval(p_val) <= 0) ||
+        (eval(p_val) >= 1) ||
+        isNaN(eval(p_val))) {
+        alert('Error: Probability must be between 0 and 1');
+        p_val = '';
     }
     else {
-    t = new tDistribution(eval(df));
-    if(type == 'less') 
-        return roundNumber(
-            t.percentile(eval(p_val)),5);
-    if(type == 'greater') 
-        return roundNumber(
-            t.percentile(1-eval(p_val)),5);
-    if(type == 'twotail')
-        return -roundNumber(
-            t.percentile(0.5*eval(p_val)),5);
-    if(type == 'twotailinside')
-        return -roundNumber(
-            t.percentile(0.5*(1-eval(p_val))),5);
-    // t.printPdf(eval(this.form.x.value), type);
+        t = new tDistribution(eval(df));
+        if (type == 'less')
+            return roundNumber(
+                t.percentile(eval(p_val)), 5);
+        if (type == 'greater')
+            return roundNumber(
+                t.percentile(1 - eval(p_val)), 5);
+        if (type == 'twotail')
+            return -roundNumber(
+                t.percentile(0.5 * eval(p_val)), 5);
+        if (type == 'twotailinside')
+            return -roundNumber(
+                t.percentile(0.5 * (1 - eval(p_val))), 5);
+        // t.printPdf(eval(this.form.x.value), type);
     }
 }
 
