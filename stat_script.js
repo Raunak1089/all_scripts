@@ -602,7 +602,7 @@ class Matrix {
         return product;
     }
 
-    static convolute(matrix_1, matrix_2) {
+    static convolute(matrix_1, matrix_2, x_step = 1, y_step = 1) {
         function getSubMatrix(matrix, r, c, x, y) {
             let subMatrix = [];
             for (let i = r; i < r + y; i++) {
@@ -616,9 +616,9 @@ class Matrix {
 
         let convolutedMatrix = [];
         
-        for (let i = 0; i <= matrix_1.length-matrix_2.length; i++) {
+        for (let i = 0; i <= matrix_1.length-matrix_2.length; i+=x_step) {
             convolutedMatrix.push(new Array(matrix_1[0].length-matrix_2[0].length+1).fill(0));
-            for (let j = 0; j <= matrix_1[0].length-matrix_2[0].length; j++) {
+            for (let j = 0; j <= matrix_1[0].length-matrix_2[0].length; j+=y_step) {
                 let sm = getSubMatrix(matrix_1, i, j, matrix_2[0].length, matrix_2.length);
                 convolutedMatrix[i][j] = Matrix.dotProd_matrices(sm, matrix_2);
             }
