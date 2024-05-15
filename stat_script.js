@@ -616,15 +616,16 @@ class Matrix {
 
         let convolutedMatrix = [];
 
-        let i = 0, j = 0;
-        while (i <= matrix_1.length - matrix_2.length) {
-            convolutedMatrix.push(new Array(matrix_1[0].length - matrix_2[0].length + 1).fill(0));
-            while (j <= matrix_1[0].length - matrix_2[0].length) {
-                let sm = getSubMatrix(matrix_1, i, j, matrix_2[0].length, matrix_2.length);
-                convolutedMatrix[i][j] = Matrix.dotProd_matrices(sm, matrix_2);
-                j += y_step;
+        let col = 0;
+        while (col <= matrix_1.length - matrix_2.length) {
+            convolutedMatrix.push(new Array(Math.floor((matrix_1[0].length - matrix_2[0].length) / y_step) + 1).fill(0));
+            let row = 0;
+            while (row <= matrix_1[0].length - matrix_2[0].length) {
+                let sm = getSubMatrix(matrix_1, col, row, matrix_2[0].length, matrix_2.length);
+                convolutedMatrix[col][row] = Matrix.dotProd_matrices(sm, matrix_2);
+                row += y_step;
             }
-            i += x_step
+            col += x_step;
         }
         return convolutedMatrix;
 
