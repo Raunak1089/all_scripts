@@ -602,18 +602,18 @@ class Matrix {
         return product;
     }
 
-    static convolute(matrix_1, matrix_2, x_stride = 1, y_stride = 1) {
-        function getSubMatrix(matrix, r, c, x, y) {
-            let subMatrix = [];
-            for (let i = r; i < r + y; i++) {
-                subMatrix.push(new Array(x).fill(0));
-                for (let j = c; j < c + x; j++) {
-                    subMatrix[i - r][j - c] = matrix[i][j];
-                }
+    static getSubMatrix(matrix, r, c, x, y) {
+        let subMatrix = [];
+        for (let i = r; i < r + y; i++) {
+            subMatrix.push(new Array(x).fill(0));
+            for (let j = c; j < c + x; j++) {
+                subMatrix[i - r][j - c] = matrix[i][j];
             }
-            return subMatrix;
         }
+        return subMatrix;
+    }
 
+    static convolute(matrix_1, matrix_2, x_stride = 1, y_stride = 1) {
         let convolutedMatrix = [];
 
         let row = 0;
@@ -623,7 +623,7 @@ class Matrix {
             let col = 0;
             let yi = 0;
             while (col <= matrix_1[0].length - matrix_2[0].length) {
-                let sm = getSubMatrix(matrix_1, row, col, matrix_2[0].length, matrix_2.length);
+                let sm = Matrix.getSubMatrix(matrix_1, row, col, matrix_2[0].length, matrix_2.length);
                 convolutedMatrix[xi][yi] = Matrix.dotProd_matrices(sm, matrix_2);
                 col += y_stride;
                 yi++;
@@ -632,10 +632,52 @@ class Matrix {
             xi++;
         }
         return convolutedMatrix;
-
     }
-}
 
+    static maxpooling(matrix, width, height = width, x_stride = width, y_stride = height) {
+        let maxpooledMatrix = [];
+
+        let row = 0;
+        let xi = 0;
+        while (row <= matrix.length - height) {
+            maxpooledMatrix.push(new Array(Math.floor((matrix[0].length - width) / y_stride) + 1).fill(0));
+            let col = 0;
+            let yi = 0;
+            while (col <= matrix[0].length - width) {
+                let sm = Matrix.getSubMatrix(matrix, row, col, width, height);
+                maxpooledMatrix[xi][yi] = eval('Math.max(' + sm.join() + ')');
+                col += y_stride;
+                yi++;
+            }
+            row += x_stride;
+            xi++;
+        }
+        return maxpooledMatrix;
+    }
+
+    static avgpooling(matrix, width, height = width, x_stride = width, y_stride = height) {
+        let avgpooledMatrix = [];
+
+        let row = 0;
+        let xi = 0;
+        while (row <= matrix.length - height) {
+            avgpooledMatrix.push(new Array(Math.floor((matrix[0].length - width) / y_stride) + 1).fill(0));
+            let col = 0;
+            let yi = 0;
+            while (col <= matrix[0].length - width) {
+                let sm = Matrix.getSubMatrix(matrix, row, col, width, height);
+                avgpooledMatrix[xi][yi] = eval('mean([' + sm.join() + '])');
+                col += y_stride;
+                yi++;
+            }
+            row += x_stride;
+            xi++;
+        }
+        return avgpooledMatrix;
+    }
+
+
+}
 
 
 
