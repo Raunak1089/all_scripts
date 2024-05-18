@@ -850,15 +850,15 @@ function fraction(decimal) {
 
 let common = document.createElement('script');
 common.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/common.js";
-document.body.appendChild(common);
+document.head.appendChild(common);
 
 let jstat = document.createElement('script');
 jstat.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/jstat.min.js";
-document.body.appendChild(jstat);
+document.head.appendChild(jstat);
 
 let tdist = document.createElement('script');
 tdist.src = "https://homepage.divms.uiowa.edu/~mbognar/applets/tdist.object.js";
-document.body.appendChild(tdist);
+document.head.appendChild(tdist);
 
 
 function t_dist(x_val, df, type = 'less') {
