@@ -1,3 +1,8 @@
+//        ADD FONTAWESOME ____________________________
+const fontawesome = document.createElement('script'); 
+fontawesome.src = "https://raunak1089.github.io/all_scripts/fontawesome.js"; 
+document.body.appendChild(fontawesome);
+
 //  ALERT MESSAGE BOX AT CENTER OF PAGE  _____________________________________________________________________________
 
 let alertBoxCSS = `
