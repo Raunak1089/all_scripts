@@ -1,7 +1,9 @@
 //        ADD FONTAWESOME ____________________________
-const fontawesome = document.createElement('script'); 
-fontawesome.src = "https://raunak1089.github.io/all_scripts/fontawesome.js"; 
-document.body.appendChild(fontawesome);
+try {
+        const fontawesome = document.createElement('script'); 
+        fontawesome.src = "https://raunak1089.github.io/all_scripts/fontawesome.js"; 
+        document.body.appendChild(fontawesome);
+} catch (err) {}
 
 //  ALERT MESSAGE BOX AT CENTER OF PAGE  _____________________________________________________________________________
 
