@@ -77,6 +77,18 @@ function r(array1, array2) {
     return Cov(array1, array2) / (SD(array1) * SD(array2))
 }
 
+function kendallsTau(ranks1, ranks2) {
+    let c = 0; let d = 0;
+    let n = ranks1.length;
+    for(let i=0; i<n; i++){
+        for(let j=0; j<i; j++){
+            if (((ranks1[i]-ranks1[j])*(ranks2[i]-ranks2[j])) >= 0) c++;
+            else d++;
+        }
+    }
+    return 2*(c-d)/(n*(n-1));
+}
+
 
 function sort(arr) {
     if (arr.length <= 1) {
