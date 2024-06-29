@@ -79,7 +79,7 @@ function r(array1, array2) {
 
 function kendall_ranks(ranks) {
     let kendall_ranks = [];
-    let slno = Array.from({ length: ranks.length }, (v, i) => i + 1)
+    let slno = Array(ranks.length).fill().map((_, i) => i + 1);
     for(let i=0;i<ranks.length;i++){
         let diff_i = (i>0) ? ranks[i]-ranks[i-1] : ranks[i];
         let sum=0;
