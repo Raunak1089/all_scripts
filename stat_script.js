@@ -77,6 +77,18 @@ function r(array1, array2) {
     return Cov(array1, array2) / (SD(array1) * SD(array2))
 }
 
+function kendall_ranks(ranks) {
+    let kendall_ranks = [];
+    let slno = Array.from({ length: ranks.length }, (v, i) => i + 1)
+    for(let i=0;i<ranks.length;i++){
+        let diff_i = (i>0) ? ranks[i]-ranks[i-1] : ranks[i];
+        let sum=0;
+        for(let j=0;j<diff_i;j++) sum+=slno[i+j];
+        for(let j=0;j<diff_i;j++) kendall_ranks[i+j]=sum/diff_i;
+    }
+    return kendall_ranks;
+}
+
 function kendallsTau(ranks1, ranks2) {
     let c = 0; let d = 0;
     let n = ranks1.length;
