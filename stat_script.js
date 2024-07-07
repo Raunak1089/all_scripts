@@ -126,114 +126,23 @@ function sort(arr) {
 }
 
 
-/*
-function det(every){
 
-    function sum_lambda(p){
-        sum_l = 0;
-        for (let l=0; l<p.length; l++){
-            for (let j=l; j<p.length; j++){
-                if (p[j] < p[l]){
-                    sum_l += 1;
-                }
+function perms(arr) {
+    if (arr.length === 1) {
+        return [[arr[0]]];
+    } else {
+        let newArr = [];
+        for (let i = 0; i < arr.length; i++) {
+            let remaining = arr.slice(0, i).concat(arr.slice(i + 1));
+            for (let x of perms(remaining)) {
+                newArr.push([arr[i]].concat(x));
             }
         }
-        return sum_l
+        return newArr;
     }
-
-const permutator = (inputArr) => {
-      let result = [];
-
-      const permute = (arr, m = []) => {
-        if (arr.length === 0) {
-          result.push(m)
-        } else {
-          for (let i = 0; i < arr.length; i++) {
-            let curr = arr.slice();
-            let next = curr.splice(i, 1);
-            permute(curr.slice(), m.concat(next))
-         }
-       }
-     }
-
-     permute(inputArr)
-
-     return result;
-    }
-
-
-    mat = []
-    n = every.length ** 0.5;
-    for (let z=0; z<n; z++){
-        mat.push([])
-        for (let zz=0; zz<n; zz++){
-            mat[mat.length-1].push(every[n * z + zz])
-        }
-    }
-
-    let digits = [];
-    for (let i=0; i<n; i++){
-        digits.push(i)
-    }
-    boom = permutator(digits);
-
-        //console.log(boom);
-
-
-    answer = 0;
-    for (permute in boom){
-        coeff = ((-1) ** sum_lambda(boom[permute]))
-        for (let i=0; i<n; i++){
-            coeff *= mat[i][boom[permute][i]]
-        }
-        answer += coeff
-    }
-
-    return answer
 }
-*/
 
-function det(every) {
-    matrix = []
-    n = every.length ** 0.5;
-    for (let z = 0; z < n; z++) {
-        matrix.push([])
-        for (let zz = 0; zz < n; zz++) {
-            matrix[matrix.length - 1].push(every[n * z + zz])
-        }
-    }
 
-    function determinant(mat) {
-
-        if (mat.length == 1) {
-            return mat[0][0];
-        } else {
-            ans = 0;
-
-            for (let i = 0; i < mat.length; i++) {
-                sub_mat = [];
-
-                for (let rows = 0; rows < mat.length - 1; rows++) {
-                    sub_mat.push([]);
-                }
-
-                for (let rows = 0; rows < mat.length - 1; rows++) {
-                    for (let j = 0; j < mat.length; j++) {
-                        if (i !== j) {
-                            sub_mat[rows].push(mat[rows + 1][j]);
-                        }
-                    }
-                }
-
-                ans += ((-1) ** i) * mat[0][i] * determinant(sub_mat);
-            }
-
-            return ans;
-        }
-    }
-
-    return determinant(matrix)
-}
 
 
 
@@ -566,20 +475,34 @@ class Matrix {
         return copiedMatrix;
     }
 
-    static det(matrix) {
-        if (matrix.length === 1) {
-            return matrix[0][0];
+    static det(mat) {
+        if (mat.length == 1) {
+            return mat[0][0];
         } else {
-            let sum = 0;
-            for (let c = 0; c < matrix.length; c++) {
-                const subMatrix = matrix.slice(1).map(row => row.filter((_, i) => i !== c));
-                const sign = (-1) ** (c % 2);
-                const product = matrix[0][c] * sign * Matrix.det(subMatrix);
-                sum += product;
+            let ans = 0;
+            for (let i = 0; i < mat.length; i++) {
+                let sub_mat = [];
+    
+                for (let rows = 0; rows < mat.length - 1; rows++) {
+                    sub_mat.push([]);
+                }
+    
+                for (let rows = 0; rows < mat.length - 1; rows++) {
+                    for (let j = 0; j < mat.length; j++) {
+                        if (i !== j) {
+                            sub_mat[rows].push(mat[rows + 1][j]);
+                        }
+                    }
+                }
+                ans += ((-1) ** i) * mat[0][i] * Matrix.det(sub_mat);
             }
-            return sum;
+    
+            return ans;
         }
     }
+    
+    
+    
 
     static cofactor(rowId, colId, matrix) {
         const subMatrix = Matrix.copyMatrix(matrix).filter((_, i) => i !== rowId)
