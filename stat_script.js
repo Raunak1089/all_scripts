@@ -143,6 +143,22 @@ function perms(arr) {
 }
 
 
+function combs(arr, r) {
+    if (r === 1) {
+        return arr.map(elem => [elem]);
+    } else {
+        let newArr = [];
+        for (let el = 0; el <= arr.length - r; el++) {
+            let subcombs = combs(arr.slice(el + 1), r - 1);
+            for (let x of subcombs) {
+                newArr.push([arr[el]].concat(x));
+            }
+        }
+        return newArr;
+    }
+}
+
+
 
 
 
