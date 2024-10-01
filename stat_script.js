@@ -435,8 +435,8 @@ class Fraction_Matrix {
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
     
-        num = Math.min(A.length,A[0].length);
-        turn=0;
+        let num = Math.min(A.length,A[0].length);
+        let turn = 0;
     
         // ROW ECHLON
     
