@@ -1,3 +1,4 @@
+
 function fac(num) {
     ans = 1;
     for (let intern = 1; intern <= num; intern++) {
@@ -515,6 +516,80 @@ class Matrix {
     
             return ans;
         }
+    }
+
+
+    static rref(matrix) {
+        // A = [[5, 1, 1, 3, 7], [2, 2, 4, 8, 1], [4, 3, 3, 7, 2], [6, 9, 7, 6, 1]];
+        // A = [[5, 1, 1, 3], [2, 2, 4, 8], [4, 3, 3, 7]];
+        // A = [[5, 1], [1, 3], [2, 2], [4, 3], [3, 7]];
+        // A = [[1,2,1,0.65],[1,4,3,3.35],[1,2,3,1.75],[1,4,5,4.45],[1,5,6,5.8]];
+    
+        // console.table(A);
+        function mult(arr, n) {
+            a = [];
+            for (x of arr) {
+                a.push(x * n);
+            }
+            return a;
+        }
+    
+        function row_divide(mat, r, m) {
+            //R1 / m
+            try {
+                c = [];
+                for (x of mat[r]) {
+                    c.push(x / m);
+                }
+                mat[r] = c;
+            } catch(err) {
+                throw new Error(`Cannot divide ${r}th row of ${mat} with ${m}`)
+            }
+            // console.table(mat.map(row => row.map(element => element.toString())));
+        }
+    
+        function elem_op(mat, r1, r2, m) {
+            // R12(m)
+            b = [];
+            for (let i = 0; i < mat[0].length; i++) {
+                b.push(mat[r1][i] + mult(mat[r2], m)[i]);
+            }
+            mat[r1] = b;
+            // console.table(mat.map(row => row.map(element => element.toString())));
+        }
+    
+        function interchange(mat, r1, r2) {
+            c = mat[r1];
+            mat[r1] = mat[r2];
+            mat[r2] = c;
+            // console.table(mat.map(row => row.map(element => element.toString())));
+        }
+    
+        num = Math.min(A.length,A[0].length);
+        turn=0;
+    
+        // ROW ECHLON
+    
+        for (col = 0; col < num; col++) {
+            if(Number(A[col][col])!=0) {/*console.log(`row_divide(A,${col},A[${col}][${col}])`);*/row_divide(A, col, A[col][col]);}
+            if(Number(A[col][col])==0 && turn <= A.length) {/*console.log(`interchange(A,${col},${A.length-1})`);*/interchange(A, col, A.length-1);col--;turn++;continue}
+            for (row = col + 1; row < A.length; row++) {
+                // console.log(`elem_op(A,${row},${col},-1*A[${row}][${col}])`);
+                elem_op(A, row, col, -1 * A[row][col]);
+            }
+        }
+    
+        // REDUCED ROW
+    
+        for (col = num - 1; col > 0; col--) {
+            for (row = col - 1; row >= 0; row--) {
+                // console.log(`elem_op(A,${row},${col},-1*A[${row}][${col}])`);
+                elem_op(A, row, col, -1 * A[row][col]);
+            }
+        }
+    
+        // console.table(A);
+        return A;
     }
     
     
