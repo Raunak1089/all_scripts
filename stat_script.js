@@ -294,7 +294,7 @@ Fraction.prototype.valueOf = function () {
 
 
 
-// CLASS MATRIX ________________________________________________________
+// CLASS FRACTION MATRIX ________________________________________________________
 
 
 class Fraction_Matrix {
@@ -422,6 +422,10 @@ class Fraction_Matrix {
         }
     }
 }
+
+
+
+// CLASS MATRIX ________________________________________________________
 
 
 
@@ -565,25 +569,31 @@ class Matrix {
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
     
-        num = Math.min(matrix.length,matrix[0].length);
-        turn=0;
+        let num = Math.min(matrix.length,matrix[0].length);
+        let turn = 0;
     
         // ROW ECHLON
     
-        for (col = 0; col < num; col++) {
-            if(Number(matrix[col][col])!=0) {/*console.log(`row_divide(A,${col},A[${col}][${col}])`);*/row_divide(matrix, col, matrix[col][col]);}
-            if(Number(matrix[col][col])==0 && turn <= matrix.length) {/*console.log(`interchange(A,${col},${A.length-1})`);*/interchange(matrix, col, matrix.length-1);col--;turn++;continue}
-            for (row = col + 1; row < matrix.length; row++) {
-                // console.log(`elem_op(A,${row},${col},-1*A[${row}][${col}])`);
+        for (let col = 0; col < num; col++) {
+            if(Number(matrix[col][col])!=0) {
+                // console.log(`row_divide(matrix,${col}, matrix[${col}][${col}])`);
+                row_divide(matrix, col, matrix[col][col]);
+            }
+            if(Number(matrix[col][col])==0 && turn <= matrix.length) {
+                // console.log(`interchange(matrix,${col},${matrix.length-1})`);
+                interchange(matrix, col, matrix.length-1);col--;turn++;continue
+            }
+            for (let row = col + 1; row < matrix.length; row++) {
+                // console.log(`elem_op(matrix,${row},${col},-1*matrix[${row}][${col}])`);
                 elem_op(matrix, row, col, -1 * matrix[row][col]);
             }
         }
     
         // REDUCED ROW
     
-        for (col = num - 1; col > 0; col--) {
-            for (row = col - 1; row >= 0; row--) {
-                // console.log(`elem_op(A,${row},${col},-1*A[${row}][${col}])`);
+        for (let col = num - 1; col > 0; col--) {
+            for (let row = col - 1; row >= 0; row--) {
+                // console.log(`elem_op(matrix,${row},${col},-1*matrix[${row}][${col}])`);
                 elem_op(matrix, row, col, -1 * matrix[row][col]);
             }
         }
