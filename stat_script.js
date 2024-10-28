@@ -293,6 +293,46 @@ Fraction.prototype.valueOf = function () {
 
 
 
+// CLASS VECTOR ________________________________________________________
+
+
+class Vector {
+	static times_const(v, c){
+        let ans = [];
+        for(let x of v) {
+          ans.push(c*x);
+        }
+        return ans;
+    }
+  
+    static subtract(v1, v2){
+        let ans = [];
+        for (let i in v1){
+            ans.push(v1[i] - v2[i]);
+        }
+        return ans;
+    }
+  
+    static normalize(v) {
+        let l2norm = Vector.dot_prod(v, v)**0.5;
+        return Vector.times_const(v, 1/l2norm);
+    }
+
+    static dot_prod(v1, v2){
+        return Matrix.multiply_matrices([v1], Matrix.transpose([v2]))[0][0];
+    }
+
+    static orth_proj(v1, v2) {
+        let v1Tv2 = Vector.dot_prod(v1, v2);
+        let v2Tv2 = Vector.dot_prod(v2, v2);
+        let c = v1Tv2 / v2Tv2;
+        return Vector.times_const(v2, c);
+    }
+
+}
+
+
+
 
 // CLASS FRACTION MATRIX ________________________________________________________
 
@@ -635,9 +675,10 @@ class Matrix {
         function elem_op(mat, r1, r2, m) {
             //  R12(m)
             let b = [];
-            for (let i = 0; i < mat[0].length; i++) {
-                b.push(mat[r1][i] + mult(mat[r2], m)[i]);
-            }
+			for (let i = 0; i < mat[0].length; i++) {
+				if (Math.abs(mat[r1][i] + mult(mat[r2], m)[i]) < (10)**(-10)) b.push(0);
+				else b.push(mat[r1][i] + mult(mat[r2], m)[i]);
+			}
             mat[r1] = b;
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
@@ -684,10 +725,136 @@ class Matrix {
         // console.table(A);
         return matrix;
     }
+
+
+    
+	static orthogonalize(mat, normalise=false) {
+		let mat1 = Matrix.transpose(mat);
+		let orth_mat = [mat1[0]];
+		for (let i=1; i<mat1.length; i++) {
+			let next = mat1[i];
+			for (let j=0; j<i; j++) {
+				let c = Vector.dot_prod(mat1[i], orth_mat[j]) / Vector.dot_prod(orth_mat[j], orth_mat[j]);
+				let d = Vector.times_const(orth_mat[j], c);
+				next = Vector.subtract(next, d);
+			}
+			orth_mat.push(next);
+		}
+
+		if (normalise) {
+			for (let i in orth_mat) {
+				orth_mat[i] = Vector.normalize(orth_mat[i]);
+			}
+		}
+
+		return Matrix.transpose(orth_mat);
+	}
+
     
         
+	static QR_decomp(mat) {
+        let U = Matrix.orthogonalize(mat, true);
+        let T = Matrix.multiply_matrices(Matrix.transpose(U), mat);
+        return [U, T];
+    }
     
-    
+
+    static eigenvalues(mat) {
+        let A1 = Matrix.copyMatrix(mat);
+        for (let i=0; i < 150; i++) {
+            let qr = Matrix.QR_decomp(A1);
+            A1 = Matrix.multiply_matrices(qr[1], qr[0]);
+        }
+        let egnvals = [];
+        for (let i in A1) {
+            egnvals.push(A1[i][i]);
+        }
+        return egnvals;
+    }
+
+    static eigenvector(mat, egnval) {
+        let A1 = Matrix.copyMatrix(mat);
+        for (let i in A1) {
+            A1[i][i] -= egnval;
+        }
+        let rrefed = Matrix.rref(A1);
+
+        let egnvctr = Matrix.transpose(rrefed)[A1.length-1];
+        egnvctr[A1.length-1] = -1;
+        return egnvctr;
+    }
+
+
+    static isEqual(mat1, mat2) {
+		if (mat1.length == mat2.length && mat1[0].length == mat2[0].length) {
+			for (let i in mat1) {
+				for (let j in mat1[0]) {
+					if (mat1[i][j] != mat2[i][j]) return false;
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+
+
+    static SpecDecomp(mat) {
+        if (!Matrix.isEqual(mat, Matrix.transpose(mat))) throw new Error('Matrix is not symmetric!');
+        
+        let U = []; let L = [];
+        let eigenvals = Matrix.eigenvalues(mat);
+
+        for (let i=0; i<mat.length; i++) {
+            U.push(Vector.normalize(Matrix.eigenvector(mat, eigenvals[i])));
+            L.push([]);
+            for (let j=0; j<mat.length; j++) {
+                if (i == j) L[i].push(eigenvals[i]);
+                else L[i].push(0);
+            }
+        }
+
+        let Ut = Matrix.transpose(U);
+        return [Ut, L, U];
+    }
+
+
+    static SVD(mat) {
+        let left = Matrix.multiply_matrices(mat, Matrix.transpose(mat));
+        let right = Matrix.multiply_matrices(Matrix.transpose(mat), mat);
+
+        let min = Math.min(mat[0].length, mat.length);
+        let egnvals;
+
+        let nonzero_egnvals = mat[0].length < mat.length ? Matrix.eigenvalues(right) : Matrix.eigenvalues(left);
+        let U = [];
+        let S = [];
+        let VT = [];
+        if(mat[0].length != mat.length) egnvals = nonzero_egnvals.concat(Array(Math.abs(mat[0].length - mat.length)).fill(0));
+        else egnvals = nonzero_egnvals;
+        let egnvals_sorted = sort(egnvals);
+        egnvals_sorted.reverse();
+
+        for (let l=0; l<mat.length; l++) {
+            U.push(Vector.normalize(Matrix.eigenvector(left, egnvals_sorted[l])))
+        }
+        for (let i=0; i < mat.length; i++) {
+            S.push([]);
+            for (let j=0; j < mat[0].length; j++) {
+                if (i == j) S[i][i] = Math.sqrt(egnvals_sorted[i]);
+                else S[i][j] = 0;
+            }
+        }
+        for (let r=0; r<mat[0].length; r++) {
+            VT.push(Vector.normalize(Matrix.eigenvector(right, egnvals_sorted[r])))
+        }
+
+        U = Matrix.transpose(U);
+        return [U, S, VT];
+    }
+
+  
 
     static cofactor(rowId, colId, matrix) {
         const subMatrix = Matrix.copyMatrix(matrix).filter((_, i) => i !== rowId)
