@@ -1070,7 +1070,7 @@ class Random {
         MVN.push(this.getNormalRandNo(mu[1]+S[1][0]*(1/S[0][0])*(MVN[0]-mu[0]),S[1][1]-S[1][0]*(1/S[0][0])*S[0][1]));
         if (mu.length < 3) return MVN;
         for(let i = 2; i < mu.length; i++) {
-            let W = this.getNormalRandNo(mu[i]+Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1),Matrix.multiply_matrices(Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.transpose([Vector.subtract(MVN,mu.slice(0,i))])))[0][0],S[i][i]-Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1),Matrix.multiply_matrices(Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.getSubMatrix(S,0,i,1,i))));
+            let W = this.getNormalRandNo(mu[i]+Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1), Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)), Matrix.transpose([Vector.subtract(MVN,mu.slice(0,i))]))[0][0],S[i][i] - Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1), Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.getSubMatrix(S,0,i,1,i)));
             MVN.push(W);
         }
         return MVN;
@@ -1096,7 +1096,7 @@ class NDM {
 
       let one_vector = Array.from(Array(n)).map((v,i)=>1);
       let H = Matrix.add_matrices(Matrix.I, Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1/n));
-      let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), Matrix.multiply_matrices(H, ndm_mat)), 1/n);
+      let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), H, ndm_mat), 1/n);
       return S;
     }
 
