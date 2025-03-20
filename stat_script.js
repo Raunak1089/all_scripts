@@ -593,6 +593,10 @@ class Matrix {
         return add_matrix;
     }
 
+    static times_const(matrix, c) {
+        return matrix.map(row => row.map(cell => cell * c));
+    }
+
     static augment(matrix1, matrix2) {
         const augmentedMatrix = [];
         for (let i = 0; i < matrix1.length; i++) {
