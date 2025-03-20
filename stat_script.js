@@ -1035,7 +1035,7 @@ class Random {
         MVN.push(this.getNormalRandNo(mu[1]+S[1][0]*(1/S[0][0])*(MVN[0]-mu[0]),S[1][1]-S[1][0]*(1/S[0][0])*S[0][1]));
         if (mu.length < 3) return MVN;
         for(let i = 2; i < mu.length; i++) {
-            W = this.getNormalRandNo(mu[i]+Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1),Matrix.multiply_matrices(Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.transpose([Vector.subtract(MVN,mu.slice(0,i))])))[0][0],S[i][i]-Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1),Matrix.multiply_matrices(Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.getSubMatrix(S,0,i,1,i))));
+            let W = this.getNormalRandNo(mu[i]+Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1),Matrix.multiply_matrices(Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.transpose([Vector.subtract(MVN,mu.slice(0,i))])))[0][0],S[i][i]-Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1),Matrix.multiply_matrices(Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.getSubMatrix(S,0,i,1,i))));
             MVN.push(W);
         }
         return MVN;
