@@ -562,35 +562,70 @@ class Matrix {
         return transpose;
     }
 
-    static multiply_matrices(matrix_1, matrix_2) {
-        if (matrix_1[0].length !== matrix_2.length) {
-            throw new Error("Invalid dimensions for matrix multiplication.");
+    static I(n) {
+        const I = [];
+        for (let i = 0; i < n; i++) {
+            I.push(new Array(n).fill(0));
+            I[i][i] = 1;
         }
-        const product_matrix = [];
-
-        for (let i = 0; i < matrix_1.length; i++) {
-            product_matrix.push(new Array(matrix_2[0].length).fill(0));
-            for (let j = 0; j < matrix_2[0].length; j++) {
-                for (let k = 0; k < matrix_1[0].length; k++) {
-                    product_matrix[i][j] += matrix_1[i][k] * matrix_2[k][j];
-                }
-            }
-        }
-        return product_matrix;
+        return I;
     }
 
-    static add_matrices(matrix_1, matrix_2) {
-        if (matrix_1[0].length !== matrix_2[0].length || matrix_1.length !== matrix_2.length) {
+    static diag(vect) {
+        const diag = [];
+        for (let i = 0; i < vect.length; i++) {
+            diag.push(new Array(vect.length).fill(0));
+            diag[i][i] = vect[i];
+        }
+        return diag;
+    }
+
+    static multiply_matrices() {
+        if (arguments[0][0].length !== arguments[1].length) {
+            throw new Error("Invalid dimensions for matrix multiplication.");
+        }
+        
+        if (arguments.length == 2) {
+            const product_matrix = [];
+            for (let i = 0; i < arguments[0].length; i++) {
+                product_matrix.push(new Array(arguments[1][0].length).fill(0));
+                for (let j = 0; j < arguments[1][0].length; j++) {
+                    for (let k = 0; k < arguments[0][0].length; k++) {
+                        product_matrix[i][j] += arguments[0][i][k] * arguments[1][k][j];
+                    }
+                }
+            }
+            return product_matrix;
+        } else {
+            let args = [];
+            for (let i = 1; i < arguments.length; i++) args.push(arguments[i])
+            let result = this.multiply_matrices(...args);
+            return this.multiply_matrices(arguments[0], result);
+        }
+    }
+
+    static add_matrices() {
+        if (arguments[0][0].length !== arguments[1][0].length || arguments[0].length !== arguments[1].length) {
             throw new Error("Invalid dimensions for matrix addition.");
         }
-        const add_matrix = [];
-        for (let i in matrix_1) {
-            add_matrix.push([]);
-            for (let j in matrix_1[i]) {
-                add_matrix[i][j] = matrix_1[i][j] + matrix_2[i][j];
+
+
+        if (arguments.length == 2) {
+            const add_matrix = [];
+            for (let i in arguments[0]) {
+                add_matrix.push([]);
+                for (let j in arguments[0][i]) {
+                    add_matrix[i][j] = arguments[0][i][j] + arguments[1][i][j];
+                }
             }
+            return add_matrix;
+        } else {
+            let args = [];
+            for (let i = 1; i < arguments.length; i++) args.push(arguments[i])
+            let result = this.add_matrices(...args);
+            return this.add_matrices(arguments[0], result);
         }
-        return add_matrix;
+
     }
 
     static times_const(matrix, c) {
@@ -1058,14 +1093,9 @@ class NDM {
 
     static covariance(ndm_mat) {
       let n = ndm_mat.length;
-      let I = [];
-      for (let i=0; i<n; i++) {
-        let r = Array.from(Array(n)).map((v,i)=>0);
-        r[i] = 1;
-        I.push(r);
-      }
+
       let one_vector = Array.from(Array(n)).map((v,i)=>1);
-      let H = Matrix.add_matrices(I, Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1/n));
+      let H = Matrix.add_matrices(Matrix.I, Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1/n));
       let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), Matrix.multiply_matrices(H, ndm_mat)), 1/n);
       return S;
     }
