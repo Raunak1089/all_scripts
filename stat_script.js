@@ -1066,7 +1066,7 @@ class NDM {
       }
       let one_vector = Array.from(Array(n)).map((v,i)=>1);
       let H = Matrix.add_matrices(I, Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1/n));
-      let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), Matrix.multiply_matrices(H, ndm_mat)), -1/n);
+      let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), Matrix.multiply_matrices(H, ndm_mat)), 1/n);
       return S;
     }
 
