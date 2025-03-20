@@ -984,6 +984,104 @@ class Matrix {
 
 
 
+// ____ NOMRAL DATA MATRIX __________________________________________
+
+class Random {
+    static getRandomNo() {
+        let CURRENT_RANDOM = Math.random();
+        return CURRENT_RANDOM;
+    }
+
+    static getBernNo(p) {
+        return ((getRandomNo()<p) ? 1 : 0);
+    }
+    static getPoisNo(l) {
+        let s = 0;
+        let x = 0;
+        let u01 = getRandomNo();
+        while(u01 > s){
+            s += Math.exp(-l) * (l ** x) / factorial(x);
+            x++;
+        }
+        return x - 1;
+    }
+    static getGeomNo(p) {
+        let s = 0;
+        let x = 0;
+        let u01 = getRandomNo();
+        while(u01 > s){
+            s += p * ((1 - p) ** x);
+            x++;
+        }
+        return x - 1;
+    }
+    static getGammaRandNo(n,l) {
+        let func = '';
+        for (let i = 0; i < n; i++) func += ` - Math.log(this.getRandomNo()) / ${l}`;
+        let CURRENT_GAMMA = eval(func);
+        return CURRENT_GAMMA;
+    }
+
+    static getStdNormalRandNo() {
+        return Math.sin(2*Math.PI*this.getRandomNo())*Math.sqrt(-2*Math.log(this.getRandomNo()));
+    }
+    static getNormalRandNo(param1, param2) {
+        return this.getStdNormalRandNo()*Math.sqrt(param2) + param1;
+    }
+    static getPvarNormRV(mu, S){
+        if (mu.length != S.length || mu.length != S[0].length || S.length != S[0].length) throw new Error("Parameter dimensions not compatible");
+        let MVN = [];
+        MVN.push(this.getNormalRandNo(mu[0],S[0][0]));
+        MVN.push(this.getNormalRandNo(mu[1]+S[1][0]*(1/S[0][0])*(MVN[0]-mu[0]),S[1][1]-S[1][0]*(1/S[0][0])*S[0][1]));
+        if (mu.length < 3) return MVN;
+        for(let i = 2; i < mu.length; i++) {
+            W = this.getNormalRandNo(mu[i]+Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1),Matrix.multiply_matrices(Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.transpose([Vector.subtract(MVN,mu.slice(0,i))])))[0][0],S[i][i]-Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1),Matrix.multiply_matrices(Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.getSubMatrix(S,0,i,1,i))));
+            MVN.push(W);
+        }
+        return MVN;
+    }
+}
+
+
+class NDM {
+    static generateNDM(n, mu, S) {
+      let mat = [];
+      for (let i = 0; i < n; i++) mat.push(Random.getPvarNormRV(mu, S));
+      return mat;
+    }
+
+    static mean(ndm_mat) {
+      let X_t = Matrix.transpose(ndm_mat);
+      let X_bar_t = X_t.map(col => mean(col));
+      return X_bar_t;
+    }
+
+    static covariance(ndm_mat) {
+      let n = ndm_mat.length;
+      let I = [];
+      for (let i=0; i<n; i++) {
+        let r = Array.from(Array(n)).map((v,i)=>0);
+        r[i] = 1;
+        I.push(r);
+      }
+      let one_vector = Array.from(Array(n)).map((v,i)=>1);
+      let H = Matrix.add_matrices(I, Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1/n));
+      let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), Matrix.multiply_matrices(H, ndm_mat)), -1/n);
+      return S;
+    }
+
+    static generateW(S, n) {
+      let p = S.length;
+      let mat = [];
+      let mu = Array.from(Array(p)).map((v,i)=>0);
+      for (let i = 0; i < n; i++) mat.push(Random.getPvarNormRV(mu, S));
+      return Matrix.multiply_matrices(Matrix.transpose(mat), mat);
+    }
+  }
+
+
+
+
 // ____ DECIMAL TO FRACTION _________________________________________
 
 function fraction(x) {
