@@ -81,11 +81,11 @@ function r(array1, array2) {
 function kendall_ranks(ranks) {
     let kendall_ranks = [];
     let slno = Array(ranks.length).fill().map((_, i) => i + 1);
-    for(let i=0;i<ranks.length;i++){
-        let diff_i = (i>0) ? ranks[i]-ranks[i-1] : ranks[i];
-        let sum=0;
-        for(let j=0;j<diff_i;j++) sum+=slno[i+j];
-        for(let j=0;j<diff_i;j++) kendall_ranks[i+j]=sum/diff_i;
+    for (let i = 0; i < ranks.length; i++) {
+        let diff_i = (i > 0) ? ranks[i] - ranks[i - 1] : ranks[i];
+        let sum = 0;
+        for (let j = 0; j < diff_i; j++) sum += slno[i + j];
+        for (let j = 0; j < diff_i; j++) kendall_ranks[i + j] = sum / diff_i;
     }
     return kendall_ranks;
 }
@@ -93,13 +93,13 @@ function kendall_ranks(ranks) {
 function kendallsTau(ranks1, ranks2) {
     let c = 0; let d = 0;
     let n = ranks1.length;
-    for(let i=0; i<n; i++){
-        for(let j=0; j<i; j++){
-            if (((ranks1[i]-ranks1[j])*(ranks2[i]-ranks2[j])) >= 0) c++;
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < i; j++) {
+            if (((ranks1[i] - ranks1[j]) * (ranks2[i] - ranks2[j])) >= 0) c++;
             else d++;
         }
     }
-    return 2*(c-d)/(n*(n-1));
+    return 2 * (c - d) / (n * (n - 1));
 }
 
 
@@ -297,28 +297,28 @@ Fraction.prototype.valueOf = function () {
 
 
 class Vector {
-	static times_const(v, c){
+    static times_const(v, c) {
         let ans = [];
-        for(let x of v) {
-          ans.push(c*x);
+        for (let x of v) {
+            ans.push(c * x);
         }
         return ans;
     }
-  
-    static subtract(v1, v2){
+
+    static subtract(v1, v2) {
         let ans = [];
-        for (let i in v1){
+        for (let i in v1) {
             ans.push(v1[i] - v2[i]);
         }
         return ans;
     }
-  
+
     static normalize(v) {
-        let l2norm = Vector.dot_prod(v, v)**0.5;
-        return Vector.times_const(v, 1/l2norm);
+        let l2norm = Vector.dot_prod(v, v) ** 0.5;
+        return Vector.times_const(v, 1 / l2norm);
     }
 
-    static dot_prod(v1, v2){
+    static dot_prod(v1, v2) {
         return Matrix.multiply_matrices([v1], Matrix.transpose([v2]))[0][0];
     }
 
@@ -428,13 +428,13 @@ class Fraction_Matrix {
         }
     }
 
-    static rref(A){
+    static rref(A) {
 
         // A = [[5, 1, 1, 3, 7], [2, 2, 4, 8, 1], [4, 3, 3, 7, 2], [6, 9, 7, 6, 1]];
         // A = [[5, 1, 1, 3], [2, 2, 4, 8], [4, 3, 3, 7]];
         // A = [[5, 1], [1, 3], [2, 2], [4, 3], [3, 7]];
         // A = [[1,2,1,0.65],[1,4,3,3.35],[1,2,3,1.75],[1,4,5,4.45],[1,5,6,5.8]];
-    
+
         // console.table(A);
         function mult(arr, n) {
             let a = [];
@@ -443,7 +443,7 @@ class Fraction_Matrix {
             }
             return a;
         }
-    
+
         function row_divide(mat, r, m) {
             //R1 / m
             try {
@@ -452,12 +452,12 @@ class Fraction_Matrix {
                     c.push(Fraction.divide(x, m));
                 }
                 mat[r] = c;
-            } catch(err) {
+            } catch (err) {
                 throw new Error(`Cannot divide ${r}th row of ${mat} with ${m}`)
             }
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
-    
+
         function elem_op(mat, r1, r2, m) {
             // R12(m)
             let b = [];
@@ -467,45 +467,45 @@ class Fraction_Matrix {
             mat[r1] = b;
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
-    
+
         function interchange(mat, r1, r2) {
             let c = mat[r1];
             mat[r1] = mat[r2];
             mat[r2] = c;
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
-    
-        let num = Math.min(A.length,A[0].length);
+
+        let num = Math.min(A.length, A[0].length);
         let turn = 0;
-    
+
         // ROW ECHLON
-    
+
         for (let col = 0; col < num; col++) {
-            if(Number(A[col][col])!=0) {/*console.log(`row_divide(A,${col},A[${col}][${col}])`);*/row_divide(A, col, A[col][col]);}
-            if(Number(A[col][col])==0 && turn <= A.length) {/*console.log(`interchange(A,${col},${A.length-1})`);*/interchange(A, col, A.length-1);col--;turn++;continue}
+            if (Number(A[col][col]) != 0) {/*console.log(`row_divide(A,${col},A[${col}][${col}])`);*/row_divide(A, col, A[col][col]); }
+            if (Number(A[col][col]) == 0 && turn <= A.length) {/*console.log(`interchange(A,${col},${A.length-1})`);*/interchange(A, col, A.length - 1); col--; turn++; continue }
             for (let row = col + 1; row < A.length; row++) {
                 // console.log(`elem_op(A,${row},${col},-1*A[${row}][${col}])`);
                 elem_op(A, row, col, Fraction.mult(-1, A[row][col]));
             }
         }
-    
+
         // REDUCED ROW
-    
+
         for (let col = num - 1; col > 0; col--) {
             for (let row = col - 1; row >= 0; row--) {
                 // console.log(`elem_op(A,${row},${col},-1*A[${row}][${col}])`);
                 elem_op(A, row, col, Fraction.mult(-1, A[row][col]));
             }
         }
-    
-    
-    
-    
+
+
+
+
         // console.table(A);
         return A;
     }
-    
-    
+
+
 
     static cofactor(rowId, colId, matrix) {
         const subMatrix = Fraction_Matrix.copyMatrix(matrix).fracObj.filter((_, i) => i !== rowId)
@@ -584,7 +584,7 @@ class Matrix {
         if (arguments[0][0].length !== arguments[1].length) {
             throw new Error("Invalid dimensions for matrix multiplication.");
         }
-        
+
         if (arguments.length == 2) {
             const product_matrix = [];
             for (let i = 0; i < arguments[0].length; i++) {
@@ -661,11 +661,11 @@ class Matrix {
             let ans = 0;
             for (let i = 0; i < mat.length; i++) {
                 let sub_mat = [];
-    
+
                 for (let rows = 0; rows < mat.length - 1; rows++) {
                     sub_mat.push([]);
                 }
-    
+
                 for (let rows = 0; rows < mat.length - 1; rows++) {
                     for (let j = 0; j < mat.length; j++) {
                         if (i !== j) {
@@ -675,19 +675,19 @@ class Matrix {
                 }
                 ans += ((-1) ** i) * mat[0][i] * Matrix.det(sub_mat);
             }
-    
+
             return ans;
         }
     }
 
 
-    static rref(matrix){
+    static rref(matrix) {
 
         // matrix = [[5, 1, 1, 3, 7], [2, 2, 4, 8, 1], [4, 3, 3, 7, 2], [6, 9, 7, 6, 1]];
         // matrix = [[5, 1, 1, 3], [2, 2, 4, 8], [4, 3, 3, 7]];
         // matrix = [[5, 1], [1, 3], [2, 2], [4, 3], [3, 7]];
         // matrix = [[1,2,1,0.65],[1,4,3,3.35],[1,2,3,1.75],[1,4,5,4.45],[1,5,6,5.8]];
-    
+
         // console.table(matrix);
         function mult(arr, n) {
             let a = [];
@@ -696,7 +696,7 @@ class Matrix {
             }
             return a;
         }
-    
+
         function row_divide(mat, r, m) {
             //  R1 / m
             try {
@@ -705,102 +705,102 @@ class Matrix {
                     c.push(x / m);
                 }
                 mat[r] = c;
-            } catch(err) {
+            } catch (err) {
                 throw new Error(err);
             }
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
-    
+
         function elem_op(mat, r1, r2, m) {
             //  R12(m)
             let b = [];
-			for (let i = 0; i < mat[0].length; i++) {
-				if (Math.abs(mat[r1][i] + mult(mat[r2], m)[i]) < (10)**(-10)) b.push(0);
-				else b.push(mat[r1][i] + mult(mat[r2], m)[i]);
-			}
+            for (let i = 0; i < mat[0].length; i++) {
+                if (Math.abs(mat[r1][i] + mult(mat[r2], m)[i]) < (10) ** (-10)) b.push(0);
+                else b.push(mat[r1][i] + mult(mat[r2], m)[i]);
+            }
             mat[r1] = b;
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
-    
+
         function interchange(mat, r1, r2) {
             let c = mat[r1];
             mat[r1] = mat[r2];
             mat[r2] = c;
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
-    
-        let num = Math.min(matrix.length,matrix[0].length);
+
+        let num = Math.min(matrix.length, matrix[0].length);
         let turn = 0;
-    
+
         // ROW ECHLON
-    
+
         for (let col = 0; col < num; col++) {
-            if(matrix[col][col] != 0) {
+            if (matrix[col][col] != 0) {
                 // console.log(`row_divide(matrix,${col},matrix[${col}][${col}])`);
                 row_divide(matrix, col, matrix[col][col]);
             }
-            if(matrix[col][col] == 0 && turn <= matrix.length) {
+            if (matrix[col][col] == 0 && turn <= matrix.length) {
                 // console.log(`interchange(matrix,${col},${matrix.length-1})`);
-                interchange(matrix, col, matrix.length-1);col--;turn++;continue
+                interchange(matrix, col, matrix.length - 1); col--; turn++; continue
             }
             for (let row = col + 1; row < matrix.length; row++) {
                 // console.log(`elem_op(matrix,${row},${col},-1*matrix[${row}][${col}])`);
                 elem_op(matrix, row, col, -1 * matrix[row][col]);
             }
         }
-    
+
         // REDUCED ROW
-    
+
         for (let col = num - 1; col > 0; col--) {
             for (let row = col - 1; row >= 0; row--) {
                 // console.log(`elem_op(matrix,${row},${col},-1*matrix[${row}][${col}])`);
                 elem_op(matrix, row, col, -1 * matrix[row][col]);
             }
         }
-    
-    
-    
-    
+
+
+
+
         // console.table(A);
         return matrix;
     }
 
 
-    
-	static orthogonalize(mat, normalise=false) {
-		let mat1 = Matrix.transpose(mat);
-		let orth_mat = [mat1[0]];
-		for (let i=1; i<mat1.length; i++) {
-			let next = mat1[i];
-			for (let j=0; j<i; j++) {
-				let c = Vector.dot_prod(mat1[i], orth_mat[j]) / Vector.dot_prod(orth_mat[j], orth_mat[j]);
-				let d = Vector.times_const(orth_mat[j], c);
-				next = Vector.subtract(next, d);
-			}
-			orth_mat.push(next);
-		}
 
-		if (normalise) {
-			for (let i in orth_mat) {
-				orth_mat[i] = Vector.normalize(orth_mat[i]);
-			}
-		}
+    static orthogonalize(mat, normalise = false) {
+        let mat1 = Matrix.transpose(mat);
+        let orth_mat = [mat1[0]];
+        for (let i = 1; i < mat1.length; i++) {
+            let next = mat1[i];
+            for (let j = 0; j < i; j++) {
+                let c = Vector.dot_prod(mat1[i], orth_mat[j]) / Vector.dot_prod(orth_mat[j], orth_mat[j]);
+                let d = Vector.times_const(orth_mat[j], c);
+                next = Vector.subtract(next, d);
+            }
+            orth_mat.push(next);
+        }
 
-		return Matrix.transpose(orth_mat);
-	}
+        if (normalise) {
+            for (let i in orth_mat) {
+                orth_mat[i] = Vector.normalize(orth_mat[i]);
+            }
+        }
 
-    
-        
-	static QR_decomp(mat) {
+        return Matrix.transpose(orth_mat);
+    }
+
+
+
+    static QR_decomp(mat) {
         let U = Matrix.orthogonalize(mat, true);
         let T = Matrix.multiply_matrices(Matrix.transpose(U), mat);
         return [U, T];
     }
-    
+
 
     static eigenvalues(mat) {
         let A1 = Matrix.copyMatrix(mat);
-        for (let i=0; i < 150; i++) {
+        for (let i = 0; i < 150; i++) {
             let qr = Matrix.QR_decomp(A1);
             A1 = Matrix.multiply_matrices(qr[1], qr[0]);
         }
@@ -818,37 +818,37 @@ class Matrix {
         }
         let rrefed = Matrix.rref(A1);
 
-        let egnvctr = Matrix.transpose(rrefed)[A1.length-1];
-        egnvctr[A1.length-1] = -1;
+        let egnvctr = Matrix.transpose(rrefed)[A1.length - 1];
+        egnvctr[A1.length - 1] = -1;
         return egnvctr;
     }
 
 
     static isEqual(mat1, mat2) {
-		if (mat1.length == mat2.length && mat1[0].length == mat2[0].length) {
-			for (let i in mat1) {
-				for (let j in mat1[0]) {
-					if (mat1[i][j] != mat2[i][j]) return false;
-				}
-			}
-			return true;
-		} else {
-			return false;
-		}
-	}
+        if (mat1.length == mat2.length && mat1[0].length == mat2[0].length) {
+            for (let i in mat1) {
+                for (let j in mat1[0]) {
+                    if (mat1[i][j] != mat2[i][j]) return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 
     static SpecDecomp(mat) {
         if (!Matrix.isEqual(mat, Matrix.transpose(mat))) throw new Error('Matrix is not symmetric!');
-        
+
         let U = []; let L = [];
         let eigenvals = Matrix.eigenvalues(mat);
 
-        for (let i=0; i<mat.length; i++) {
+        for (let i = 0; i < mat.length; i++) {
             U.push(Vector.normalize(Matrix.eigenvector(mat, eigenvals[i])));
             L.push([]);
-            for (let j=0; j<mat.length; j++) {
+            for (let j = 0; j < mat.length; j++) {
                 if (i == j) L[i].push(eigenvals[i]);
                 else L[i].push(0);
             }
@@ -870,22 +870,22 @@ class Matrix {
         let U = [];
         let S = [];
         let VT = [];
-        if(mat[0].length != mat.length) egnvals = nonzero_egnvals.concat(Array(Math.abs(mat[0].length - mat.length)).fill(0));
+        if (mat[0].length != mat.length) egnvals = nonzero_egnvals.concat(Array(Math.abs(mat[0].length - mat.length)).fill(0));
         else egnvals = nonzero_egnvals;
         let egnvals_sorted = sort(egnvals);
         egnvals_sorted.reverse();
 
-        for (let l=0; l<mat.length; l++) {
+        for (let l = 0; l < mat.length; l++) {
             U.push(Vector.normalize(Matrix.eigenvector(left, egnvals_sorted[l])))
         }
-        for (let i=0; i < mat.length; i++) {
+        for (let i = 0; i < mat.length; i++) {
             S.push([]);
-            for (let j=0; j < mat[0].length; j++) {
+            for (let j = 0; j < mat[0].length; j++) {
                 if (i == j) S[i][i] = Math.sqrt(egnvals_sorted[i]);
                 else S[i][j] = 0;
             }
         }
-        for (let r=0; r<mat[0].length; r++) {
+        for (let r = 0; r < mat[0].length; r++) {
             VT.push(Vector.normalize(Matrix.eigenvector(right, egnvals_sorted[r])))
         }
 
@@ -893,7 +893,7 @@ class Matrix {
         return [U, S, VT];
     }
 
-  
+
 
     static cofactor(rowId, colId, matrix) {
         const subMatrix = Matrix.copyMatrix(matrix).filter((_, i) => i !== rowId)
@@ -1028,13 +1028,13 @@ class Random {
     }
 
     static getBernNo(p) {
-        return ((getRandomNo()<p) ? 1 : 0);
+        return ((getRandomNo() < p) ? 1 : 0);
     }
     static getPoisNo(l) {
         let s = 0;
         let x = 0;
         let u01 = getRandomNo();
-        while(u01 > s){
+        while (u01 > s) {
             s += Math.exp(-l) * (l ** x) / factorial(x);
             x++;
         }
@@ -1044,13 +1044,13 @@ class Random {
         let s = 0;
         let x = 0;
         let u01 = getRandomNo();
-        while(u01 > s){
+        while (u01 > s) {
             s += p * ((1 - p) ** x);
             x++;
         }
         return x - 1;
     }
-    static getGammaRandNo(n,l) {
+    static getGammaRandNo(n, l) {
         let func = '';
         for (let i = 0; i < n; i++) func += ` - Math.log(this.getRandomNo()) / ${l}`;
         let CURRENT_GAMMA = eval(func);
@@ -1058,20 +1058,20 @@ class Random {
     }
 
     static getStdNormalRandNo() {
-        return Math.sin(2*Math.PI*this.getRandomNo())*Math.sqrt(-2*Math.log(this.getRandomNo()));
+        return Math.sin(2 * Math.PI * this.getRandomNo()) * Math.sqrt(-2 * Math.log(this.getRandomNo()));
     }
     static getNormalRandNo(param1, param2) {
-        return this.getStdNormalRandNo()*Math.sqrt(param2) + param1;
+        return this.getStdNormalRandNo() * Math.sqrt(param2) + param1;
     }
-    static getPvarNormRV(mu, S){
+    static getPvarNormRV(mu, S) {
         if (!(mu.length == S.length && mu.length == S[0].length)) throw new Error("Parameter dimensions not compatible");
         let MVN = [];
-        MVN.push(this.getNormalRandNo(mu[0],S[0][0]));
-	if (mu.length < 2) return MVN[0];
-        MVN.push(this.getNormalRandNo(mu[1]+S[1][0]*(1/S[0][0])*(MVN[0]-mu[0]),S[1][1]-S[1][0]*(1/S[0][0])*S[0][1]));
+        MVN.push(this.getNormalRandNo(mu[0], S[0][0]));
+        if (mu.length < 2) return MVN[0];
+        MVN.push(this.getNormalRandNo(mu[1] + S[1][0] * (1 / S[0][0]) * (MVN[0] - mu[0]), S[1][1] - S[1][0] * (1 / S[0][0]) * S[0][1]));
         if (mu.length < 3) return MVN;
-        for(let i = 2; i < mu.length; i++) {
-            let W = this.getNormalRandNo(mu[i]+Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1), Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)), Matrix.transpose([Vector.subtract(MVN,mu.slice(0,i))]))[0][0],S[i][i] - Matrix.multiply_matrices(Matrix.getSubMatrix(S,i,0,i,1), Matrix.inverse(Matrix.getSubMatrix(S,0,0,i,i)),Matrix.getSubMatrix(S,0,i,1,i)));
+        for (let i = 2; i < mu.length; i++) {
+            let W = this.getNormalRandNo(mu[i] + Matrix.multiply_matrices(Matrix.getSubMatrix(S, i, 0, i, 1), Matrix.inverse(Matrix.getSubMatrix(S, 0, 0, i, i)), Matrix.transpose([Vector.subtract(MVN, mu.slice(0, i))]))[0][0], S[i][i] - Matrix.multiply_matrices(Matrix.getSubMatrix(S, i, 0, i, 1), Matrix.inverse(Matrix.getSubMatrix(S, 0, 0, i, i)), Matrix.getSubMatrix(S, 0, i, 1, i)));
             MVN.push(W);
         }
         return MVN;
@@ -1081,34 +1081,51 @@ class Random {
 
 class NDM {
     static generateNDM(n, mu, S) {
-      let mat = [];
-      for (let i = 0; i < n; i++) mat.push(Random.getPvarNormRV(mu, S));
-      return mat;
+        let mat = [];
+        for (let i = 0; i < n; i++) mat.push(Random.getPvarNormRV(mu, S));
+        return mat;
     }
 
     static mean(ndm_mat) {
-      let X_t = Matrix.transpose(ndm_mat);
-      let X_bar_t = X_t.map(col => mean(col));
-      return X_bar_t;
+        let X_t = Matrix.transpose(ndm_mat);
+        let X_bar_t = X_t.map(col => mean(col));
+        return X_bar_t;
     }
 
     static covariance(ndm_mat) {
-      let n = ndm_mat.length;
+        let n = ndm_mat.length;
 
-      let one_vector = new Array(n).fill(1);
-      let H = Matrix.add_matrices(Matrix.I(n), Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1/n));
-      let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), H, ndm_mat), 1/n);
-      return S;
+        let one_vector = new Array(n).fill(1);
+        let H = Matrix.add_matrices(Matrix.I(n), Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1 / n));
+        let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), H, ndm_mat), 1 / n);
+        return S;
     }
 
     static generateW(S, n) {
-      let p = S.length;
-      let mat = [];
-      let mu = new Array(p).fill(0);
-      for (let i = 0; i < n; i++) mat.push(Random.getPvarNormRV(mu, S));
-      return Matrix.multiply_matrices(Matrix.transpose(mat), mat);
+        let p = S.length;
+        let mat = [];
+        let mu = new Array(p).fill(0);
+        for (let i = 0; i < n; i++) mat.push(Random.getPvarNormRV(mu, S));
+        return Matrix.multiply_matrices(Matrix.transpose(mat), mat);
     }
-  }
+
+    // WILK'S LAMBDA DISTRIBUTION __________________
+    static generateWilksLambda(p, m, n) {
+        let A = this.generateW(Matrix.I(p), m);
+        let B = this.generateW(Matrix.I(p), n);
+        let delta = Matrix.det(A) / Matrix.det(Matrix.add_matrices(A, B));
+        return delta;
+    }
+
+    // ROY'S GREATEST ROOT DISTRIBUTION __________________
+    static generateRoysGR(p, m, n) {
+        let A = this.generateW(Matrix.I(p), m);
+        let B = this.generateW(Matrix.I(p), n);
+        let rgr_mat = Matrix.multiply_matrices(Matrix.inverse(Matrix.add_matrices(A, B)), B);
+        return Math.max(...Matrix.eigenvalues(rgr_mat));
+    }
+
+}
 
 
 
