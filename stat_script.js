@@ -1064,9 +1064,10 @@ class Random {
         return this.getStdNormalRandNo()*Math.sqrt(param2) + param1;
     }
     static getPvarNormRV(mu, S){
-        if (mu.length != S.length || mu.length != S[0].length || S.length != S[0].length) throw new Error("Parameter dimensions not compatible");
+        if (!(mu.length == S.length && mu.length == S[0].length)) throw new Error("Parameter dimensions not compatible");
         let MVN = [];
         MVN.push(this.getNormalRandNo(mu[0],S[0][0]));
+	if (mu.length < 2) return MVN[0];
         MVN.push(this.getNormalRandNo(mu[1]+S[1][0]*(1/S[0][0])*(MVN[0]-mu[0]),S[1][1]-S[1][0]*(1/S[0][0])*S[0][1]));
         if (mu.length < 3) return MVN;
         for(let i = 2; i < mu.length; i++) {
@@ -1094,8 +1095,8 @@ class NDM {
     static covariance(ndm_mat) {
       let n = ndm_mat.length;
 
-      let one_vector = Array.from(Array(n)).map((v,i)=>1);
-      let H = Matrix.add_matrices(Matrix.I, Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1/n));
+      let one_vector = new Array(n).fill(1);
+      let H = Matrix.add_matrices(Matrix.I(n), Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1/n));
       let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), H, ndm_mat), 1/n);
       return S;
     }
@@ -1103,7 +1104,7 @@ class NDM {
     static generateW(S, n) {
       let p = S.length;
       let mat = [];
-      let mu = Array.from(Array(p)).map((v,i)=>0);
+      let mu = new Array(p).fill(0);
       for (let i = 0; i < n; i++) mat.push(Random.getPvarNormRV(mu, S));
       return Matrix.multiply_matrices(Matrix.transpose(mat), mat);
     }
