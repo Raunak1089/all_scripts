@@ -1065,6 +1065,7 @@ class Random {
     }
     static getPvarNormRV(mu, S) {
         if (!(mu.length == S.length && mu.length == S[0].length)) throw new Error("Parameter dimensions not compatible");
+        if (Matrix.det(S) <= 0) throw new Error("Covariance matrix must be positive definite!");
         let MVN = [];
         MVN.push(this.getNormalRandNo(mu[0], S[0][0]));
         if (mu.length < 2) return MVN[0];
@@ -1081,6 +1082,7 @@ class Random {
 
 class NDM {
     static generateNDM(n, mu, S) {
+        if (Matrix.det(S) <= 0) throw new Error("Covariance matrix must be positive definite!");
         let mat = [];
         for (let i = 0; i < n; i++) mat.push(Random.getPvarNormRV(mu, S));
         return mat;
@@ -1102,6 +1104,7 @@ class NDM {
     }
 
     static generateW(S, n) {
+        if (Matrix.det(S) <= 0) throw new Error("Covariance matrix must be positive definite!");
         let p = S.length;
         let mat = [];
         let mu = new Array(p).fill(0);
