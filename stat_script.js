@@ -1099,7 +1099,7 @@ class NDM {
 
         let one_vector = new Array(n).fill(1);
         let H = Matrix.add_matrices(Matrix.I(n), Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1 / n));
-        let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), H, ndm_mat), 1 / n);
+        let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), H, ndm_mat), 1 / (n-1));
         return S;
     }
 
