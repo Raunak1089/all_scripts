@@ -808,7 +808,7 @@ class Matrix {
         for (let i in A1) {
             egnvals.push(A1[i][i]);
         }
-        return sort(egnvals);
+        return sort(egnvals).reverse();
     }
 
     static eigenvector(mat, egnval) {
