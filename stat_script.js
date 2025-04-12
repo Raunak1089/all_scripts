@@ -820,7 +820,7 @@ class Matrix {
 
         let egnvctr = Matrix.transpose(rrefed)[A1.length - 1];
         egnvctr[A1.length - 1] = -1;
-        return egnvctr;
+        return Vector.times_const(Vector.normalize(egnvctr), -1);
     }
 
 
