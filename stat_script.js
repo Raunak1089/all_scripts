@@ -1103,6 +1103,17 @@ class NDM {
         return S;
     }
 
+    static scale(ndm_mat) {
+        let n = ndm_mat.length;
+
+        let one_vector = new Array(n).fill(1);
+        let H = Matrix.add_matrices(Matrix.I(n), Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1 / n));
+        let sd_vect = new Array(ndm_mat[0].length).fill(0).map((_, i) => (this.covariance(ndm_mat)[i][i]) ** (-1 / 2));
+        let Ds = Matrix.diag(sd_vect);
+        let Y = Matrix.multiply_matrices(H, ndm_mat, Ds);
+        return Y;
+    }
+
     static generateW(S, n) {
         if (Matrix.det(S) <= 0) throw new Error("Covariance matrix must be positive definite!");
         let p = S.length;
