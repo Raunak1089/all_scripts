@@ -571,14 +571,21 @@ class Matrix {
         return I;
     }
 
-    static diag(vect) {
+static diag(vectORmat) {
+    let isVect = Array.isArray(vectORmat) ? Array.isArray(vectORmat[0]) ? false : true : undefined;
+    if (isVect) {
         const diag = [];
-        for (let i = 0; i < vect.length; i++) {
-            diag.push(new Array(vect.length).fill(0));
-            diag[i][i] = vect[i];
+        for (let i = 0; i < vectORmat.length; i++) {
+            diag.push(new Array(vectORmat.length).fill(0));
+            diag[i][i] = vectORmat[i];
         }
         return diag;
+    } else if (!isVect) {
+        return new Array(vectORmat[0].length).fill(0).map((_,i)=>vectORmat[i][i]);
+    } else {
+        return;
     }
+}
 
     static multiply_matrices() {
         if (arguments[0][0].length !== arguments[1].length) {
