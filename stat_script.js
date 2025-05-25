@@ -339,7 +339,7 @@ class Vector {
     }
 
     static dot_prod(v1, v2) {
-        return Matrix.multiply_matrices([v1], transpose([v2]))[0][0];
+        return Matrix.multiply_matrices([v1], Matrix.transpose([v2]))[0][0];
     }
 
     static orth_proj(v1, v2) {
