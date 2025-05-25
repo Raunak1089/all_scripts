@@ -183,6 +183,26 @@ function transpose_table(tab) {
 }
 
 
+function LineartoMatrix(array, row, col) {
+  let mat = [];
+  let ind = 0;
+  for (let i = 0; i < row; i++) {
+    mat.push([]);
+    for (let j = 0; j < col; j++) {
+      mat[i].push(array[ind]);
+      ind++;
+    }
+  }
+  return mat;
+}
+
+function MatrixtoLinear(mat) {
+  let vect = [];
+  for (let row of mat) {
+    for (let el of row) {vect.push(el);}
+  }
+  return vect;
+}
 
 
 
@@ -319,7 +339,7 @@ class Vector {
     }
 
     static dot_prod(v1, v2) {
-        return Matrix.multiply_matrices([v1], Matrix.transpose([v2]))[0][0];
+        return Matrix.multiply_matrices([v1], .transpose([v2]))[0][0];
     }
 
     static orth_proj(v1, v2) {
