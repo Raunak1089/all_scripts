@@ -826,15 +826,12 @@ static diag(vectORmat) {
 
 
     static eigenvalues(mat) {
-        let A1 = Matrix.copyMatrix(mat);
+        let A1 = Matrix.add_matrices(mat, Matrix.I(mat.length));
         for (let i = 0; i < 150; i++) {
             let qr = Matrix.QR_decomp(A1);
             A1 = Matrix.multiply_matrices(qr[1], qr[0]);
         }
-        let egnvals = [];
-        for (let i in A1) {
-            egnvals.push(A1[i][i]);
-        }
+        let egnvals = Vector.subtract(Matrix.diag(A1), new Array(mat.length).fill(1));
         return sort(egnvals).reverse();
     }
 
@@ -869,17 +866,12 @@ static diag(vectORmat) {
     static SpecDecomp(mat) {
         if (!Matrix.isEqual(mat, Matrix.transpose(mat))) throw new Error('Matrix is not symmetric!');
 
-        let U = []; let L = [];
         let eigenvals = Matrix.eigenvalues(mat);
-
+        let U;
         for (let i = 0; i < mat.length; i++) {
             U.push(Vector.normalize(Matrix.eigenvector(mat, eigenvals[i])));
-            L.push([]);
-            for (let j = 0; j < mat.length; j++) {
-                if (i == j) L[i].push(eigenvals[i]);
-                else L[i].push(0);
-            }
         }
+        let L = Matrix.diag(eigenvals);
 
         let Ut = Matrix.transpose(U);
         return [Ut, L, U];
@@ -899,21 +891,19 @@ static diag(vectORmat) {
         let VT = [];
         if (mat[0].length != mat.length) egnvals = nonzero_egnvals.concat(Array(Math.abs(mat[0].length - mat.length)).fill(0));
         else egnvals = nonzero_egnvals;
-        let egnvals_sorted = sort(egnvals);
-        egnvals_sorted.reverse();
 
         for (let l = 0; l < mat.length; l++) {
-            U.push(Vector.normalize(Matrix.eigenvector(left, egnvals_sorted[l])))
+            U.push(Vector.normalize(Matrix.eigenvector(left, egnvals[l])))
         }
         for (let i = 0; i < mat.length; i++) {
             S.push([]);
             for (let j = 0; j < mat[0].length; j++) {
-                if (i == j) S[i][i] = Math.sqrt(egnvals_sorted[i]);
+                if (i == j) S[i][i] = Math.sqrt(egnvals[i]);
                 else S[i][j] = 0;
             }
         }
         for (let r = 0; r < mat[0].length; r++) {
-            VT.push(Vector.normalize(Matrix.eigenvector(right, egnvals_sorted[r])))
+            VT.push(Vector.normalize(Matrix.eigenvector(right, egnvals[r])))
         }
 
         U = Matrix.transpose(U);
