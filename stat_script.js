@@ -456,6 +456,13 @@ class Fraction_Matrix {
         // A = [[1,2,1,0.65],[1,4,3,3.35],[1,2,3,1.75],[1,4,5,4.45],[1,5,6,5.8]];
 
         // console.table(A);
+        function all_zeroes(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                if (Number(arr[i]) !== 0) return false;
+            }
+            return true;
+        }
+
         function mult(arr, n) {
             let a = [];
             for (let x of arr) {
@@ -472,7 +479,7 @@ class Fraction_Matrix {
                     c.push(Fraction.divide(x, m));
                 }
                 mat[r] = c;
-            } catch (err) {
+            } catch(err) {
                 throw new Error(`Cannot divide ${r}th row of ${mat} with ${m}`)
             }
             // console.table(mat.map(row => row.map(element => element.toString())));
@@ -495,26 +502,57 @@ class Fraction_Matrix {
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
 
-        let num = Math.min(A.length, A[0].length);
-        let turn = 0;
+        let num = Math.min(A.length,A[0].length);
+        let skipped_col = 0;
 
         // ROW ECHLON
 
-        for (let col = 0; col < num; col++) {
-            if (Number(A[col][col]) != 0) {/*console.log(`row_divide(A,${col},A[${col}][${col}])`);*/row_divide(A, col, A[col][col]); }
-            if (Number(A[col][col]) == 0 && turn <= A.length) {/*console.log(`interchange(A,${col},${A.length-1})`);*/interchange(A, col, A.length - 1); col--; turn++; continue }
-            for (let row = col + 1; row < A.length; row++) {
-                // console.log(`elem_op(A,${row},${col},-1*A[${row}][${col}])`);
-                elem_op(A, row, col, Fraction.mult(-1, A[row][col]));
+        for (let col = 0; col < Math.min(num+skipped_col, A[0].length); col++) {
+            if(Number(A[col-skipped_col][col]) != 0) {
+                // console.log(`row_divide(A,${col-skipped_col},A[${col-skipped_col}][${col}])`);
+                row_divide(A, col-skipped_col, A[col-skipped_col][col]);
+            } else {
+                if (all_zeroes(Matrix.transpose(A)[col].slice(col-skipped_col))) {
+                    // console.log(`Column ${col} is all zeroes, skipping`);
+                    skipped_col++;
+                    continue;
+                } else {
+                    for (let i = col-skipped_col + 1; i < A.length; i++) {
+                        if (Number(A[i][col]) != 0) {
+                            // console.log(`interchange(A,${col-skipped_col},${i})`);
+                            interchange(A, col-skipped_col, i);
+                            break;
+                        }
+                    }
+                    col--;
+                    continue;
+                }
+            }
+
+            for (let row = col-skipped_col + 1; row < A.length; row++) {
+                // console.log(`col = ${col}, row = ${row}`);
+                // console.log(`elem_op(A,${row},${col-skipped_col},-1*A[${row}][${col}])`);
+                elem_op(A, row, col-skipped_col, Fraction.mult(-1, A[row][col]));
             }
         }
 
         // REDUCED ROW
 
-        for (let col = num - 1; col > 0; col--) {
+        let pivots = [0];
+        let pivot_row = 0;
+        for (let col = 1; col < A[0].length; col++) {
+            for (let row = A.length - 1; row >= 0; row--) {
+                if (Number(A[row][col]) != 0 && row == pivot_row + 1) {
+                    pivots.push(col);
+                    pivot_row++;
+                }
+            }
+        }
+
+        for (let col = pivots.length - 1; col >= 0; col--) {
             for (let row = col - 1; row >= 0; row--) {
-                // console.log(`elem_op(A,${row},${col},-1*A[${row}][${col}])`);
-                elem_op(A, row, col, Fraction.mult(-1, A[row][col]));
+                // console.log(`elem_op(A,${row},${col},-1*A[${row}][${pivots[col]}])`);
+                elem_op(A, row, col, Fraction.mult(-1, A[row][pivots[col]]));
             }
         }
 
@@ -818,12 +856,20 @@ static diag(vectORmat) {
             }
         }
 
-
-
-
-
         // console.table(A);
         return matrix;
+    }
+
+    static rank(mat) {
+        let rrefed = Matrix.rref(mat);
+        for (let row = mat.length - 1; row >=0; row--) {
+            for (let col = 0; col < mat[0].length; col++) {
+                if (mat[row][col] != 0) {
+                    return row + 1;
+                }
+            }
+        }
+        return 0;
     }
 
 
