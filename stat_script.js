@@ -788,7 +788,7 @@ static diag(vectORmat) {
             //  R12(m)
             let b = [];
             for (let i = 0; i < mat[0].length; i++) {
-                if (Math.abs(mat[r1][i] + mult(mat[r2], m)[i]) < (10) ** (-10)) b.push(0);
+                if (Math.abs(mat[r1][i] + mult(mat[r2], m)[i]) < (10) ** (-4)) b.push(0);
                 else b.push(mat[r1][i] + mult(mat[r2], m)[i]);
             }
             mat[r1] = b;
@@ -907,7 +907,7 @@ static diag(vectORmat) {
 
     static eigenvalues(mat) {
         let A1 = Matrix.add_matrices(mat, Matrix.I(mat.length));
-        for (let i = 0; i < 150; i++) {
+        for (let i = 0; i < 200; i++) {
             let qr = Matrix.QR_decomp(A1);
             A1 = Matrix.multiply_matrices(qr[1], qr[0]);
         }
