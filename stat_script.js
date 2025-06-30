@@ -1,4 +1,3 @@
-
 function fac(num) {
     ans = 1;
     for (let intern = 1; intern <= num; intern++) {
@@ -181,6 +180,21 @@ function transpose_table(tab) {
 
     return trans;
 }
+
+function Htmlof2DArray(tab) {
+    let htmlcode = '<table>';
+    for (let row of tab) {
+        htmlcode += '<tr>';
+        for (let cell of row) {
+            htmlcode += '<td>' + cell + '</td>';
+        }
+        htmlcode += '</tr>';
+    }
+    htmlcode += '</table>';
+
+    return htmlcode;
+}
+
 
 
 function LineartoMatrix(array, row, col) {
