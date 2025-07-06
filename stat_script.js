@@ -961,7 +961,7 @@ static diag(vectORmat) {
         if (!Matrix.isEqual(mat, Matrix.transpose(mat))) throw new Error('Matrix is not symmetric!');
 
         let eigenvals = Matrix.eigenvalues(mat);
-        let U;
+        let U = [];
         for (let i = 0; i < mat.length; i++) {
             U.push(Vector.normalize(Matrix.eigenvector(mat, eigenvals[i])));
         }
