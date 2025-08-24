@@ -198,24 +198,24 @@ function Htmlof2DArray(tab) {
 
 
 function LineartoMatrix(array, row, col) {
-  let mat = [];
-  let ind = 0;
-  for (let i = 0; i < row; i++) {
-    mat.push([]);
-    for (let j = 0; j < col; j++) {
-      mat[i].push(array[ind]);
-      ind++;
+    let mat = [];
+    let ind = 0;
+    for (let i = 0; i < row; i++) {
+        mat.push([]);
+        for (let j = 0; j < col; j++) {
+            mat[i].push(array[ind]);
+            ind++;
+        }
     }
-  }
-  return mat;
+    return mat;
 }
 
 function MatrixtoLinear(mat) {
-  let vect = [];
-  for (let row of mat) {
-    for (let el of row) {vect.push(el);}
-  }
-  return vect;
+    let vect = [];
+    for (let row of mat) {
+        for (let el of row) { vect.push(el); }
+    }
+    return vect;
 }
 
 
@@ -493,7 +493,7 @@ class Fraction_Matrix {
                     c.push(Fraction.divide(x, m));
                 }
                 mat[r] = c;
-            } catch(err) {
+            } catch (err) {
                 throw new Error(`Cannot divide ${r}th row of ${mat} with ${m}`)
             }
             // console.table(mat.map(row => row.map(element => element.toString())));
@@ -516,25 +516,25 @@ class Fraction_Matrix {
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
 
-        let num = Math.min(A.length,A[0].length);
+        let num = Math.min(A.length, A[0].length);
         let skipped_col = 0;
 
         // ROW ECHLON
 
-        for (let col = 0; col < Math.min(num+skipped_col, A[0].length); col++) {
-            if(Number(A[col-skipped_col][col]) != 0) {
+        for (let col = 0; col < Math.min(num + skipped_col, A[0].length); col++) {
+            if (Number(A[col - skipped_col][col]) != 0) {
                 // console.log(`row_divide(A,${col-skipped_col},A[${col-skipped_col}][${col}])`);
-                row_divide(A, col-skipped_col, A[col-skipped_col][col]);
+                row_divide(A, col - skipped_col, A[col - skipped_col][col]);
             } else {
-                if (all_zeroes(Matrix.transpose(A)[col].slice(col-skipped_col))) {
+                if (all_zeroes(Matrix.transpose(A)[col].slice(col - skipped_col))) {
                     // console.log(`Column ${col} is all zeroes, skipping`);
                     skipped_col++;
                     continue;
                 } else {
-                    for (let i = col-skipped_col + 1; i < A.length; i++) {
+                    for (let i = col - skipped_col + 1; i < A.length; i++) {
                         if (Number(A[i][col]) != 0) {
                             // console.log(`interchange(A,${col-skipped_col},${i})`);
-                            interchange(A, col-skipped_col, i);
+                            interchange(A, col - skipped_col, i);
                             break;
                         }
                     }
@@ -543,10 +543,10 @@ class Fraction_Matrix {
                 }
             }
 
-            for (let row = col-skipped_col + 1; row < A.length; row++) {
+            for (let row = col - skipped_col + 1; row < A.length; row++) {
                 // console.log(`col = ${col}, row = ${row}`);
                 // console.log(`elem_op(A,${row},${col-skipped_col},-1*A[${row}][${col}])`);
-                elem_op(A, row, col-skipped_col, Fraction.mult(-1, A[row][col]));
+                elem_op(A, row, col - skipped_col, Fraction.mult(-1, A[row][col]));
             }
         }
 
@@ -643,21 +643,21 @@ class Matrix {
         return I;
     }
 
-static diag(vectORmat) {
-    let isVect = Array.isArray(vectORmat) ? Array.isArray(vectORmat[0]) ? false : true : undefined;
-    if (isVect) {
-        const diag = [];
-        for (let i = 0; i < vectORmat.length; i++) {
-            diag.push(new Array(vectORmat.length).fill(0));
-            diag[i][i] = vectORmat[i];
+    static diag(vectORmat) {
+        let isVect = Array.isArray(vectORmat) ? Array.isArray(vectORmat[0]) ? false : true : undefined;
+        if (isVect) {
+            const diag = [];
+            for (let i = 0; i < vectORmat.length; i++) {
+                diag.push(new Array(vectORmat.length).fill(0));
+                diag[i][i] = vectORmat[i];
+            }
+            return diag;
+        } else if (!isVect) {
+            return new Array(vectORmat[0].length).fill(0).map((_, i) => vectORmat[i][i]);
+        } else {
+            return;
         }
-        return diag;
-    } else if (!isVect) {
-        return new Array(vectORmat[0].length).fill(0).map((_,i)=>vectORmat[i][i]);
-    } else {
-        return;
     }
-}
 
     static multiply_matrices() {
         if (arguments[0][0].length !== arguments[1].length) {
@@ -816,25 +816,25 @@ static diag(vectORmat) {
             // console.table(mat.map(row => row.map(element => element.toString())));
         }
 
-        let num = Math.min(matrix.length,matrix[0].length);
+        let num = Math.min(matrix.length, matrix[0].length);
         let skipped_col = 0;
 
         // ROW ECHLON
 
-        for (let col = 0; col < Math.min(num+skipped_col, matrix[0].length); col++) {
-            if(Number(matrix[col-skipped_col][col]) != 0) {
+        for (let col = 0; col < Math.min(num + skipped_col, matrix[0].length); col++) {
+            if (Number(matrix[col - skipped_col][col]) != 0) {
                 // console.log(`row_divide(A,${col-skipped_col},A[${col-skipped_col}][${col}])`);
-                row_divide(matrix, col-skipped_col, matrix[col-skipped_col][col]);
+                row_divide(matrix, col - skipped_col, matrix[col - skipped_col][col]);
             } else {
-                if (all_zeroes(Matrix.transpose(matrix)[col].slice(col-skipped_col))) {
+                if (all_zeroes(Matrix.transpose(matrix)[col].slice(col - skipped_col))) {
                     // console.log(`Column ${col} is all zeroes, skipping`);
                     skipped_col++;
                     continue;
                 } else {
-                    for (let i = col-skipped_col + 1; i < matrix.length; i++) {
+                    for (let i = col - skipped_col + 1; i < matrix.length; i++) {
                         if (Number(matrix[i][col]) != 0) {
                             // console.log(`interchange(A,${col-skipped_col},${i})`);
-                            interchange(matrix, col-skipped_col, i);
+                            interchange(matrix, col - skipped_col, i);
                             break;
                         }
                     }
@@ -843,10 +843,10 @@ static diag(vectORmat) {
                 }
             }
 
-            for (let row = col-skipped_col + 1; row < matrix.length; row++) {
+            for (let row = col - skipped_col + 1; row < matrix.length; row++) {
                 // console.log(`col = ${col}, row = ${row}`);
                 // console.log(`elem_op(A,${row},${col-skipped_col},-1*A[${row}][${col}])`);
-                elem_op(matrix, row, col-skipped_col, -1 * matrix[row][col]);
+                elem_op(matrix, row, col - skipped_col, -1 * matrix[row][col]);
             }
         }
 
@@ -876,7 +876,7 @@ static diag(vectORmat) {
 
     static rank(mat) {
         let rrefed = Matrix.rref(mat);
-        for (let row = mat.length - 1; row >=0; row--) {
+        for (let row = mat.length - 1; row >= 0; row--) {
             for (let col = 0; col < mat[0].length; col++) {
                 if (mat[row][col] != 0) {
                     return row + 1;
@@ -958,7 +958,7 @@ static diag(vectORmat) {
 
 
     static SpecDecomp(mat) {
-        if (!Matrix.isEqual(mat, Matrix.transpose(mat))) throw new Error('Matrix is not symmetric!');
+        // if (!Matrix.isEqual(mat, Matrix.transpose(mat))) throw new Error('Matrix is not symmetric!');
 
         let eigenvals = Matrix.eigenvalues(mat);
         let U = [];
@@ -1210,7 +1210,7 @@ class NDM {
 
         let one_vector = new Array(n).fill(1);
         let H = Matrix.add_matrices(Matrix.I(n), Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose([one_vector]), [one_vector]), -1 / n));
-        let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), H, ndm_mat), 1 / (n-1));
+        let S = Matrix.times_const(Matrix.multiply_matrices(Matrix.transpose(ndm_mat), H, ndm_mat), 1 / (n - 1));
         return S;
     }
 
@@ -1253,6 +1253,225 @@ class NDM {
 }
 
 
+
+
+class NeuralNetwork {
+    //  BASIC NEEDS   ___________________________________________________________________________
+
+    static getStdNormalRandNo() {
+        return (
+            Math.sin(2 * Math.PI * Math.random()) *
+            Math.sqrt(-2 * Math.log(Math.random()))
+        );
+    }
+
+    static MatrixtoLinear(wb_Matrix) {
+        let weights = wb_Matrix[0];
+        let biases = wb_Matrix[1];
+        let linear_params = [];
+        for (let w of weights) {
+            for (let row of w) {
+                linear_params.push(...row);
+            }
+        }
+        for (let b of biases) {
+            linear_params.push(...Matrix.transpose(b)[0]);
+        }
+        return linear_params;
+    }
+
+    static LineartoMatrix(array, layers) {
+        let w = [];
+        let b = [];
+        let serial = 0;
+        let bs = array.length - (sum(layers) - layers[0]);
+        for (let i = 1; i < layers.length; i++) {
+            w.push([]);
+            b.push([]);
+            for (let j = 0; j < layers[i]; j++) {
+                w[i - 1].push([]);
+                for (let k = 0; k < layers[i - 1]; k++) {
+                    w[i - 1][j].push(array[serial]);
+                    serial++;
+                }
+                b[i - 1].push([array[bs]]);
+                bs++;
+            }
+        }
+        return { w, b };
+    }
+
+
+    static Derivative(func, params, network_layer, data_X, data_Y, argIndex) {
+        let h = 10 ** -6;
+        let argsPlusH = [...params];
+        let argsMinusH = [...params];
+        argsPlusH[argIndex] += h;
+        // argsMinusH[argIndex] -= h;
+
+        let funcPlusH = func(argsPlusH, network_layer, data_X, data_Y);
+        let funcMinusH = func(argsMinusH, network_layer, data_X, data_Y);
+
+        let deriv = (funcPlusH - funcMinusH) * 10 ** 6;
+        let rounded = round(deriv, 4);
+        return rounded;
+    }
+
+
+    // ACTIVATION staticS ________________________________________________________________________
+
+    static softPlus(x) {
+        return Math.log(1 + Math.exp(x));
+    }
+    static vectorSoftPlus(vect) {
+        let row_arr = Matrix.transpose(vect);
+        row_arr[0] = row_arr[0].map((x) => NeuralNetwork.softPlus(x));
+        return Matrix.transpose(row_arr);
+    }
+    static ReLU(x) {
+        return Math.max(0, x);
+    }
+    static vectorReLU(vect) {
+        let row_arr = Matrix.transpose(vect);
+        row_arr[0] = row_arr[0].map((x) => NeuralNetwork.ReLU(x));
+        return Matrix.transpose(row_arr);
+    }
+    static sigmoid(x) {
+        return 1 / (1 + Math.exp(-x));
+    }
+    static vectorSigmoid(vect) {
+        let row_arr = Matrix.transpose(vect);
+        row_arr[0] = row_arr[0].map((x) => NeuralNetwork.sigmoid(x));
+        return Matrix.transpose(row_arr);
+    }
+    static vectorLinear(vect) {
+        return vect;
+    }
+    static softMax(vect) {
+        let row_arr = Matrix.transpose(vect);
+        let expsum = 0;
+        for (let e of row_arr[0]) expsum += Math.exp(e);
+        row_arr[0] = row_arr[0].map((x) => Math.exp(x) / expsum);
+        return Matrix.transpose(row_arr);
+    }
+    static argMax(vect) {
+        let maxIndex = 0;
+        for (let i = 1; i < vect.length; i++) {
+            if (vect[i] > vect[maxIndex]) {
+                maxIndex = i;
+            }
+        }
+        let new_vect = Array(vect.length).fill(0);
+        new_vect[maxIndex] = 1;
+        return Matrix.transpose([new_vect]);
+    }
+
+
+    //  NETWROK OPERATIONS _____________________________________________________________________
+
+
+    static neural_network(input, w, b, actv_Fn=NeuralNetwork.vectorReLU) {
+        let layers = w.map(mat => mat[0].length);
+        layers.push(w[w.length - 1].length);
+
+        let input_vector = Matrix.transpose([input]);
+        for (let i = 0; i < layers.length - 2; i++) {
+            input_vector = actv_Fn(
+                Matrix.add_matrices(Matrix.multiply_matrices(w[i], input_vector), b[i])
+            );
+        }
+        let output = Matrix.add_matrices(Matrix.multiply_matrices(w[layers.length - 2], input_vector), b[layers.length - 2]);
+        return output;
+    }
+
+
+    static logistic_regression(input, w, b) {
+        let input_vector = Matrix.transpose([input]);
+        let h = Matrix.add_matrices(Matrix.multiply_matrices(w[0], input_vector), b[0]);
+        return NeuralNetwork.sigmoid(h);
+    }
+
+    static Loss(linear_params, layers, X, Y) {
+        let params = NeuralNetwork.LineartoMatrix(linear_params, layers);
+        let SSR = 0;
+        for (let i in X) {
+            SSR += Math.pow(Y[i] - NeuralNetwork.neural_network(X[i], params.w, params.b), 2);
+        }
+        return SSR;
+    }
+
+    static CrossEntropy(linear_params, layers, X, Y) {
+        let params = NeuralNetwork.LineartoMatrix(linear_params, layers);
+        let Outputs = [];
+        for(let o of Y) if(!Outputs.includes(o)) Outputs.push(o);
+
+        let CE = 0;
+        for (let i in X) {
+            let j = Outputs.indexOf(Y[i]);
+            CE += -1 * Math.log(Number(NeuralNetwork.softMax(NeuralNetwork.neural_network(X[i], params.w, params.b))[j]));
+        }
+        return CE;
+    }
+
+    static Cost(linear_params, layers, X, Y) {
+        let params = NeuralNetwork.LineartoMatrix(linear_params, layers);
+        let cost = 0;
+        for (let i in X) {
+            let Y_pred = NeuralNetwork.logistic_regression(X[i], params.w, params.b);
+            cost += Y[i] * Math.log(Y_pred) + (1 - Y[i]) * Math.log(1 - Y_pred);
+        }
+        return cost * (-1 / X.length);
+    }
+
+
+    static initiate(layers) {
+        let weights = [];
+        let biases = [];
+        for (let i = 1; i < layers.length; i++) {
+            weights.push([]);
+            biases.push([]);
+            for (let j = 0; j < layers[i]; j++) {
+                weights[i - 1].push([]);
+                for (let k = 0; k < layers[i - 1]; k++) {
+                    weights[i - 1][j].push(NeuralNetwork.getStdNormalRandNo());
+                }
+                biases[i - 1].push([0]);
+            }
+        }
+
+        return { weights, biases };
+    }
+
+
+    static update_parameters(weights, biases, X, Y, LR) {
+        let layers = weights.map(mat => mat[0].length);
+        layers.push(weights[weights.length - 1].length);
+
+        let parameters = NeuralNetwork.MatrixtoLinear([weights, biases]);
+        for (let i in parameters) {
+            parameters[i] -= NeuralNetwork.Derivative(NeuralNetwork.CrossEntropy, parameters, layers, X, Y, i) * LR;
+        }
+
+        // console.log('CrossEntropy:', NeuralNetwork.CrossEntropy(parameters, layers, X, Y));
+        return NeuralNetwork.LineartoMatrix(parameters, layers);
+        // return [...parameters, NeuralNetwork.Cost(parameters, layers, X, Y)];
+    }
+
+}
+
+// //  APPLY NEURAL NETWORK CLASS _____________________________
+// let X_val = [[0.5, 0.8], [1.0, 1.0], [1.5, 1.2], [2.0, 0.6], [2.5, 1.5], [3.0, 1.1], [3.2, 0.9], [3.5, 1.3], [3.8, 1.6], [4.0, 0.7], [4.2, 1.4], [4.5, 1.2], [5.0, 0.8], [5.5, 1.7], [6.0, 1.0]];
+// let Y_val = [0.432, 0.721, 0.931, 0.563, 0.974, 0.434, 0.214, 0.332, 0.462, -0.231, 0.152, -0.057, -0.287, 0.514, 0.160];
+
+// let params = NeuralNetwork.initiate([2, 1, 1]);
+
+// NeuralNetwork.Loss(NeuralNetwork.MatrixtoLinear([params.weights, params.biases]), [2, 1, 1], X_val, Y_val);
+
+// params = NeuralNetwork.update_parameters(params.weights, params.biases, X_val, Y_val, 0.01);
+// for (let i = 0; i < 100; i++) {
+//     params = NeuralNetwork.update_parameters(params.w, params.b, X_val, Y_val, 0.01);
+// }
+//  ________________________________________________________
 
 
 // ____ DECIMAL TO FRACTION _________________________________________
