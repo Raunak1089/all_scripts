@@ -54,9 +54,9 @@
          .replace(/ব্র/g, "ब्र")
          .replace(/স্ত্র/g, "स्त्र")
          .replace(/্র/g, "्र")
-         .replace(/র্/g, "र्");
-         .replace(/্ৰ/g, "्र");
-         .replace(/ৰ্/g, "र्");;
+         .replace(/র্/g, "र्")
+         .replace(/্ৰ/g, "्र")
+         .replace(/ৰ্/g, "र्");
 
     // ya-phala: C + virama + (য or য়)  ->  mapped_consonant + "्य"
     const consClass = "[" + escapeForClass(CONSONANTS) + "]";
