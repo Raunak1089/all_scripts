@@ -57,7 +57,7 @@ alertBoxDiv.id = 'alertBox';
 alertBoxDiv.classList.add('alert-box');
 alertBoxDiv.innerHTML = `
     <msg>Alert message.</msg>
-    <span class="close-btn" onclick="closeAlert()" title="Close"><i class="fa-regular fa-xmark"></i></span>
+    <span class="close-btn" onclick="closeAlert()" title="Close"><i class="fa-solid fa-xmark"></i></span>
 `;
 document.body.appendChild(alertBoxDiv);
 
